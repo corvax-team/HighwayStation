@@ -16,7 +16,6 @@
 /datum/design/stasisbodybag
 	name = "Stasis Body Bag"
 	desc = "A folded bag designed for the storage and transportation of cadavers with portable stasis module and little space."
-	id = "stasisbodybag"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plasma =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SMALL_MATERIAL_AMOUNT*5)
 	build_path = /obj/item/bodybag/stasis

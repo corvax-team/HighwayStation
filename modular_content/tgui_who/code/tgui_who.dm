@@ -166,10 +166,8 @@
 
 /datum/tgui_who/proc/get_state(mob/user)
 	switch(user.stat)
-		if(CONSCIOUS)
-			return "Живой"
-		if(UNCONSCIOUS)
-			return "Без сознания"
+		if(STABLE)
+			return IS_UNCONSCIOUS(user) ? "Без сознания" : "Живой"
 		if(SOFT_CRIT, HARD_CRIT)
 			return "В крите"
 		if(DEAD)

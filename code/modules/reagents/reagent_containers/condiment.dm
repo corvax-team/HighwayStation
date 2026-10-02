@@ -36,7 +36,7 @@
 		icon_state = icon_empty
 	return ..()
 
-/obj/item/reagent_containers/condiment/suicide_act(mob/living/carbon/user)
+/obj/item/reagent_containers/condiment/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[capitalize(user.declent_ru(NOMINATIVE))] пытается проглотить [declent_ru(ACCUSATIVE)] целиком! Кажется, [ru_p_they()] не знает, как работает еда!"))
 	return OXYLOSS
 
@@ -251,6 +251,16 @@
 	list_reagents = list(/datum/reagent/consumable/cornmeal = 30)
 	fill_icon_thresholds = null
 
+/obj/item/reagent_containers/condiment/korta_flour
+	name = "korta flour sack"
+	desc = "A big bag of lizards' favorite korta nut flour. Made in Tiriza!"
+	icon_state = "korta_flour"
+	inhand_icon_state = "carton"
+	lefthand_file = 'icons/mob/inhands/items/drinks_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items/drinks_righthand.dmi'
+	list_reagents = list(/datum/reagent/consumable/korta_flour = 30)
+	fill_icon_thresholds = null
+
 /obj/item/reagent_containers/condiment/bbqsauce
 	name = "bbq sauce"
 	desc = "Салфетки в набор не входят."
@@ -327,6 +337,13 @@
 	desc = "Выжатые томаты, что скрываются в пластиковой бутылке. Смутно напоминают Америку."
 	icon_state = "ketchup"
 	list_reagents = list(/datum/reagent/consumable/ketchup = 50)
+	fill_icon_thresholds = null
+
+/obj/item/reagent_containers/condiment/mustard
+	name = "mustard"
+	desc = "A spicy and tangy sauce made out of the mustard plant. Great on hotdogs!"
+	icon_state = "mustard"
+	list_reagents = list(/datum/reagent/consumable/mustard = 50)
 	fill_icon_thresholds = null
 
 /obj/item/reagent_containers/condiment/worcestershire
@@ -486,7 +503,7 @@
 		desc = temp_list[3]
 	else
 		icon_state = "condi_mixed"
-		desc = "Небольшой пакетик с приправами. На этикетке написано, что внутри [originalname]"
+		desc = "Небольшой пакетик с приправами. На этикетке написано, что внутри [originalname]."
 
 //Ketchup
 /obj/item/reagent_containers/condiment/pack/ketchup
@@ -534,3 +551,9 @@
 	originalname = "mayonnaise"
 	volume = 5
 	list_reagents = list(/datum/reagent/consumable/mayonnaise = 5)
+
+/obj/item/reagent_containers/condiment/pack/beef_flavour
+	name = "beef space ramen flavouring"
+	originalname = "beef flavour"
+	volume = 5
+	list_reagents = list(/datum/reagent/consumable/beef_flavour = 5)

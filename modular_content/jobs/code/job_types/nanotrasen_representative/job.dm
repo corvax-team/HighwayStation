@@ -41,3 +41,4 @@
 
 	rpg_title = "Diplomat"
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS | JOB_ANTAG_PROTECTED
+	tgui_icon = FA_ICON_USER_TIE

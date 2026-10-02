@@ -28,27 +28,19 @@
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/crocodile)
 
 // Croco AI
-/datum/ai_planning_subtree/random_speech/crocodile
-	speech_chance = 5
-	sound = list('sound/mobs/humanoids/lizard/lizard_hiss.ogg')
-	emote_hear = list("рычит.", "хрипит.", "шипит.")
-	emote_see = list("машет хвостом.", "широко раскрывает пасть.")
-
 /datum/ai_controller/basic_controller/crocodile
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/crocodile.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_BASIC_MOB_SPEAK_LINES = list(
+			BB_EMOTE_HEAR = list("рычит.", "хрипит.", "шипит."),
+			BB_EMOTE_SEE = list("машет хвостом.", "широко раскрывает пасть."),
+			BB_EMOTE_SOUND = list('sound/mobs/humanoids/lizard/lizard_hiss.ogg'),
+			BB_SPEAK_CHANCE = 5,
+		),
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/target_retaliate,
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/go_for_swim,
-		/datum/ai_planning_subtree/find_food,
-		/datum/ai_planning_subtree/random_speech/crocodile,
-	)
 
 // Croco rideable
 /datum/component/riding/creature/crocodile

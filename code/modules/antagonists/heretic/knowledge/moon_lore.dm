@@ -53,9 +53,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_moon
 	name = "Moonlight Troupe"
-	desc = "Открывает перед вами Путь луны. \
-		Позволяет трансмутировать 2 листа стекла и нож в Лунный клинок. \
+	desc = "Открывает перед вами Путь луны.<br>\
+		Позволяет создавать Лунные клинки. \
 		Одновременно можно иметь только два."
+	transmute_text = "Трансмутируйте 2 листа стекла и нож."
 	gain_text = "Под лунным светом смех отдается эхом."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -90,20 +91,24 @@
 /datum/heretic_knowledge/spell/mind_gate
 	name = "Mind Gate"
 	desc = "Grants you Mind Gate, a spell which mutes, deafens, blinds, inflicts hallucinations, \
-		confusion, oxygen loss and brain damage to its target over 10 seconds.\
-		The caster takes 20 brain damage per use."
+		confusion, oxygen loss and brain damage to its target over 10 seconds.<br>\
+		Casting the spell causes brain damage."
 	gain_text = "My mind swings open like a gate, and its insight will let me perceive the truth."
-
 	action_to_add = /datum/action/cooldown/spell/pointed/mind_gate
 	cost = 2
+	max_charges = 6
+	path_recharge_amount = 0.33
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.33
 
 /datum/heretic_knowledge/moon_amulet
 	name = "Moonlight Amulet"
-	desc = "Позволяет трансмутировать 2 листа стекла, сердце и галстук, чтобы создать Moonlight Amulet. \
-			Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд; \
-			если рассудок не достаточно низок, то уменьшается их настроение. \
-			Ношение этого предмета дарует вам способность видеть язычников сквозь стены, а ваши клинки сделает безвредными - они будут калечить разум жертв. \
-			Предоставляет термальное зрение и удваивает регенерацию мозга еретика Луны при ношении."
+	desc = "Создает Moonlight Amulet.<br>\
+		Если предмет использован на том, у кого слабый рассудок, они становятся берсерком, нападая на всех подряд. \
+		Если рассудок не достаточно низок, то уменьшается их настроение.<br>\
+		Ношение этого предмета исцеляет повреждения вашего мозга и дарует вам способность видеть язычников сквозь стены, \
+		но делает ваши клинки безвредными - вместо этого они будут калечить разум жертв."
+	transmute_text = "Трансмутируйте 2 листа стекла, сердце и галстук."
 	gain_text = "Во главе парада стоял он, луна сгустилась в единную массу, отражение души."
 
 	required_atoms = list(
@@ -111,7 +116,7 @@
 		/obj/item/stack/sheet/glass = 2,
 		/obj/item/clothing/neck/tie = 1,
 	)
-	result_atoms = list(/obj/item/clothing/neck/heretic_focus/moon_amulet)
+	result_atoms = list(/obj/item/clothing/neck/moon_amulet)
 	cost = 2
 
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
@@ -119,11 +124,13 @@
 	research_tree_icon_frame = 9
 
 /datum/heretic_knowledge/armor/moon
-	desc = "Allows you to transmute a table (or a suit), a mask and two sheets of glass to create a Resplendant Regalia, this robe will render the user   fully immune to disabling effects and convert all forms of damage into brain damage, while also pacifying the user and render him unable to use ranged weapons (Moon blade will bypass pacifism). \
-			Acts as a focus while hooded."
+	desc = "Create a Resplendant Regalia.<br>While worn, renders you fully immune to disabling effects \
+			While worn, pacifies you, while also rendering you fully immune to disabling effects and converting all forms of damage into brain damage."
 	gain_text = "Trails of light and mirth flowed from every arm of this magnificent attire. \
-				The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
-				I observed, basking in the light, to find my self."
+			The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
+			I observed, basking in the light, to find my self."
+	notice = "Despite the robe's pacifying effect, you can still use your Moon Blades, provided you ALSO wear a Moonlight Amulet."
+	transmute_text = "Transmute a table (or a suit), a mask and two sheets of glass."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon)
 	research_tree_icon_state = "moon_armor"
 	required_atoms = list(
@@ -134,17 +141,23 @@
 
 /datum/heretic_knowledge/spell/moon_parade
 	name = "Lunar Parade"
-	desc = "Grants you Lunar Parade, a spell that - after a short charge - sends a carnival forward \
-		when hitting someone they are forced to join the parade and suffer hallucinations."
+	desc = "Grants you Lunar Parade, a spell that - after a short charge - fires a projectile.<br>\
+		Anyone hit by it is forced to join the parade, following the projectile while suffering hallucinations."
 	gain_text = "The music like a reflection of the soul compelled them, like moths to a flame they followed"
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
+	notice = "There is no cap to the number of charges on the spell from applying Moonlight Amulets."
 	cost = 2
 	drafting_tier = 5
+	max_charges = 4
+	path_recharge_amount = 0.25
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
+	path_recharge_can_surpass_cap = TRUE
 
 /datum/heretic_knowledge/blade_upgrade/moon
 	name = "Moonlight Blade"
-	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации. \
-			Наносит больше урона мозгу если жертва в безумии или спит."
+	desc = "Ваш клинок теперь наносит урон мозгу и рассудку, а также вызывает случайные галлюцинации.<br>\
+		Наносит больше урона мозгу если жертва в безумии или спит."
 	gain_text = "Его остроумие было острым, как клинок, оно прорезало ложь, чтобы принести нам радость."
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -163,32 +176,34 @@
 		)
 	target.emote(pick("giggle", "laugh"))
 	target.mob_mood?.adjust_sanity(-10)
-	if(target.stat == CONSCIOUS && target.mob_mood?.sanity >= SANITY_NEUTRAL)
+	if(!IS_UNCONSCIOUS_OR_CRIT(target) && target.mob_mood?.sanity >= SANITY_NEUTRAL)
 		target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 10)
 		return
 	target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 25)
 
 /datum/heretic_knowledge/spell/moon_ringleader
 	name = "Ringleaders Rise"
-	desc = "Дает вам Ringleaders Rise, заклинание по области, которое наносит больше урона мозгу в зависимости от отсутствующего рассудка у целей, \
-			также вызывает им галлюцинации, больше тем, у кого мало рассудка. \
-			Если их рассудок достаточно слабый, они обезумеют и потеряют половину рассудка."
+	desc = "Дает вам Ringleaders Rise, заклинание по области, которое наносит урон мозгу и вызывает галлюцинации в зависимости от рассудка целей."
 	gain_text = "Взял его за руку, мы поднялись, и те, кто видел правду, поднялись вместе с нами. \
 		Шпрехшталмейстер указал вверх, и тусклый свет правды осветил нас еще больше."
-
+	notice = "There is no cap to the number of charges on the spell from applying Moonlight Amulets."
 	action_to_add = /datum/action/cooldown/spell/aoe/moon_ringleader
 	cost = 2
-
 	research_tree_icon_frame = 5
 	is_final_knowledge = TRUE
+	max_charges = 2
+	path_recharge_amount = 0.25
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
+	path_recharge_can_surpass_cap = TRUE
 
 /datum/heretic_knowledge/ultimate/moon_final
 	name = "The Last Act"
-	desc = "Ритуал вознесения Пути луны. \
-		Принесите 3 трупа с более чем 50 урона мозгу на руну трансмутации, чтобы завершить ритуал \
+	desc = "Ритуал вознесения Пути луны.<br>\
 		При завершении, вы становитесь предвестником безумия и получаете ауру пассивного снижения рассудка, \
-		а члены экипажа с достаточно низким рассудком станут аколитами. \
+		а члены экипажа с достаточно низким рассудком станут аколитами.<br>\
 		Одна пятая экипажа превратится в аколитов и будет следовать вашим приказам, также они получат Moonlight Amulet"
+	transmute_text = "Трансмутируйте 3 трупа с более чем 50 урона мозгу."
 	gain_text = "Мы нырнули вниз, к толпе, его душа отделилась в поисках более великой авантюры, \
 		туда, откуда Шпрехшталмейстер начал парад, и я продолжу его до самой кончины солнца \
 		УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ, ЛУНА УЛЫБНЕТСЯ РАЗ И НАВСЕГДА!"
@@ -216,7 +231,7 @@
 	var/amount_of_lunatics = 0
 	var/list/lunatic_candidates = list()
 	for(var/mob/living/carbon/human/crewmate as anything in shuffle(GLOB.human_list))
-		if(QDELETED(crewmate) || isnull(crewmate.client) || isnull(crewmate.mind) || crewmate.stat != CONSCIOUS || crewmate.can_block_magic(MAGIC_RESISTANCE_MIND))
+		if(QDELETED(crewmate) || isnull(crewmate.client) || isnull(crewmate.mind) || IS_UNCONSCIOUS_OR_CRIT(crewmate) || crewmate.can_block_magic(MAGIC_RESISTANCE_MIND))
 			continue
 		var/turf/crewmate_turf = get_turf(crewmate)
 		var/crewmate_z = crewmate_turf?.z
@@ -251,7 +266,7 @@
 
 	var/datum/antagonist/lunatic/lunatic = convertee.mind.add_antag_datum(/datum/antagonist/lunatic)
 	lunatic.set_master(user.mind, user)
-	var/obj/item/clothing/neck/heretic_focus/moon_amulet/amulet = new(convertee.drop_location())
+	var/obj/item/clothing/neck/moon_amulet/amulet = new(convertee.drop_location())
 	var/static/list/slots = list(
 		LOCATION_NECK,
 		LOCATION_HANDS,
@@ -273,7 +288,7 @@
 
 	for(var/mob/living/carbon/carbon_view in range(7, source))
 		var/carbon_sanity = carbon_view.mob_mood.sanity
-		if(carbon_view.stat != CONSCIOUS)
+		if(IS_UNCONSCIOUS_OR_CRIT(carbon_view))
 			continue
 		if(IS_HERETIC_OR_MONSTER(carbon_view))
 			continue
@@ -286,7 +301,7 @@
 		carbon_view.mob_mood.adjust_sanity(-20)
 
 		if(carbon_sanity >= 10)
-			return
+			continue
 		// So our sanity is dead, time to fuck em up
 		if(SPT_PROB(20, seconds_per_tick))
 			to_chat(carbon_view, span_warning("оно эхом отдаётся в вас!"))
@@ -300,11 +315,10 @@
 			to_chat(carbon_view, span_boldbig(span_red(\
 				"ВАШИ ЧУВСТВА ОХВАЧЕНЫ УЖАСОМ, КОГДА В ВАШ РАЗУМ ВТОРГАЕТСЯ ПОТУСТОРОННЯЯ СИЛА, ПЫТАЮЩАЯСЯ ПЕРЕПИСЫВАТЬ ВАШЕ СУЩЕСТВО. \
 				ВЫ ДАЖЕ НЕ УСПЕВАЕТЕ КРИКНУТЬ, КАК ВАШ ИМПЛАНТ АКТИВИРУЕТ СВОЮ СИСТЕМУ АВАРИЙНОЙ ПСИОНИЧЕСКОЙ ЗАЩИТЫ, СНОСЯ ВАМ ГОЛОВУ.")))
-			var/obj/item/bodypart/head/head = locate() in carbon_view.bodyparts
+			var/obj/item/bodypart/head/head = carbon_view.get_bodypart(BODY_ZONE_HEAD)
 			if(!head?.dismember())
 				carbon_view.gib(DROP_ALL_REMAINS)
-			var/datum/effect_system/reagents_explosion/explosion = new()
-			explosion.set_up(1, get_turf(carbon_view), TRUE, 0)
+			var/datum/effect_system/reagents_explosion/explosion = new(get_turf(carbon_view), 1, 1, 1)
 			explosion.start(src)
 		else
 			attempt_conversion(carbon_view, source)

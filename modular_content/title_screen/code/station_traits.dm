@@ -1,6 +1,3 @@
-/datum/station_trait/proc/on_lobby_button_click(mob/dead/new_player/user, button_id)
-	return // No SCUB and Pet Day
-
 // STANDARD JOB TRAIT HANDLING
 /datum/station_trait/job/on_lobby_button_click(mob/dead/new_player/user, button_id)
 	if(SSticker.HasRoundStarted())

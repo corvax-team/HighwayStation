@@ -31,3 +31,4 @@
 	)
 	rpg_title = "Explorer"
 	job_flags = STATION_JOB_FLAGS
+	tgui_icon = FA_ICON_COMPASS

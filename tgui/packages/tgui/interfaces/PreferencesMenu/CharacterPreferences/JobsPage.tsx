@@ -1,4 +1,3 @@
-import { sortBy } from 'es-toolkit';
 import type { CSSProperties, PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Button, Section, Stack, Tooltip } from 'tgui-core/components';
@@ -14,13 +13,6 @@ import {
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
 import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD - Pref Job Slots
-
-function sortJobs(entries: [string, Job][], head?: string) {
-  return sortBy(entries, [
-    ([key, _]) => (key === head ? -1 : 1),
-    ([key, _]) => key,
-  ]);
-}
 
 type PriorityButtonProps = {
   name: string;
@@ -88,7 +80,7 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
 type PriorityButtonsProps = {
   createSetPriority: CreateSetPriority;
   isOverflow: boolean;
-  priority: JobPriority;
+  priority: JobPriority | null;
 };
 
 function PriorityButtons(props: PriorityButtonsProps) {
@@ -188,7 +180,8 @@ function JobRow(props: JobRowProps) {
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
     rightSide = <Stack.Item className="restricted ban">Забанен</Stack.Item>;
   } else {
-    const priority = data.job_preferences[name];
+    const priority =
+      data.job_preferences.find((pref) => pref.job === name)?.priority ?? null;
     const isOverflow = data.overflow_role === name;
     const createSetPriority = createCreateSetPriorityFromName(name);
 
@@ -231,7 +224,7 @@ function Department(props: DepartmentProps) {
     return;
   }
 
-  const { departments, jobs } = data.jobs;
+  const { departments, jobs, jobs_sorted } = data.jobs;
   const department = departments[name];
 
   // This isn't necessarily a bug, it's like this
@@ -242,10 +235,9 @@ function Department(props: DepartmentProps) {
     return null;
   }
 
-  const jobsForDepartment = sortJobs(
-    Object.entries(jobs).filter(([_, job]) => job.department === name),
-    department.head,
-  );
+  const jobsForDepartment = jobs_sorted
+    .map((jobName) => [jobName, jobs[jobName]] as const)
+    .filter(([, job]) => job.department === name);
 
   return (
     <Stack fill vertical g={0}>

@@ -63,7 +63,7 @@
 	..()
 	var/mob/living/carbon/smoker = loc
 	if(istype(smoker))
-		if(src == smoker.wear_mask)
+		if(smoker.get_item_by_slot(ITEM_SLOT_MASK) == src)
 			SEND_SIGNAL(smoker, "testsig")
 	else if(istype(smoker, /obj/item/clothing/mask/gas))
 		smoker = smoker.loc

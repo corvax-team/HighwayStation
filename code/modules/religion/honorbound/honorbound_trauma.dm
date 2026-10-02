@@ -104,10 +104,10 @@
 /// Checks a mob for any obvious signs of evil, and applies a guilty reason for each.
 /datum/brain_trauma/special/honorbound/proc/check_visible_guilt(mob/living/attacked_mob)
 	//will most likely just hit nuke ops but good catch-all. WON'T hit traitors
-	if(ROLE_SYNDICATE in attacked_mob.faction)
+	if(attacked_mob.has_faction(ROLE_SYNDICATE))
 		guilty(attacked_mob, "for their misaligned association with the Syndicate!")
 	//not an antag datum check so it applies to wizard minions as well
-	if(ROLE_WIZARD in attacked_mob.faction)
+	if(attacked_mob.has_faction(ROLE_WIZARD))
 		guilty(attacked_mob, "for blasphemous magicks!")
 	if(HAS_TRAIT(attacked_mob, TRAIT_CULT_HALO))
 		guilty(attacked_mob, "for blasphemous worship!")
@@ -164,7 +164,7 @@
 	//THE UNREADY (Applies over ANYTHING else!)
 	if(honorbound_human == target_creature)
 		return TRUE //oh come on now
-	if(target_creature.IsSleeping() || target_creature.IsUnconscious() || HAS_TRAIT(target_creature, TRAIT_RESTRAINED))
+	if(IS_UNCONSCIOUS(target_creature) || HAS_TRAIT(target_creature, TRAIT_RESTRAINED))
 		to_chat(honorbound_human, span_warning("There is no honor in attacking the <b>unready</b>."))
 		return FALSE
 	//THE JUST (Applies over guilt except for med, so you best be careful!)
@@ -221,7 +221,7 @@
 
 /datum/action/cooldown/spell/pointed/declare_evil
 	name = "Declare Evil"
-	desc = "If someone is so obviously an evil of this world you can spend a huge amount of favor to declare them guilty."
+	desc = "If someone is so obviously an evil of this world then you can spend a huge amount of favor to declare them guilty."
 	button_icon_state = "declaration"
 	ranged_mousepointer = 'icons/effects/mouse_pointers/honorbound.dmi'
 

@@ -1,4 +1,4 @@
-/obj/item/modular_computer/pda/heads/centcom // Special PDA for centcom cause they don't have their own
+/obj/item/modular_computer/pda/crew/heads/centcom // Special PDA for centcom cause they don't have their own
 	name = "centcom officer PDA"
 	greyscale_config = /datum/greyscale_config/tablet/stripe_double
 	greyscale_colors = "#141414#FFD700#FFD700"

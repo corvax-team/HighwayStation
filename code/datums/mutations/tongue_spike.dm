@@ -1,6 +1,6 @@
 /datum/mutation/tongue_spike
 	name = "Tongue Spike"
-	desc = "Позволяет существу добровольно выстрелить своим языком, как смертельным оружием."
+	desc = "Субъект получает способность добровольно выстрелить своим языком, как смертельным оружием."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Ты чувствуешь, что можешь выкинуть свой голос.")
 	instability = POSITIVE_INSTABILITY_MINI // worthless. also serves as a bit of a hint that it's not good
@@ -89,7 +89,7 @@
 
 /datum/mutation/tongue_spike/chem
 	name = "Chem Spike"
-	desc = "Позволяет существу добровольно выстрелить своим языком из биомассы, позволяет передавать химические вещества на большое расстояние."
+	desc = "Субъект получает способность добровольно выстрелить своим языком из биомассы, что позволяет передавать химические вещества на большое расстояние."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Ты чувствуешь, что можешь соединиться с людьми бросив свой голос.")
 	instability = POSITIVE_INSTABILITY_MINOR // slightly less worthless. slightly.

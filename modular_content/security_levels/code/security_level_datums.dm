@@ -105,11 +105,7 @@
 		CHECK_TICK
 
 	for(var/obj/machinery/power/apc/current_apc as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/apc))
-		if(!current_apc.cell || !SSmapping.level_trait(current_apc.z, ZTRAIT_STATION))
-			continue
-
-		var/area/apc_area = current_apc.area
-		if(is_type_in_typecache(apc_area, GLOB.typecache_powerfailure_safe_areas))
+		if(!current_apc.cell || !SSmapping.level_trait(current_apc.z, ZTRAIT_STATION) || HAS_TRAIT(current_apc.area, TRAIT_AREA_BLOCK_POWER_FAIL))
 			continue
 
 		current_apc.reboot()

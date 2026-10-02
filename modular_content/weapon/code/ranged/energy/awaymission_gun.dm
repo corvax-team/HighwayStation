@@ -70,7 +70,6 @@
 /datum/design/exploreverse_mk1
 	name = "Exploreverse Mk.I"
 	desc = "Энергетическое оружие с экспериментальным миниатюрным реактором."
-	id = "exploreverse_mk1"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
@@ -86,7 +85,6 @@
 /datum/design/exploreverse_mk2
 	name = "Exploreverse Mk.II"
 	desc = "Энергетическое оружие с экспериментальным миниатюрным реактором и рычагом для ручной зарядки."
-	id = "exploreverse_mk2"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
@@ -102,9 +100,9 @@
 	departmental_flags = DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_SECURITY
 
 /datum/techweb_node/mining/New()
+	unlocked_designs |= /datum/design/exploreverse_mk1
 	. = ..()
-	design_ids |= "exploreverse_mk1"
 
 /datum/techweb_node/plasma_mining/New()
+	unlocked_designs |= /datum/design/exploreverse_mk2
 	. = ..()
-	design_ids |= "exploreverse_mk2"

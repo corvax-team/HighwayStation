@@ -13,8 +13,6 @@ import {
   Tabs,
 } from 'tgui-core/components';
 
-import { ReverseJobsRu } from '../../bandastation/ru_jobs'; // BANDASTATION EDIT
-import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
 import type { MedicalRecord, MedicalRecordData } from './types';
 
@@ -124,7 +122,7 @@ const CrewTab = (props: { record: MedicalRecord }) => {
       selected={selectedRecord?.crew_ref === crew_ref}
     >
       <Box>
-        <Icon name={JOB2ICON[ReverseJobsRu(trim)] || 'question'} /> {name}
+        <Icon name={trim || 'question'} /> {name}
       </Box>
     </Tabs.Tab>
   );

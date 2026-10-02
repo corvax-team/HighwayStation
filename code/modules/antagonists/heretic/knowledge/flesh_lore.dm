@@ -44,16 +44,17 @@
 	guaranteed_side_tier2 = /datum/heretic_knowledge/crucible
 	robes = /datum/heretic_knowledge/armor/flesh
 	knowledge_tier3 = /datum/heretic_knowledge/summon/raw_prophet
-	guaranteed_side_tier3 = /datum/heretic_knowledge/spell/crimson_cleave
+	guaranteed_side_tier3 = /datum/heretic_knowledge/crimson_cleave
 	blade = /datum/heretic_knowledge/blade_upgrade/flesh
 	knowledge_tier4 = /datum/heretic_knowledge/summon/stalker
 	ascension = /datum/heretic_knowledge/ultimate/flesh_final
 
 /datum/heretic_knowledge/limited_amount/starting/base_flesh
 	name = "Principle of Hunger"
-	desc = "Открывает перед вами Путь плоти. \
-		Позволяет трансмутировать нож и лужу крови в Кровавый клинок. \
+	desc = "Открывает перед вами Путь плоти.<br>\
+		Позволяет создавать Кровавые клинки. \
 		Одновременно можно иметь только три."
+	transmute_text = "Трансмутируйте нож и лужу крови."
 	gain_text = "Сотни наших голодали, но не я... Я нашел силу в своей жадности."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -72,7 +73,7 @@
 	summon_objective.owner = our_heretic.owner
 	our_heretic.objectives += summon_objective
 
-	to_chat(user, span_hierophant("Пройдя Путь плоти, вы получаете еще одну цель."))
+	to_chat(user, span_mansus("Пройдя Путь плоти, вы получаете еще одну цель."))
 	our_heretic.owner.announce_objectives()
 
 /datum/heretic_knowledge/limited_amount/starting/base_flesh/on_mansus_grasp(mob/living/source, mob/living/target)
@@ -128,14 +129,15 @@
 
 /datum/heretic_knowledge/limited_amount/flesh_ghoul
 	name = "Imperfect Ritual"
-	desc = "Позволяет трансмутировать труп и мак, чтобы создать Безголосого мертвеца. \
-		Трупу необязательно иметь душу. \
+	desc = "Превращает труп в Безголосого мертвеца. \
+		Трупу необязательно иметь душу.<br>\
 		Безголосые мертвецы - это немые гули, у них всего 50 здоровья, но они могут эффективно использовать Кровавые клинки. \
 		Одновременно можно иметь только два."
+	transmute_text = "Трансмутируйте труп и мак."
 	gain_text = "Я нашел записи о темном ритуале, незаконченные... но все же я стремился вперед."
 	required_atoms = list(
 		/mob/living/carbon/human = 1,
-		/obj/item/food/grown/poppy = 1,
+		/obj/item/food/grown/flower/poppy = 1,
 	)
 	limit = 2
 	cost = 2
@@ -212,21 +214,23 @@
 
 /datum/heretic_knowledge/spell/flesh_surgery
 	name = "Knitting of Flesh"
-	desc = "Дарует вам заклинание Knit Flesh. Это заклинание позволяет извлекать органы из жертв \
-		без необходимости длительной операции. Этот процесс занимает гораздо больше времени, если цель жива. \
+	desc = "Дарует вам заклинание Knit Flesh.<br>Это заклинание позволяет извлекать органы из жертв \
+		без необходимости длительной операции.<br>Этот процесс занимает гораздо больше времени, если цель жива.<br>\
 		Это заклинание также позволяет вам исцелять ваших миньонов и призванных или восстанавливать отказавшие органы до приемлемого состояния."
 	gain_text = "Но они недолго оставались вне моей досягаемости. С каждым шагом крики усиливались, пока, наконец, \
 		я не понял, что их можно заглушить."
 	action_to_add = /datum/action/cooldown/spell/touch/flesh_surgery
 	cost = 2
 	drafting_tier = 5
+	max_charges = INFINITY
 
 /datum/heretic_knowledge/armor/flesh
-	desc = "Allows you to transmute a table (or a suit), a mask and a pool of blood to create a writhing embrace. \
-		It grants you the ability to detect the health condition of other living (and non-living) and an aura that slowly heals your summons. \
-		Acts as a focus while hooded."
+	desc = "Create a Writhing Embrace.<br>\
+		It grants you the ability to detect the health condition of other living (and non-living) \
+		and an aura that slowly heals your summons."
+	transmute_text = "Transmute a table (or a suit), a mask and a pool of blood."
 	gain_text = "I tugged these wretched, slothing things about me, like one might a warm blanket. \
-				With eyes-not-mine, they will witness. With teeth-not-mine, they will clench. With limbs-not-mine, they will break."
+		With eyes-not-mine, they will witness. With teeth-not-mine, they will clench. With limbs-not-mine, they will break."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/flesh)
 	research_tree_icon_state = "flesh_armor"
 	required_atoms = list(
@@ -237,9 +241,10 @@
 
 /datum/heretic_knowledge/summon/raw_prophet
 	name = "Raw Ritual"
-	desc = "Позволяет трансмутировать пару глаз, левую руку и лужу крови, чтобы создать Сырого пророка. \
+	desc = "Призывает Сырого пророка.<br>\
 		Сырые пророки обладают значительно увеличенной дальностью зрения и рентгеновским зрением, \
 		а также джаунтом дальнего действия и способностью связывать разумы для легкого общения, но очень хрупки и слабы в бою."
+	transmute_text = "Трансмутируйте пару глаз, левую руку и лужу крови."
 	gain_text = "Я не мог продолжать в одиночку. Я смог призвать Жуткого человека, чтобы он помог мне увидеть больше. \
 		Крики... когда-то постоянные, теперь заглушались их убогим видом. Ничто не было недосягаемо."
 	required_atoms = list(
@@ -267,14 +272,15 @@
 		return
 
 	var/mob/living/carbon/carbon_target = target
-	var/obj/item/bodypart/bodypart = pick(carbon_target.bodyparts)
+	var/obj/item/bodypart/bodypart = pick(carbon_target.get_bodyparts())
 	var/datum/wound/crit_wound = new wound_type()
 	crit_wound.apply_wound(bodypart, attack_direction = get_dir(source, target))
 
 /datum/heretic_knowledge/summon/stalker
 	name = "Lonely Ritual"
-	desc = "Позволяет трансмутировать хвост любого вида, желудок, язык, ручку и лист бумаги, чтобы создать Сталкера. \
+	desc = "Призывает Сталкера.<br>\
 		Сталкеры имеют джаунт, могут выпускать ЭМИ, превращаться в животных или автоматонов и сильны в бою."
+	transmute_text = "Трансмутируйте хвост любого вида, желудок, язык, ручку и лист бумаги."
 	gain_text = "Я смог объединить свою жадность и желания, чтобы вызвать мистическое чудовище, которого я никогда раньше не видел. \
 		Постоянно меняющая форму масса плоти, она хорошо знала мои цели. Маршал одобрил."
 
@@ -293,14 +299,14 @@
 
 /datum/heretic_knowledge/ultimate/flesh_final
 	name = "Priest's Final Hymn"
-	desc = "Ритуал вознесения Пути плоти. \
-		Принесите 4 трупа к руне трансмутации, чтобы завершить ритуал. \
+	desc = "Ритуал вознесения Пути плоти.<br>\
 		После завершения вы обретаете способность сбросить человеческую форму \
 		и стать Властелином ночи, сверхмощным существом. \
-		Один только акт превращения вызывает у близлежащих язычников сильный страх и травму. \
-		Находясь в форме Повелителя ночи, вы можете потреблять оружие для исцеления и восстановления сегментов. \
+		Один только акт превращения вызывает у близлежащих язычников сильный страх и травму.<br>\
+		Находясь в форме Повелителя ночи, вы можете потреблять оружие для исцеления и восстановления сегментов.<br>\
 		Кроме того, вы можете вызывать в три раза больше упырей и безголосых мертвецов, \
 		а также создавать неограниченное количество клинков, чтобы вооружить их всех."
+	transmute_text = "Трансмутируйте 4 трупа."
 	gain_text = "С ведома Маршала моя сила достигла пика. Трон был готов к завоеванию. \
 		Люди этого мира, услышьте меня, ибо время пришло! Маршал ведет мою армию! \
 		Реальность согнется перед ВЛАДЫКОЙ НОЧИ, или будет разрушена! УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ!"

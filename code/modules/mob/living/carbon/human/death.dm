@@ -22,6 +22,8 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 	human_heart?.beat = BEAT_NONE
 	human_heart?.Stop()
 
+	force_say(list(""), immediate = TRUE)
+
 	. = ..()
 
 	if(client && !HAS_TRAIT(src, TRAIT_SUICIDED) && !(client in GLOB.dead_players_during_shift))
@@ -38,6 +40,8 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 				<b>Reagents</b>:<br>[reagents_readout()]", INVESTIGATE_DEATHS)
 	to_chat(src, span_warning("Вы погибли. Если ваше тело не было уничтожено, вас могут вернуть к жизни другие игроки. \
 		Если вы не хотите возвращаться в тело, используйте кнопку \"Do Not Resuscitate\" (DNR) внизу экрана."))
+	if(SSlag_switch.measures[DISABLE_DEAD_KEYLOOP] && !client?.holder)
+		to_chat(src, span_warning("Ghost movement is currently disabled by admins. To leave your body use the Ghost verb."))
 
 /mob/living/carbon/human/proc/reagents_readout()
 	var/readout = "[get_bloodtype()?.get_blood_name() || "Blood"]stream:"
@@ -53,8 +57,10 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 	return readout
 
 /mob/living/carbon/human/proc/makeSkeleton()
-	ADD_TRAIT(src, TRAIT_DISFIGURED, TRAIT_GENERIC)
 	set_species(/datum/species/skeleton)
+	var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
+	if(head)
+		ADD_TRAIT(head, TRAIT_DISFIGURED, INNATE_TRAIT)
 	return TRUE
 
 /mob/living/carbon/proc/Drain()

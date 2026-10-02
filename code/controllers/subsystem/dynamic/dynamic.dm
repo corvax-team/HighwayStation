@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(dynamic)
 	name = "Dynamic"
-	flags = SS_NO_INIT
+	ss_flags = SS_NO_INIT
 	wait = 5 MINUTES
 
 	// These vars just exist for admins interfacing with dynamic
@@ -140,8 +140,8 @@ SUBSYSTEM_DEF(dynamic)
 	// put rulesets in the queue (if admins didn't)
 	// this will even handle the case in which the tier wants 0 roundstart rulesets
 	if(!length(queued_rulesets))
-		for(var/ruleset_typepath in pick_roundstart_rulesets(antag_candidates))
-			queue_ruleset(ruleset_typepath)
+		for(var/ruleset in pick_roundstart_rulesets(antag_candidates))
+			queue_ruleset(ruleset)
 	// we got what we needed, reset so we can do real job selection later
 	// reset only happens AFTER roundstart selection so we can verify stuff like "can we get 3 heads of staff for revs?"
 	SSjob.reset_occupations()
@@ -278,9 +278,9 @@ SUBSYSTEM_DEF(dynamic)
 		log_dynamic("Roundstart: Ruleset [picked_ruleset.config_tag] (Chance: [round(rulesets_weighted[picked_ruleset] / total_weight * 100, 0.01)]%)")
 		if(picked_ruleset.solo)
 			log_dynamic("Roundstart: Ruleset is a solo ruleset. Cancelling other picks.")
-			QDEL_LIST(picked_rulesets)
+			picked_rulesets.Cut()
 			rulesets_weighted -= picked_ruleset
-			picked_rulesets += picked_ruleset
+			picked_rulesets += picked_ruleset.type
 			break
 		if(current_tier.tier != DYNAMIC_TIER_HIGH && (picked_ruleset.ruleset_flags & RULESET_HIGH_IMPACT))
 			for(var/datum/dynamic_ruleset/roundstart/high_impact_ruleset as anything in rulesets_weighted)
@@ -290,13 +290,13 @@ SUBSYSTEM_DEF(dynamic)
 				rulesets_weighted -= high_impact_ruleset
 		if(!picked_ruleset.repeatable)
 			rulesets_weighted -= picked_ruleset
-			picked_rulesets += picked_ruleset
+			picked_rulesets += picked_ruleset.type
 			continue
 
 		rulesets_weighted[picked_ruleset] -= picked_ruleset.repeatable_weight_decrease
 		total_weight -= picked_ruleset.repeatable_weight_decrease
-		// Rulesets are not singletons. We need to to make a new one
-		picked_rulesets += new picked_ruleset.type(dynamic_config)
+		picked_rulesets += picked_ruleset.type
+		// Rulesets are not singletons. Queue_ruleset() will make them one.
 
 	// clean up unused rulesets
 	QDEL_LIST(rulesets_weighted)
@@ -728,7 +728,7 @@ SUBSYSTEM_DEF(dynamic)
 			data += "\]\n"
 		else
 			data += "blacklisted_roles = \[\]\n"
-		if(!istype(ruleset, /datum/dynamic_ruleset/latejoin) && !istype(ruleset, /datum/dynamic_ruleset/midround/from_living))
+		if(!istype(ruleset, /datum/dynamic_ruleset/latejoin))
 			if(islist(ruleset.min_antag_cap))
 				for(var/ruleset_min_antag_cap in ruleset.min_antag_cap)
 					data += "min_antag_cap.[ruleset_min_antag_cap] = [ruleset.min_antag_cap[ruleset_min_antag_cap]]\n"

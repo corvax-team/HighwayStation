@@ -17,7 +17,6 @@
 
 	// holder
 	held_state = "borgi"
-	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_NORMAL
 	held_lh = 'modular_content/mobs/icons/inhands/mobs_lefthand.dmi'
 	held_rh = 'modular_content/mobs/icons/inhands/mobs_righthand.dmi'

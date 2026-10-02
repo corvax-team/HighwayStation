@@ -3,6 +3,7 @@
 	ui_bgr = "node_lock"
 	complexity = "Medium"
 	complexity_color = COLOR_YELLOW
+	shop_cost_discount = 1
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
 		"state" = "key_blade",
@@ -46,10 +47,11 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_lock
 	name = "A Steward's Secret"
-	desc = "Открывает перед вами Путь замка. \
-		Позволяет трансмутировать нож и монтировку в Ключ-клинок. \
+	desc = "Открывает перед вами Путь замка.<br>\
+		Позволяет создавать Ключ-клинки. \
 		Одновременно можно иметь только два, а также он действует как быстрая монтировка. \
 		К тому же, они помещаются в пояса для инструментов."
+	transmute_text = "Трансмутируйте нож и монтировку."
 	gain_text = "Запертный лабиринт ведет к свободе. Но только пойманные Управляющие знают верный путь."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -117,13 +119,16 @@
 	return COMPONENT_USE_HAND
 
 /datum/heretic_knowledge/key_ring
-	name = "Key Keeper’s Burden"
-	desc = "Позволяет трансмутировать кошелек, железный прут и ИД-карта, чтобы создать Мистическую карту. \
-		Ударьте ею по двум шлюзам, чтобы создать спаренный портал, который будет телепортировать вас между ними, а не-еретиков случайно. \
+	name = "Key Keeper's Burden"
+	desc = "Зачаровывает ИД-карту в Мистическую карту.<br>\
+		Ударьте ею по двум шлюзам, чтобы создать спаренный портал, \
+		который будет телепортировать вас между ними, а не-еретиков случайно. \
 		С помощью Ctrl-Click по карте, вы можете инвертировать поведение созданных порталов. \
-		Каждая такая карта может иметь только одну пару порталов. \
+		Каждая такая карта может иметь только одну пару порталов.<br>\
 		Также, она выглядит и работает как обычная ИД-карта. \
-		Атаки по карте обычными ИД-картами поглощает их и получает их доступ. При использовании в руке, она может изменить свой внешний вид на любую поглощенную."
+		Атаки по карте обычными ИД-картами поглощает их и получает их доступ. \
+		При использовании в руке, она может изменить свой внешний вид на любую поглощенную."
+	transmute_text = "Трансмутируйте кошелек, железный прут и ИД-карту."
 	gain_text = "Хранитель усмехнулся. \"Эти пластиковые прямоугольники - насмешка над ключами, и я проклинаю каждую дверь, которая их требует.\""
 	required_atoms = list(
 		/obj/item/storage/wallet = 1,
@@ -149,8 +154,10 @@
 
 /datum/heretic_knowledge/limited_amount/concierge_rite
 	name = "Concierge's Rite"
-	desc = "Позволяет трансмутировать мелок, деревянную доску и мультитул, чтобы создать Справочник лабиринта. \
-		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии. Имеет 5 зарядов, которые перезаряжаются со временем."
+	desc = "Создает Справочник лабиринта.<br>\
+		Оно может материализовать на расстоянии баррикаду, через которую могут пройти только вы и люди с сопротивлением против магии.<br>\
+		Имеет 5 зарядов, которые перезаряжаются со временем."
+	transmute_text = "Трансмутируйте мелок, деревянную доску и мультитул."
 	gain_text = "Консьерж записал мое имя в Справочник. \"Добро пожаловать в ваш новый дом, коллега Управляющий.\""
 	required_atoms = list(
 		/obj/item/toy/crayon = 1,
@@ -164,12 +171,12 @@
 	drafting_tier = 5
 
 /datum/heretic_knowledge/armor/lock
-	desc = "Allows you to transmute a table (or a suit), a mask and a crowbar to create a shifting guise. \
-		It grants you camoflage from cameras, hides your identity, voice and muffles your footsteps. \
-		Acts as a focus while hooded."
+	desc = "Create a Shifting Guise.<br>\
+		It grants you camouflage from cameras, hides your identity, voice and muffles your footsteps."
+	transmute_text = "Transmute a table (or a suit), a mask and a crowbar."
 	gain_text = "While stewards are known to the Concierge, \
-				they still consort between one another and with outsiders under shaded cloaks and drawn hoods. \
-				Familiarity is treachery, even to oneself."
+		they still consort between one another and with outsiders under shaded cloaks and drawn hoods. \
+		Familiarity is treachery, even to oneself."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/lock)
 	research_tree_icon_state = "lock_armor"
 	required_atoms = list(
@@ -183,9 +190,13 @@
 	desc = "Дарует вам заклинание, Burglar's Finesse, которое \
 		перемещает случайный предмет из сумки жертвы в вашу руку."
 	gain_text = "Общение с духами Взломщиками не одобряется, но Управляющий всегда хочет узнавать о новых дверях."
-
+	required_atoms = list(/obj/item/clothing/gloves = 1)
 	action_to_add = /datum/action/cooldown/spell/pointed/burglar_finesse
 	cost = 2
+	max_charges = 12
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.33
+	transmute_text = "Can be manually recharged by completing a ritual with a pair of gloves."
 
 /datum/heretic_knowledge/blade_upgrade/flesh/lock
 	name = "Opening Blade"
@@ -201,25 +212,35 @@
 		return ..()
 
 /datum/heretic_knowledge/spell/caretaker_refuge
-	name = "Caretaker’s Last Refuge"
-	desc = "Заклинание, позволяющее становиться прозрачным и безтелесным. Невозможно использовать рядом с живыми разумными существами. \
-		Пока вы находитесь в убежище, вы не можете использовать руки и заклинания, и вы имеете иммунитет к замедлению. \
-		Вы неуязвимы, но также не можете ничему вредить. При попадании анти-магией, эффект прерывается."
+	name = "Caretaker's Last Refuge"
+	desc = "Заклинание, позволяющее становиться прозрачным и безтелесным.<br>\
+		Пока заклинание активно, вы не можете использовать руки и другие заклинания, и вы имеете иммунитет к замедлению. \
+		Вы полностью неуязвимы, но также не можете ничему вредить. "
 	gain_text = "Страж и Гончая охотились за мной из ревности. Но я раскрыл свою форму, став лишь неприкосаемой дымкой."
 	action_to_add = /datum/action/cooldown/spell/caretaker
 	cost = 2
 	is_final_knowledge = TRUE
+	max_charges = 3
+	path_recharge_amount = 0.66
+	holywater_drain_amount = 0.33
+	notice = "&bull; Cannot be used near living sentient beings.<br>&bull; Cancelled if you are hit with an anti-magic item."
+
+/datum/heretic_knowledge/spell/caretaker_refuge/has_charges(mob/living/user)
+	return user.has_status_effect(/datum/status_effect/caretaker_refuge) || ..()
+
+/datum/heretic_knowledge/spell/caretaker_refuge/should_deduct_charge(mob/living/user)
+	return !user.has_status_effect(/datum/status_effect/caretaker_refuge)
 
 /datum/heretic_knowledge/ultimate/lock_final
 	name = "Unlock the Labyrinth"
 	desc = "Ритуал вознесения Пути замка. \
-		Принесите 3 трупа без органов в их торсе к руне трансмутации, чтобы завершить ритуал. \
 		При завершении, вы сможете превращаться в усиленных мистических существ, \
 		а ваши ключ-клинки становятся еще смертоноснее. \
 		Также, вы откроете разрыв к сердцу Лабиринта; \
 		разрыв в реальности, который будет находиться на месте ритуала. \
 		Мистические существа будут беспрерывно выходить из разлома, \
 		и они будут подчиненны вам."
+	transmute_text = "Трансмутируйте 3 трупа без органов в их торсе."
 	gain_text = "Управляющие направляли меня, и я направил их. \
 		Мои враги были Замками, а мои клинки - Ключами! \
 		Лабиринт теперь не будет Заперт, свобода будет нашей! УЗРИТЕ НАС!"

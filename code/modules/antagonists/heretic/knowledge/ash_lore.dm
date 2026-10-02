@@ -27,9 +27,7 @@
 	tips = list(
 		"Your Mansus Grasp applies a short blind and a mark that puts your opponent into stamina crit when triggered by your blade. The mark can spread to nearby opponents.",
 		"Selecting this path makes you immune to high temperature damage. Remember, however, that your clothes can still burn! If you want to protect yourself from your own fire, wear a Scorched Mantle.",
-		"Your Scorched Mantle will cause you to generate firestacks on your own body (Make sure you toggle the effect!). Upon reaching 5 fire stacks, your ashen spells will be  empowered (indicated by your spells being highlighted in green).",
-		"Your Ashen passage is a short cooldown jaunt capable of removing restraints. If empowered, it gains a longer jaunt time, and also will remove stuns and stamina crit.",
-		"Volcano blast can make short work of your enemies, should they be foolish enough to stick close to each other. If empowered, it will have no cast time and generate twice the amount of firestacks. Burn the heathens to ashes!",
+		"Your Scorched Mantle will keep you on fire while protecting you from the ill effects of it. Use this to your advantage by running into groups of enemies, spreading fire far and wide.",
 		"Do not neglect the Mask of Madness. It will slowly sap the stamina of your enemies and make them hallucinate.",
 		"Make sure to set as many enemies on fire as you possibly can! Nightwatcher's Rebirth will heal you and have its cooldown reduced based on how many mobs you siphon.",
 		"Your ascension grants you complete immunity to environmental hazards, including bombs! But you are still vulnerable to more conventional weaponry. Do not become overconfident.",
@@ -41,7 +39,7 @@
 	knowledge_tier2 = /datum/heretic_knowledge/spell/fire_blast
 	guaranteed_side_tier2 = /datum/heretic_knowledge/rifle
 	robes = /datum/heretic_knowledge/armor/ash
-	knowledge_tier3 = /datum/heretic_knowledge/mad_mask
+	knowledge_tier3 = /datum/heretic_knowledge/nightwatchers_lantern
 	guaranteed_side_tier3 = /datum/heretic_knowledge/summon/ashy
 	blade = /datum/heretic_knowledge/blade_upgrade/ash
 	knowledge_tier4 = /datum/heretic_knowledge/spell/flame_birth
@@ -49,9 +47,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_ash
 	name = "Nightwatcher's Secret"
-	desc = "Открывает перед вами путь пепла. \
-		Позволяет трансмутировать спичку и нож в Пепельный клинок. \
+	desc = "Открывает перед вами путь пепла.<br>\
+		Позволяет создавать Пепельные клинки. \
 		Одновременно можно иметь только два."
+	transmute_text = "Трансмутируйте спичку и нож."
 	gain_text = "Городская стража знает своих дозорных. Если вы спросите их ночью, они могут рассказать вам о пепельном фонаре."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -89,32 +88,35 @@
 
 /datum/heretic_knowledge/spell/ash_passage
 	name = "Ashen Passage"
-	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, allowing you to traverse a short distance, passing though any walls. \
-			When empowered, it will break you out of any stuns and restraints, and will have a longer range."
+	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, \
+		allowing you to traverse a short distance, passing though any walls."
 	gain_text = "Он знал, как ходить между мирами."
-
 	action_to_add = /datum/action/cooldown/spell/jaunt/ethereal_jaunt/ash
 	cost = 2
 	drafting_tier = 5
+	max_charges = 6
+	focus_recharge_amount = 0.15
+	holywater_drain_amount = 0.15
 
 /datum/heretic_knowledge/spell/fire_blast
 	name = "Volcano Blast"
 	desc = "Дает вам Volcano Blast - заклинание, которое после короткой зарядки выстреливает лучом энергии \
 		в ближайшего врага, поджигая и обжигая его. Если они не потушат себя, \
-		луч продолжит движение к другой цели. \
-		При усилении не имеет зарядки и выстреливает большим количеством пламени."
+		луч продолжит движение к другой цели."
 	gain_text = "Ни один огонь не был достаточно горячим, чтобы разжечь их. Ни один огонь не был достаточно ярким, чтобы спасти их. Ни один огонь не вечен."
 	action_to_add = /datum/action/cooldown/spell/charged/beam/fire_blast
 	cost = 2
 	research_tree_icon_frame = 7
+	max_charges = 3
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.16
 
 /datum/heretic_knowledge/armor/ash
-	desc = "Allows you to transmute a table (or a suit), a mask and a match to create a scorched mantle. \
-		It provides completes protection from fire, and is able to produce more flames passively. \
-		When you have enough fire, you may cast empowered versions of your ashen spells. \
-		Acts as a focus while hooded."
+	desc = "Create a Scorched Mantle.<br>\
+		It provides completes protection from fire, and is able to produce more flames passively."
+	transmute_text = "Transmute a table (or a suit), a mask and a match."
 	gain_text = "The Watch remain as they fell, crumbling away from sight. \
-			Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen."
+		Yet the winds blowing through the city call them back to service, dust kicked into the air, a drifting silhouette of the fallen."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/ash)
 	research_tree_icon_state = "ash_armor"
 	required_atoms = list(
@@ -123,29 +125,41 @@
 		/obj/item/match = 1,
 	)
 
-/datum/heretic_knowledge/mad_mask
-	name = "Mask of Madness"
-	desc = "Позволяет трансмутировать любую маску, четыре свечи, станбатон и печень, чтобы создать Маску безумия. \
-		Маска вселяет страх в язычников, которые становятся ее свидетелями, вызывая у них потерю стамины, галлюцинации и безумие. \
-		Его также можно насильно надеть на язычника, чтобы он не смог его снять..."
-	gain_text = "Ночной дозорный был потерян. Так считал Дозор. И все же он ходил по миру, незамеченный массами."
+/datum/heretic_knowledge/nightwatchers_lantern
+	name = "Nightwatcher's Lantern"
+	desc = "Create a burning lantern.<br>\
+		A burning lantern is a bright light that damages the eyes and eventually confuses those who witness it for too long. \
+		The effect is reduced for those with protective eyewear, and strengthened if the burning lantern is the only nearby source of light."
+	transmute_text = "Transmute a lamp, lantern, or seclight, a pair of eyes, a flash, and four lit candles."
+	gain_text = "The Nightwatcher did not venture out in the dark. That was foolish, even the Watch knew that. \
+		Their lantern burned with a light that could burn the sun."
+	cost = 2
+	result_atoms = list(/obj/item/flashlight/lantern/heretic)
 	required_atoms = list(
-		/obj/item/organ/liver = 1,
-		/obj/item/melee/baton/security = 1,  // Technically means a cattleprod is valid
-		/obj/item/clothing/mask = 1,
+		list(/obj/item/flashlight/lamp, /obj/item/flashlight/lantern, /obj/item/flashlight/seclite) = 1,
+		/obj/item/organ/eyes = 1,
+		/obj/item/assembly/flash = 1,
 		/obj/item/flashlight/flare/candle = 4,
 	)
-	result_atoms = list(/obj/item/clothing/mask/madness_mask)
-	cost = 2
-	research_tree_icon_path = 'icons/obj/clothing/masks.dmi'
-	research_tree_icon_state = "mad_mask"
+	research_tree_icon_path = 'icons/obj/lighting.dmi'
+	research_tree_icon_state = "lantern"
+
+/datum/heretic_knowledge/nightwatchers_lantern/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
+	. = ..()
+	for(var/obj/item/flashlight/flare/candle/candle in atoms)
+		if(!candle.light_on)
+			atoms -= candle
+
+/datum/heretic_knowledge/nightwatchers_lantern/prepare_atom_for_ritual_test(atom/what)
+	. = ..()
+	if(istype(what, /obj/item/flashlight/flare/candle))
+		what.set_light_on(TRUE)
 
 /datum/heretic_knowledge/blade_upgrade/ash
 	name = "Fiery Blade"
 	desc = "Ваш клинок теперь поджигает врагов при атаке."
 	gain_text = "Он вернулся, с клинком в руке, он размахивал и размахивал, когда пепел падал с неба. \
 		Его город, люди, за которыми он поклялся наблюдать... и он наблюдал, пока все они сгорали дотла."
-
 
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
 	research_tree_icon_state = "blade_upgrade_ash"
@@ -160,7 +174,7 @@
 /datum/heretic_knowledge/spell/flame_birth
 	name = "Nightwatcher's Rebirth"
 	desc = "Дарует вам Nightwatcher's Rebirth, заклинание, которое потушит вас \
-		и обжигает всех ближайших язычников, которые в данный момент горят, исцеляя вас за каждую пораженную цель. \
+		и обжигает всех ближайших язычников, которые в данный момент горят, исцеляя вас за каждую пораженную цель.<br>\
 		Если цель находится в критическом состоянии, она мгновенно умрёт."
 	gain_text = "Огонь был неизбежным, и все же жизнь оставалась в его обугленном теле. \
 		Ночной дозорный был конкретным человеком, всегда бдительным."
@@ -168,16 +182,18 @@
 	cost = 2
 	research_tree_icon_frame = 5
 	is_final_knowledge = TRUE
+	max_charges = 3
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.16
 
 /datum/heretic_knowledge/ultimate/ash_final
 	name = "Ashlord's Rite"
-	desc = "Ритуал вознесения Пути пепла. \
-		Принесите 3 горящих трупа или хаска к руне трансмутации, чтобы завершить ритуал. \
-		После завершения вы становитесь предвестником пламени и получаете две способности. \
+	desc = "Ритуал вознесения Пути пепла.<br>\
+		После завершения вы становитесь предвестником пламени и получаете две способности.<br>\
 		Cascade, который вызывает массивное, растущее огненное кольцо вокруг вас, \
-		и Oath of Flame, заставляя вас пассивно создавать кольцо пламени, когда вы идете. \
-		Некоторые известные заклинания пепла также будут усилены. \
-		tУ вас также появится иммунитет к огню, космосу и подобным опасностям окружающей среды."
+		и Oath of Flame, заставляя вас пассивно создавать кольцо пламени, когда вы идете.<br>\
+		У вас также появится иммунитет к огню, космосу и подобным опасностям окружающей среды."
+	transmute_text = "Трансмутируйте 3 горящих трупа или хаска."
 	gain_text = "Дозор мертв, и Ночной дозорный сгорел вместе с ним. И все же его огонь горит вечно, \
 		ибо он принес человечеству обряд! Его взгляд продолжается, и теперь я един с пламенем, \
 		УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ, ПЕПЕЛЬНЫЙ ФОНАРЬ ВОСПЛАМЕНИТСЯ ВНОВЬ!"

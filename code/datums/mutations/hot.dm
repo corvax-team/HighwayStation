@@ -1,6 +1,6 @@
 /datum/mutation/cindikinesis
 	name = "Cindikinesis"
-	desc = "Позволяет обладателю мутации сконцентрировать рядом находящееся тепло в кучу пепла. Вау. Очень интересно."
+	desc = "Субъект может по своему желанию вытягивать тепло из воздуха, создавая кучу пепла."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Твоя рука кажется тёплой.")
 	instability = POSITIVE_INSTABILITY_MINOR
@@ -23,7 +23,7 @@
 
 /datum/mutation/pyrokinesis
 	name = "Pyrokinesis"
-	desc = "Притягивает положительную энергию окружения для повышения температуры вокруг субъекта."
+	desc = "Субъект может по своему желанию притягивать положительную энергию из окружения, чтобы выстрелить сгустком горячей энергии."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Твоя рука кажется горячей!")
 	instability = POSITIVE_INSTABILITY_MODERATE
