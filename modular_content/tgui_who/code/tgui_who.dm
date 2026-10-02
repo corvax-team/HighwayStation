@@ -232,10 +232,7 @@
 	/// Used to avoid spam of creating those datums.
 	var/datum/tgui_who/who = null
 
-/client/who()
-	set name = "Who"
-	set category = "OOC"
-
+/client/__gvb_who(list/structured_args)
 	if(isnull(who))
 		who = new()
 

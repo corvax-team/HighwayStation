@@ -14,39 +14,45 @@
 		'modular_content/emote_panel/audio/human/female/sigh_female.ogg',
 	)
 
-/datum/species/human/get_cry_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
-			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
-			'modular_content/emote_panel/audio/human/female/cry_female_1.ogg',
-			'modular_content/emote_panel/audio/human/female/cry_female_2.ogg',
-			'modular_content/emote_panel/audio/human/female/cry_female_3.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
-		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
-		'modular_content/emote_panel/audio/human/male/cry_male_1.ogg',
-		'modular_content/emote_panel/audio/human/male/cry_male_2.ogg',
-	)
-
-/datum/species/human/get_laugh_sound(mob/living/carbon/human/human)
-	if(human.physique == FEMALE)
-		return pick(
-			'sound/mobs/humanoids/human/laugh/womanlaugh.ogg',
-			'modular_content/emote_panel/audio/human/female/laugh_female_1.ogg',
-			'modular_content/emote_panel/audio/human/female/laugh_female_2.ogg',
-			'modular_content/emote_panel/audio/human/female/laugh_female_3.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
-		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
-		'modular_content/emote_panel/audio/human/male/laugh_male_1.ogg',
-		'modular_content/emote_panel/audio/human/male/laugh_male_2.ogg',
-	)
-
 // MARK: Emotes
+/datum/emote/living/carbon/cry
+	sounds_by_mobtype = list(
+		/mob/living/carbon/human = list(
+			FEMALE = list(
+				'sound/mobs/humanoids/human/cry/female_cry1.ogg',
+				'sound/mobs/humanoids/human/cry/female_cry2.ogg',
+				'modular_content/emote_panel/audio/human/female/cry_female_1.ogg',
+				'modular_content/emote_panel/audio/human/female/cry_female_2.ogg',
+				'modular_content/emote_panel/audio/human/female/cry_female_3.ogg',
+			),
+			MALE = list(
+				'sound/mobs/humanoids/human/cry/male_cry1.ogg',
+				'sound/mobs/humanoids/human/cry/male_cry2.ogg',
+				'sound/mobs/humanoids/human/cry/male_cry3.ogg',
+				'modular_content/emote_panel/audio/human/male/cry_male_1.ogg',
+				'modular_content/emote_panel/audio/human/male/cry_male_2.ogg',
+			),
+		),
+	)
+
+/datum/emote/living/laugh
+	sounds_by_mobtype = list(
+		/mob/living/carbon/human = list(
+			FEMALE = list(
+				'sound/mobs/humanoids/human/laugh/womanlaugh.ogg',
+				'modular_content/emote_panel/audio/human/female/laugh_female_1.ogg',
+				'modular_content/emote_panel/audio/human/female/laugh_female_2.ogg',
+				'modular_content/emote_panel/audio/human/female/laugh_female_3.ogg',
+			),
+			MALE = list(
+				'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
+				'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
+				'modular_content/emote_panel/audio/human/male/laugh_male_1.ogg',
+				'modular_content/emote_panel/audio/human/male/laugh_male_2.ogg',
+			),
+		),
+	)
+
 /datum/emote/living/sniffle
 	key = "sniffle"
 	key_third_person = "sniffles"

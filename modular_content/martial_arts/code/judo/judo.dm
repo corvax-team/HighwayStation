@@ -1,7 +1,7 @@
 /datum/martial_art/judo
 	name = "Corporate Judo"
 	id = "corporate judo"
-	help_verb = /mob/living/proc/judo_help
+	help_verb = "Вспомнить основы"
 	display_combos = TRUE
 	max_streak_length = 12
 	combo_timer = 15 SECONDS

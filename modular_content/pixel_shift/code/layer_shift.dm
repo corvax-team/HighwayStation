@@ -3,9 +3,7 @@
 //#define MOB_LAYER 				4   // This is a byond standard define
 #define MOB_LAYER_SHIFT_MAX   		4.05
 
-/mob/living/verb/layershift_up()
-	set name = "Shift Layer Upwards"
-	set category = "IC"
+GAME_VERB(/mob/living, layershift_up, "Shift Layer Upwards", "IC")
 
 	if(build_incapacitated())
 		to_chat(src, span_warning("You can't do that right now!"))
@@ -19,9 +17,7 @@
 	var/layer_priority = round((layer - MOB_LAYER) * 100, 1) // Just for text feedback
 	to_chat(src, span_notice("Your layer priority is now [layer_priority]."))
 
-/mob/living/verb/layershift_down()
-	set name = "Shift Layer Downwards"
-	set category = "IC"
+GAME_VERB(/mob/living, layershift_down, "Shift Layer Downwards", "IC")
 
 	if(build_incapacitated())
 		to_chat(src, span_warning("You can't do that right now!"))
