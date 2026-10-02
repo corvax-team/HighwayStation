@@ -1,4 +1,4 @@
-/obj/item/ai_module/core/full/cowboy
+/obj/item/ai_module/law/core/full/cowboy
 	name = "'Cowboy' Core AI Module"
 	law_id = "cowboy"
 
@@ -17,14 +17,13 @@
 /datum/design/board/cowboy
 	name = "Cowboy Module"
 	desc = "Allows for the construction of a cowboy AI Core Module."
-	id = "cowboy_module"
 	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/ai_module/core/full/cowboy
+	build_path = /obj/item/ai_module/law/core/full/cowboy
 	category = list(
 		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_CORE_MODULES
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/techweb_node/ai_laws/New()
+	unlocked_designs += /datum/design/board/cowboy
 	. = ..()
-	design_ids += "cowboy_module"

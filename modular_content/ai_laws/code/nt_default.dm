@@ -1,4 +1,4 @@
-/obj/item/ai_module/core/full/nt_default
+/obj/item/ai_module/law/core/full/nt_default
 	name = "'NT Default' Core AI Module"
 	law_id = "nt_default"
 
@@ -15,14 +15,13 @@
 /datum/design/board/nt_default
 	name = "NT Default Module"
 	desc = "Allows for the construction of an NT Default AI Core Module."
-	id = "nt_default_module"
 	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/ai_module/core/full/nt_default
+	build_path = /obj/item/ai_module/law/core/full/nt_default
 	category = list(
 		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_CORE_MODULES
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/techweb_node/ai_laws/New()
+	unlocked_designs += /datum/design/board/nt_default
 	. = ..()
-	design_ids += "nt_default_module"

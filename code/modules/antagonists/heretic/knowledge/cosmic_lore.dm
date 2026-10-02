@@ -49,9 +49,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_cosmic
 	name = "Eternal Gate"
-	desc = "Открывает перед вами Путь космоса. \
-		озволяет трансмутировать лист плазмы и нож в Космический клинок. \
+	desc = "Открывает перед вами Путь космоса.<br>\
+		Позволяет создавать Космические клинки. \
 		Одновременно можно иметь только два."
+	transmute_text = "Трансмутируйте лист плазмы и нож."
 	gain_text = "Туманность появилась в небе, ее пламенное рождение озарило меня. Это было начало великой трансценденции"
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -81,6 +82,7 @@
 	action_to_add = /datum/action/cooldown/spell/cosmic_rune
 	cost = 2
 	drafting_tier = 5
+	max_charges = INFINITY
 
 /datum/heretic_knowledge/spell/star_blast
 	name = "Star Blast"
@@ -89,13 +91,17 @@
 	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/star_blast
 	cost = 2
+	max_charges = 4
+	path_recharge_amount = 0.5
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
 
 /datum/heretic_knowledge/armor/cosmic
-
-	desc = "Allows you to transmute a table (or a suit), a mask and a sheet of plasma to create a Starwoven Cloak, grants protection from the hazards of space while granting to the user the ability to levitate at will. \
-			Acts as a focus while hooded."
+	desc = "Create a Starwoven Cloak.<br>Grants protection from the hazards of space \
+		while granting to the user the ability to levitate at will."
+	transmute_text = "Transmute a table (or a suit), a mask and a sheet of plasma."
 	gain_text = "Like radiant cords, the stars shone in union across the silken shape of a billowing cloak, that at once does and does not drape my shoulders. \
-				The eyes of the Beast rested upon me, and through me."
+		The eyes of the Beast rested upon me, and through me."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/cosmic)
 	research_tree_icon_state = "cosmic_armor"
 	required_atoms = list(
@@ -114,6 +120,10 @@
 		Теперь мои вены изучали странное фиолетовое сияние: Зверь знает, что я превзойду их ожидания."
 	action_to_add = /datum/action/cooldown/spell/touch/star_touch
 	cost = 2
+	max_charges = 4
+	path_recharge_amount = 0.5
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
 
 /datum/heretic_knowledge/blade_upgrade/cosmic
 	name = "Cosmic Blade"
@@ -214,18 +224,21 @@
 	action_to_add = /datum/action/cooldown/spell/conjure/cosmic_expansion
 	cost = 2
 	is_final_knowledge = TRUE
+	max_charges = 2
+	path_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
 
 /datum/heretic_knowledge/ultimate/cosmic_final
 	name = "Creators's Gift"
-	desc = "Ритуал вознесения Пути Космоса. \
-		Для завершения ритуала принесите 3 трупа с Меткой звезды к руне трансмутации. \
+	desc = "Ритуал вознесения Пути Космоса.<br>\
 		После завершения вы станете обладателем Звездочета. \
 		Вы сможете управлять Звездочетом с помощью Альт-Клик. \
-		Вы также можете отдавать ему команды с помощью речи. \
+		Вы также можете отдавать ему команды с помощью речи.<br>\
 		Звездочет - сильный союзник, который может даже разрушить укрепленные стены. \
-		Звездочет обладает аурой, которая исцеляет вас и наносит урон противникам. \
-		Star Touch теперь может телепортировать вас к Звездочету, когда активируется в вашей руке. \
+		Звездочет обладает аурой, которая исцеляет вас и наносит урон противникам.<br>\
+		Star Touch теперь может телепортировать вас к Звездочету, когда активируется в вашей руке.<br>\
 		Заклинание Cosmic Expansion и ваши клинки также значительно усилены."
+	transmute_text = "Трансмутируйте 3 трупа с Меткой звезды."
 	gain_text = "Зверь протянул руку, я ухватился за нее, и он притянул меня к себе. Их тело возвышалось надо моим, но также казалось настолько крохотными и слабым после всех их историй в моей голове. \
 		Я прижался к ним, они защитят меня, и я защищаю их. \
 		Я закрыл глаза, прижавшись головой к их телу. Я был в безопасности. \
@@ -259,7 +272,6 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/ascended_human = user
 		var/obj/item/organ/eyes/heretic_eyes = ascended_human.get_organ_slot(ORGAN_SLOT_EYES)
-		ascended_human.update_sight()
 		heretic_eyes?.color_cutoffs = list(30, 30, 30)
 		ascended_human.update_sight()
 
@@ -314,14 +326,14 @@
 
 	var/mob/living/to_reset = bad_dog.resolve()
 
-	to_chat(owner, span_hierophant("You prompt [to_reset] to shift it\'s personality..."))
+	to_chat(owner, span_mansus("You prompt [to_reset] to shift it\'s personality..."))
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
-		to_chat(owner, span_hierophant("Your request to shift [to_reset]'\s personality appears to have been denied... Looks like you're stuck with it for now."))
+		to_chat(owner, span_mansus("Your request to shift [to_reset]'\s personality appears to have been denied... Looks like you're stuck with it for now."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_hierophant("Your summoner reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance."))
-	to_chat(owner, span_hierophant("The mind of [to_reset] has twisted itself to suit you better."))
+	to_chat(to_reset, span_mansus("Your summoner reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance."))
+	to_chat(owner, span_mansus("The mind of [to_reset] has twisted itself to suit you better."))
 	message_admins("[key_name_admin(chosen_one)] has taken control of ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)
 	to_reset.PossessByPlayer(chosen_one.key)

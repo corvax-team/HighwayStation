@@ -18,9 +18,7 @@
 		flavor_text = client?.prefs.read_preference(/datum/preference/text/silicon_flavor_text)
 	AddComponent(/datum/component/examine_panel)
 
-/mob/living/verb/change_flavor_text()
-	set name = "Изменить описание"
-	set category = "IC"
+GAME_VERB(/mob/living, change_flavor_text, "Изменить описание", "IC")
 
 	var/new_flavor_text = tgui_input_text(usr, "Введите новое описание", "Изменение описания")
 	if(new_flavor_text)

@@ -1,4 +1,4 @@
-/obj/item/ai_module/core/full/chapai
+/obj/item/ai_module/law/core/full/chapai
 	name = "'ChapAI' Core AI Module"
 	law_id = "chapai"
 
@@ -16,14 +16,13 @@
 /datum/design/board/chapai
 	name = "ChapAI Module"
 	desc = "Allows for the construction of an ChapAI AI Core Module."
-	id = "chapai_module"
 	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/ai_module/core/full/chapai
+	build_path = /obj/item/ai_module/law/core/full/chapai
 	category = list(
 		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_CORE_MODULES
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/techweb_node/ai_laws/New()
+	unlocked_designs += /datum/design/board/chapai
 	. = ..()
-	design_ids += "chapai_module"

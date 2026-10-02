@@ -477,8 +477,7 @@
 		addtimer(CALLBACK(src, PROC_REF(delayed_puff), living_user, amount_to_waste), 1 SECONDS)
 
 /obj/item/hookah_mouthpiece/proc/make_black_smoke(mob/living_user, location, datum/reagents/some_reagents)
-	var/datum/effect_system/fluid_spread/smoke/chem/black_smoke = new
-	black_smoke.set_up(2, location = location, carry = some_reagents)
+	var/datum/effect_system/fluid_spread/smoke/chem/black_smoke = new(location, 2, carry = some_reagents)
 	black_smoke.start()
 	QDEL_LIST(source_hookah.food_items)
 	some_reagents.clear_reagents()
@@ -493,8 +492,7 @@
 	human_user.adjust_stamina_loss(BASE_COUGH_STAMINA_LOSS * 4)
 
 /obj/item/hookah_mouthpiece/proc/delayed_puff(mob/user, amount)
-	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new
-	puff.set_up(amount / 5, amount * 0.2, location = user.loc, carry = source_hookah.reagents)
+	var/datum/effect_system/fluid_spread/smoke/chem/quick/puff = new(user.loc, amount / 5, amount * 0.2, carry = source_hookah.reagents)
 	puff.start()
 
 /obj/item/hookah_coals

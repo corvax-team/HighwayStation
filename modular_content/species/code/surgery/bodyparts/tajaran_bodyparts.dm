@@ -41,21 +41,21 @@
 /obj/item/bodypart/leg/left/digitigrade/tajaran
 	icon_greyscale = 'icons/bandastation/mob/species/tajaran/bodyparts.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
-	bodyshape = BODYSHAPE_DIGITIGRADE
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/left/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = FALSE)
+/obj/item/bodypart/leg/left/digitigrade/tajaran/Initialize(mapload)
 	. = ..()
-	limb_id = owner?.is_digitigrade_squished() ? SPECIES_TAJARAN : BODYPART_ID_DIGITIGRADE
+	var/datum/component/digitigrade_limb/digitigrade = GetComponent(/datum/component/digitigrade_limb)
+	digitigrade.squashed_id = SPECIES_TAJARAN
 
 /obj/item/bodypart/leg/right/digitigrade/tajaran
 	icon_greyscale = 'icons/bandastation/mob/species/tajaran/bodyparts.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
-	bodyshape = BODYSHAPE_DIGITIGRADE
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/right/digitigrade/tajaran/update_limb(dropping_limb = FALSE, is_creating = FALSE)
+/obj/item/bodypart/leg/right/digitigrade/tajaran/Initialize(mapload)
 	. = ..()
-	limb_id = owner?.is_digitigrade_squished() ? SPECIES_TAJARAN : BODYPART_ID_DIGITIGRADE
+	var/datum/component/digitigrade_limb/digitigrade = GetComponent(/datum/component/digitigrade_limb)
+	digitigrade.squashed_id = SPECIES_TAJARAN

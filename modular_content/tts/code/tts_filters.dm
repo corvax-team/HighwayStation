@@ -136,8 +136,28 @@
 	ffmpeg_arguments = @{"[0:a] asplit [out0][out2]; [out0] asetrate=%SAMPLE_RATE%*0.99,aresample=%SAMPLE_RATE%,volume=0.3 [p0]; [p0][out2] amix=inputs=2"}
 	priority = TTS_SOUND_EFFECT_PRIORITY_TONGUE
 
-/obj/machinery/vending
+/obj/machinery
 	voice_effect = list(/datum/singleton/sound_effect/vending)
+
+/obj/item/modular_computer
+	voice_effect = list(/datum/singleton/sound_effect/vending)
+
+/mob/living/basic/robot_customer
+	voice_effect = list(/datum/singleton/sound_effect/vending)
+
+/obj/effect/landmark/transport/nav_beacon/tram
+	voice_effect = list(/datum/singleton/sound_effect/vending)
+
+/obj/machinery/computer/tram_controls
+	voice_effect = list(/datum/singleton/sound_effect/tram)
+
+/obj/item/assembly/control/transport
+	voice_effect = list(/datum/singleton/sound_effect/tram)
+
+/datum/singleton/sound_effect/tram
+	suffix = "_tram"
+	ffmpeg_arguments = "highpass=f=300,lowpass=f=3500,aecho=0.8:0.9:70|140:0.3|0.15,alimiter=0.9,acompressor=threshold=0.2:ratio=20:attack=10:release=50:makeup=2,highpass=f=1000"
+	priority = TTS_SOUND_EFFECT_PRIORITY_TONGUE
 
 /datum/singleton/sound_effect/vending
 	suffix = "_vending"

@@ -20,6 +20,7 @@ import { ReconnectButton } from './reconnect';
 import { settingsVisibleAtom } from './settings/atoms';
 import { SettingsPanel } from './settings/SettingsPanel';
 import { useSettings } from './settings/use-settings';
+import { CommandBar } from './verbs/CommandBar';
 // import { EmotePanel, useEmotes } from './emotes'; // BANDASTATION ADD  - Emote Panel // Broken by PR - https://github.com/tgstation/tgstation/pull/94514
 
 export function Panel(props) {
@@ -32,7 +33,7 @@ export function Panel(props) {
 
   return (
     <Pane theme={settings.theme} canSuspend={false}>
-      <Stack fill vertical>
+      <Stack fill vertical className="Panel__stack">
         <Stack.Item>
           <Section fitted>
             <Stack mr={1} align="center">
@@ -96,6 +97,9 @@ export function Panel(props) {
               )}
             </Notifications>
           </Section>
+        </Stack.Item>
+        <Stack.Item>
+          <CommandBar />
         </Stack.Item>
       </Stack>
     </Pane>

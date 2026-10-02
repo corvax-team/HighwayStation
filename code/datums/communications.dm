@@ -12,6 +12,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	/// Are we trying to send a cross-station message that contains soft-filtered words? If so, flip to TRUE to extend the time admins have to cancel the message.
 	var/soft_filtering = FALSE
 
+	/// The main content of the roundstart report
+	/// If nothing is set, it will pick a random flavor report
+	var/command_report_main_content = ""
 	/// A list of footnote datums, to be added to the bottom of the roundstart command report.
 	var/list/command_report_footnotes = list()
 	/// A counter of conditions that are blocking the command report from printing. Counter incremements up for every blocking condition, and de-incrememnts when it is complete.
@@ -25,6 +28,9 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	var/waittime_l = 1 SECONDS /// BANDASTATION EDIT
 	/// What is the higher bound of when the roundstart announcement is sent out?
 	var/waittime_h = 5 SECONDS /// BANDASTATION EDIT
+
+	/// Tracks if we have announced greenshift at the start of the round or not
+	var/announced_greenshift = FALSE
 
 /datum/communciations_controller/proc/can_announce(mob/living/user, is_silicon)
 	if(is_silicon && COOLDOWN_FINISHED(src, silicon_message_cooldown))
@@ -50,7 +56,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
 
-/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE)
+/datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE, contains_advanced_html = FALSE)
 	for(var/obj/machinery/computer/communications/C in GLOB.shuttle_caller_list)
 		if(!(C.machine_stat & (BROKEN|NOPOWER)) && is_station_level(C.z))
 			if(unique)
@@ -61,7 +67,8 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			if(print)
 				var/obj/item/paper/printed_paper = new /obj/item/paper(C.loc)
 				printed_paper.name = "paper - '[sending.title]'"
-				printed_paper.add_raw_text(sending.content)
+				printed_paper.add_raw_text("</center>[sending.content]", advanced_html = contains_advanced_html)
+				printed_paper.color = "#deebff"
 				printed_paper.update_appearance()
 
 // Called AFTER everyone is equipped with their job
@@ -142,6 +149,12 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 #endif
 
 /// BANDASTATION EDIT END - UPDATED INTERCEPT TEMPLATE
+
+/// Return a random flavor/meme report to use in the command report
+/datum/communciations_controller/proc/get_main_report_content()
+	if(istype(SSstation.announcer, /datum/centcom_announcer/intern))
+		return pick_list_replacements("flavor_reports.json", "intern_reports")
+	return pick_list_replacements("flavor_reports.json", "reports")
 
 #undef COMMUNICATION_COOLDOWN
 #undef COMMUNICATION_COOLDOWN_AI

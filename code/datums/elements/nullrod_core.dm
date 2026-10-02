@@ -5,7 +5,7 @@
  * Called when the element is added to a datum. If the 'chaplain_spawnable' arg is TRUE and unit testing is enabled,
  * we check that the target is actually in the nullrod_variants global list
  */
-/datum/element/nullrod_core/Attach(obj/item/target, chaplain_spawnable = TRUE, rune_remove_line = "BEGONE FOUL MAGIKS!!")
+/datum/element/nullrod_core/Attach(obj/item/target, chaplain_spawnable = TRUE, rune_remove_line = "ПРОЧЬ ЗЛАЯ СКВЕРНА!!")
 	. = ..()
 	if(!istype(target))
 		return ELEMENT_INCOMPATIBLE
@@ -18,7 +18,8 @@
 		on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed), target), \
 		effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune, /obj/effect/cosmic_rune), \
 	)
-	target.AddElement(/datum/element/bane, mob_biotypes = MOB_SPIRIT, damage_multiplier = 0, added_damage = 25, requires_combat_mode = FALSE)
+	target.AddComponent(/datum/component/cult_kill_tracker)
+	target.AddComponent(/datum/component/bane, affected_biotypes = MOB_SPIRIT, added_damage = 25)
 	ADD_TRAIT(target, TRAIT_NULLROD_ITEM, ELEMENT_TRAIT(type))
 
 	if(!PERFORM_ALL_TESTS(focus_only/nullrod_variants) || !chaplain_spawnable)

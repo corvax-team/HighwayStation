@@ -21,7 +21,7 @@
 	mutant_organs = list(
 		/obj/item/organ/head_tentacle = /datum/sprite_accessory/skrell_head_tentacle/short::name
 	)
-	exotic_bloodtype = BLOOD_TYPE_SKRELL
+	exotic_bloodtype = /datum/blood_type/skrell
 
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/skrell,

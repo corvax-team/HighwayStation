@@ -56,6 +56,11 @@
 
 // Delete colors
 /obj/structure/window/bronze
+	icon = 'icons/obj/structures.dmi'
+	color = null
+
+/obj/structure/window/cult
+	icon = 'icons/obj/structures.dmi'
 	color = null
 
 /obj/structure/window/paperframe
@@ -65,6 +70,11 @@
 	color = null
 
 /obj/structure/window/reinforced/survival_pod
+	icon = 'icons/obj/structures.dmi'
+	color = null
+
+/obj/structure/window/reinforced/titanium
+	icon = 'icons/obj/structures.dmi'
 	color = null
 
 /obj/structure/window/reinforced/plasma/plastitanium
@@ -155,6 +165,9 @@
 
 // Override to original
 /obj/effect/spawner/structure/window/bronze
+	icon = 'icons/obj/structures_spawners.dmi'
+
+/obj/effect/spawner/structure/window/cult
 	icon = 'icons/obj/structures_spawners.dmi'
 
 /obj/effect/spawner/structure/window/hollow

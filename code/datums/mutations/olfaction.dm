@@ -1,6 +1,6 @@
 /datum/mutation/olfaction
 	name = "Transcendent Olfaction"
-	desc = "Ваше обоняние сравнимо с собачьим."
+	desc = "Обоняние субъекта сравнимо с собачьим."
 	quality = POSITIVE
 	difficulty = 12
 	text_gain_indication = span_notice("Запахи приобретают новый смысл...")
@@ -50,9 +50,8 @@
 	. = ..()
 	// Can we sniff? is there miasma in the air?
 	var/datum/gas_mixture/air = cast_on.loc.return_air()
-	var/list/cached_gases = air.gases
 
-	if(cached_gases[/datum/gas/miasma])
+	if(air.moles[/datum/gas/miasma])
 		cast_on.adjust_disgust(sensitivity * 45)
 		to_chat(cast_on, span_warning("With your overly sensitive nose, \
 			you get a whiff of stench and feel sick! Try moving to a cleaner area!"))

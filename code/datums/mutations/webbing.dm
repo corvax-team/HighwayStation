@@ -1,7 +1,7 @@
 //spider webs
 /datum/mutation/webbing
 	name = "Webbing Production"
-	desc = "Позволяет обладателю генома плести паутину и перемещаться по ней."
+	desc = "Субъект получает способность плести паутину и перемещаться по ней."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Твоя кожа кажется паутиной.")
 	instability = POSITIVE_INSTABILITY_MODERATE // useful until you're lynched

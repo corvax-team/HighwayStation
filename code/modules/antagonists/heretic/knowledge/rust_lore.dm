@@ -52,9 +52,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_rust
 	name = "Blacksmith's Tale"
-	desc = "Открывает перед вами Путь ржавчины. \
-		Позволяет трансмутировать нож с любым мусором в Ржавый клинок. \
+	desc = "Открывает перед вами Путь ржавчины.<br>\
+		Позволяет создавать Ржавые клинки. \
 		Одновременно можно создать только два."
+	transmute_text = "Трансмутируйте нож с любым мусором."
 	gain_text = "\"Позвольте мне рассказать вам историю\", сказал Кузнец, вглядываясь в глубину своего ржавого клинка."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -81,7 +82,7 @@
 
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
-		for(var/obj/item/bodypart/robotic_limb as anything in carbon_target.bodyparts)
+		for(var/obj/item/bodypart/robotic_limb as anything in carbon_target.get_bodyparts())
 			if(IS_ROBOTIC_LIMB(robotic_limb))
 				robotic_limb.receive_damage(500)
 
@@ -104,28 +105,34 @@
 
 /datum/heretic_knowledge/spell/rust_charge
 	name = "Rust Charge"
-	desc = "A charge that must be started on a rusted tile and will destroy any rusted objects you come into contact with, will deal high damage to others and rust around you during the charge."
+	desc = "Allows you to muster a mighty charge while standing on rusted tile.<br>\
+		As you charge, you will spread rust, destroy any rusted objects, and deal high damage to anyone you collide with."
 	gain_text = "The hills sparkled now, as I neared them my mind began to wander. I quickly regained my resolve and pushed forward, this last leg would be the most treacherous."
 
 	action_to_add = /datum/action/cooldown/mob_cooldown/charge/rust
 	cost = 2
 	is_final_knowledge = TRUE
+	max_charges = INFINITY
 
 /datum/heretic_knowledge/spell/rust_construction
 	name = "Rust Construction"
-	desc = "Дает вам Rust Construction - заклинание, позволяющее возвести стену из ржавого пола. \
+	desc = "Дает вам Rust Construction - заклинание, позволяющее возвести стену из ржавого пола.<br>\
 		Любой человек, находящийся над стеной, будет отброшен в сторону (или вверх) и получит урон."
 	gain_text = "В моем сознании начали плясать образы иноземных и зловещих сооружений. Покрытые с ног до головы толстым слоем ржавчины, \
 		они больше не выглядели рукотворными. А может быть, они вообще никогда и не существовали."
 	action_to_add = /datum/action/cooldown/spell/pointed/rust_construction
 	cost = 2
+	max_charges = 20
+	path_recharge_amount = 0.2
+	focus_recharge_amount = 0.5
+	holywater_drain_amount = 0.1
 
 /datum/heretic_knowledge/armor/rust
-	desc = "Allows you to transmute a table (or a suit), a mask and any trash item to create a Salvaged Remains. \
-			Has extra armor, tackle resistance and syringe immunity while standing on rust. \
-			Acts as a focus while hooded."
+	desc = "Create a Salvaged Remains.<br>\
+		Has extra armor, tackle resistance and syringe immunity while standing on rust."
+	transmute_text = "Transmute a table (or a suit), a mask and any trash item."
 	gain_text = "From beneath warped scrap, the Blacksmith pulls forth an ancient fabric. \
-				\"Whatever this once stood for is lost. So now, we give it new purpose.\""
+		\"Whatever this once stood for is lost. So now, we give it new purpose.\""
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/rust)
 	research_tree_icon_state = "rust_armor"
 	required_atoms = list(
@@ -136,16 +143,24 @@
 
 /datum/heretic_knowledge/spell/area_conversion
 	name = "Aggressive Spread"
-	desc = "Дает вам заклинание Aggressive Spread, которое распространяет ржавчину на близлежащие поверхности. \
-		Уже заржавевшие поверхности разрушаются. \ Также улучшает способности ржавчины еретиков не Пути ржавчины."
+	desc = "Дает вам заклинание Aggressive Spread, которое распространяет ржавчину на близлежащие поверхности.<br>\
+		Уже заржавевшие поверхности разрушаются.<br>Улучшает способности ржавчины еретиков не Пути ржавчины."
 	gain_text = "Мудрецы знают, что не стоит посещать Ржавые холмы... Но рассказ Кузнеца был вдохновляющим."
+	required_atoms = list(
+		/obj/item/storage/toolbox = 1,
+	)
 	action_to_add = /datum/action/cooldown/spell/aoe/rust_conversion
 	cost = 2
 	research_tree_icon_frame = 5
+	max_charges = 12
+	path_recharge_amount = 0.25
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.16
+	transmute_text = "Can be manually recharged by completing a ritual with a toolbox."
 
 /datum/heretic_knowledge/blade_upgrade/rust
 	name = "Toxic Blade"
-	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке. \ Позволяет заставить ржаветь титаниум и пластитаниум."
+	desc = "Ваш Ржавый клинок теперь отвращает врагов при атаке.<br>Позволяет заставить ржаветь титаниум и пластитаниум."
 	gain_text = "Кузнец протягивает вам свой клинок. \"Клинок проведет тебя через плоть, если ты позволишь ему.\" \
 		Тяжелая ржавчина утяжеляет клинок. Вы пристально вглядываетесь в него. Ржавые холмы зовут тебя."
 	research_tree_icon_path = 'icons/ui_icons/antags/heretic/knowledge.dmi'
@@ -161,23 +176,28 @@
 
 /datum/heretic_knowledge/spell/entropic_plume
 	name = "Entropic Plume"
-	desc = "Дарует вам Entropic Plume, заклинание, выпускающее досаждающую волну ржавчины. \
+	desc = "Дарует вам Entropic Plume, заклинание, выпускающее досаждающую волну ржавчины.<br>\
 		Ослепляет, отравляет и накладывает Amok на всех попавших язычников, заставляя их дико нападать \
-		на друзей или врагов. Также ржавеет и разрушает поверхности, на которые попадает. Улучшает способности ржавчины еретиков не Пути ржавчины."
+		на друзей или врагов.<br>Также ржавеет и разрушает поверхности, на которые попадает. \
+		Улучшает способности ржавчины еретиков не Пути ржавчины."
 	gain_text = "Коррозия была неостановима. Ржавчина была неприятной. \
 		Кузнец ушел, ты держишь его клинок. Чемпионы надежды, Повелитель ржавчины близок!"
 
 	action_to_add = /datum/action/cooldown/spell/cone/staggered/entropic_plume
 	cost = 2
 	drafting_tier = 5
+	max_charges = 4
+	path_recharge_amount = 0.25
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.25
 
 /datum/heretic_knowledge/ultimate/rust_final
 	name = "Rustbringer's Oath"
-	desc = "Ритуал вознесения Пути ржавчины. \
-		Принесите 3 трупа к руне трансмутации на мостик станции, чтобы завершить ритуал. \
-		После завершения, ритуальное место будет бесконечно распространять ржавчину на любую поверхность, не останавливаясь ни перед чем. \
+	desc = "Ритуал вознесения Пути ржавчины.<br>\
+		После завершения, ритуальное место будет бесконечно распространять ржавчину на любую поверхность, не останавливаясь ни перед чем.<br>\
 		Кроме того, вы станете чрезвычайно стойкими на ржавчине, исцеляясь втрое быстрее \
 		и приобретая иммунитет ко многим эффектам и опасностям. Вы сможете заставлять ржаветь почти всё."
+	transmute_text = "Трансмутируйте 3 трупа на мостике станции."
 	gain_text = "Чемпион ржавчины. Разлагатель стали. Бойся темноты, ибо пришел ПОВЕЛИТЕЛЬ РЖАВЧИНЫ! \
 		Работа Кузнеца продолжается! Ржавые холмы, УСЛЫШЬТЕ МОЕ ИМЯ! УЗРИТЕ МОЕ ВОЗНЕСЕНИЕ!"
 

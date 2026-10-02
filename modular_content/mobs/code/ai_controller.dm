@@ -1,131 +1,93 @@
-
 // Как выставлять контроллер:
 //	ai_controller = /datum/ai_controller/basic_controller/base_animal
 
 // =========== Базовый контроллер животного ===========
 /datum/ai_controller/basic_controller/base_animal
+	behavior_tree_json = "code/datums/ai/basic_mobs/base_animal.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_BASIC_MOB_SPEAK_LINES = list(	// - что будет говорить и показывает в качестве эмоций
+			BB_EMOTE_SAY = list("Вэх!", "Вэх."), // Что говорит
+			BB_EMOTE_HEAR = list("говорит."), // Что показывается когда говорит
+			BB_EMOTE_SEE = list("трясет головой.", "гонится за хвостом.", "пялится.", "озирается."), // Случайная эмоция
+			BB_SPEAK_CHANCE = 3,
+		),
 	)
 
 	ai_traits = PASSIVE_AI_FLAGS
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/find_nearest_thing_which_attacked_me_to_flee,
-		/datum/ai_planning_subtree/flee_target,
-		/datum/ai_planning_subtree/random_speech/base_animal,	// - что будет говорить и показывает в качестве эмоций
-	)
-
-/datum/ai_planning_subtree/random_speech/base_animal
-	speech_chance = 3
-	speak = list("Вэх!", "Вэх.") // Что говорит
-	emote_hear = list("говорит.") // Что показывается когда говорит
-	emote_see = list("трясет головой.", "гонится за хвостом.", "пялится.", "озирается.") // Случайная эмоция
 
 // =========== Петух ===========
 /datum/ai_controller/basic_controller/chicken/cock
-	planning_subtrees = list(
-		// Addition subtrees
-		/datum/ai_planning_subtree/capricious_retaliate,
-		/datum/ai_planning_subtree/target_retaliate,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-
-		// Parent subtrees
-		// /datum/ai_planning_subtree/find_nearest_thing_which_attacked_me_to_flee,	// no flee anymore
-		// /datum/ai_planning_subtree/flee_target,
-		/datum/ai_planning_subtree/random_speech/chicken,
-	)
+	behavior_tree_json = "code/modules/mob/living/basic/farm_animals/chicken/chicken_cock.bt.json"
 
 // =========== Опоссум ===========
 /datum/ai_controller/basic_controller/possum
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/possum.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_BASIC_MOB_SPEAK_LINES = list(
+			BB_EMOTE_SAY = list("Хссс...", "Хиссс..."),
+			BB_EMOTE_HEAR = list("Хсаааа!", "Хссс!"),
+			BB_EMOTE_SEE = list("трясет головой.", "гонится за хвостом.", "пялится.", "озирается."),
+			BB_SPEAK_CHANCE = 3,
+		),
 	)
 
 	ai_traits = DEFAULT_AI_FLAGS | STOP_MOVING_WHEN_PULLED
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/capricious_retaliate,
-		/datum/ai_planning_subtree/target_retaliate,
-		// /datum/ai_planning_subtree/find_food, // Food is not selected
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/random_speech/possum,
-	)
-
-/datum/ai_planning_subtree/random_speech/possum
-	speech_chance = 3
-	emote_hear = list("Хсаааа!", "Хссс!")
-	emote_see = list("трясет головой.", "гонится за хвостом.", "пялится.", "озирается.")
-	speak = list("Хссс...", "Хиссс...")
 
 // =========== Большие ящерицы ===========
 /datum/ai_controller/basic_controller/lizard/big
+	behavior_tree_json = "code/modules/mob/living/basic/vermin/lizard_big.bt.json"
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_BASIC_MOB_SPEAK_LINES = list(
+			BB_EMOTE_SAY = list("ГРРР!", "Гррр!", "Рыр!", "Грх!"),
+			BB_EMOTE_HEAR = list("рычит.", "ворчит.", "грохочет."),
+			BB_EMOTE_SEE = list("топает.", "свирепо пялится."),
+			BB_EMOTE_SOUND = list('modular_content/mobs/sound/lizard_angry1.ogg', 'modular_content/mobs/sound/lizard_angry2.ogg', 'modular_content/mobs/sound/lizard_angry3.ogg'),
+			BB_SPEAK_CHANCE = 1,
+		),
 	)
 
 	ai_traits = DEFAULT_AI_FLAGS | STOP_MOVING_WHEN_PULLED
 	ai_movement = /datum/ai_movement/basic_avoidance
-	idle_behavior = /datum/idle_behavior/idle_random_walk
-
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/escape_captivity, // Нельзя запереть, попытается выбраться
-		/datum/ai_planning_subtree/target_retaliate,
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/random_speech/lizard/big,
-	)
-
-/datum/ai_planning_subtree/random_speech/lizard/big
-	speech_chance = 1
-	speak = list("ГРРР!", "Гррр!", "Рыр!", "Грх!")
-	emote_hear = list("рычит.", "ворчит.", "грохочет.")
-	emote_see = list("топает.", "свирепо пялится.")
-	sound = list('modular_content/mobs/sound/lizard_angry1.ogg', 'modular_content/mobs/sound/lizard_angry2.ogg', 'modular_content/mobs/sound/lizard_angry3.ogg')
 
 // =========== Крысы ===========
-/datum/ai_planning_subtree/random_speech/mouse/rat
-	sound = list('modular_content/mobs/sound/rat_talk.ogg')
-
 /datum/ai_controller/basic_controller/mouse/rat/syndi
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/escape_captivity,
-		/datum/ai_planning_subtree/pet_planning,
-		/datum/ai_planning_subtree/simple_find_target,
-		/datum/ai_planning_subtree/attack_obstacle_in_path,
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cheese,
-		/datum/ai_planning_subtree/random_speech/mouse/rat/syndi,
-		/datum/ai_planning_subtree/find_and_hunt_target/look_for_cables,
+	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
+		BB_CURRENT_TARGET = null,
+		BB_CURRENT_HUNTING_TARGET = null,
+		BB_LOW_PRIORITY_HUNTING_TARGET = null,
+		BB_OWNER_SELF_HARM_RESPONSES = list(
+			"*me cleans its whiskers in disapproval.",
+			"*me squeaks sadly.",
+			"*me sheds a single small tear."
+		),
+		BB_BASIC_MOB_SPEAK_LINES = list(
+			BB_EMOTE_SAY = list("Слава Синдикату!", "Смерть НаноТрейзен!", "Отдавайте сыр!", "Слава Сыркату!", "Смерть за сыр!"),
+			BB_EMOTE_HEAR = list("пищит."),
+			BB_EMOTE_SEE = list("бегает по кругу.", "встряхивается."),
+			BB_EMOTE_SOUND = list('modular_content/mobs/sound/rat_talk.ogg'),
+			BB_SPEAK_CHANCE = 2,
+		),
 	)
-
-/datum/ai_planning_subtree/random_speech/mouse/rat/syndi
-	speech_chance = 2
-	speak = list("Слава Синдикату!", "Смерть НаноТрейзен!", "Отдавайте сыр!", "Слава Сыркату!", "Смерть за сыр!")
 
 // =========== Хряки ===========
 /datum/ai_controller/basic_controller/pig/big
-	planning_subtrees = list(
-		/datum/ai_planning_subtree/capricious_retaliate,
-		/datum/ai_planning_subtree/target_retaliate,
-		// /datum/ai_planning_subtree/find_food, // Food is not selected
-		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		/datum/ai_planning_subtree/random_speech/pig/big,
+	behavior_tree_json = "code/modules/mob/living/basic/farm_animals/pig_big.bt.json"
+	blackboard = list(
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+		BB_BASIC_MOB_SPEAK_LINES = list(
+			BB_EMOTE_SAY = list("хрю?", "хрю", "хрюк"),
+			BB_EMOTE_HEAR = list("хрюкает."),
+			BB_EMOTE_SEE = list("обнюхивается."),
+			BB_EMOTE_SOUND = list('modular_content/mobs/sound/pig_talk1.ogg', 'modular_content/mobs/sound/pig_talk2.ogg'),
+			BB_SPEAK_CHANCE = 3,
+		),
 	)
-
-/datum/ai_planning_subtree/random_speech/pig/big
-	sound = list('modular_content/mobs/sound/pig_talk1.ogg', 'modular_content/mobs/sound/pig_talk2.ogg')
-
-// =========== Зомби звуки ===========
-
-/datum/ai_planning_subtree/random_speech/zombie
-	sound = list('modular_content/mobs/sound/zombie_idle1.ogg', 'modular_content/mobs/sound/zombie_idle3.ogg')
-
-/datum/ai_planning_subtree/random_speech/zombie/fast
-	sound = list('modular_content/mobs/sound/fast_zombie_idle1.ogg', 'modular_content/mobs/sound/fast_zombie_idle2.ogg')
 
 // =========== ... ===========

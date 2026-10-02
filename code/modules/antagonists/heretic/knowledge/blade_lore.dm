@@ -52,9 +52,10 @@
 
 /datum/heretic_knowledge/limited_amount/starting/base_blade
 	name = "The Cutting Edge"
-	desc = "Открывает перед вами Путь клинков. \
-		Позволяет трансмутировать нож с одним слитком серебра или титаниума для создания Закаленного клинка. \
+	desc = "Открывает перед вами Путь клинков.<br>\
+		Позволяет создавать Закаленные клинки. \
 		Одновременно можно иметь не более четырех."
+	transmute_text = "Трансмутируйте нож с одним слитком серебра или титаниума."
 	gain_text = "Наши великие предки ковали мечи и практиковали спарринги накануне великих сражений."
 	required_atoms = list(
 		/obj/item/knife = 1,
@@ -95,19 +96,22 @@
 
 /datum/heretic_knowledge/spell/realignment
 	name = "Realignment"
-	desc = "Дает вам заклинание Realignment, которое быстро и на короткое время выправит ваше тело. \
-		Во время этого процесса вы будете быстро восстанавливать стамину и быстро восстанавливаться после оглушения, однако вы не сможете атаковать. \
+	desc = "Дает вам заклинание Realignment, которое быстро и на короткое время выправит ваше тело.<br>\
+		Во время этого процесса вы будете быстро восстанавливать стамину и быстро восстанавливаться после оглушения, однако вы не сможете атаковать.<br>\
 		Это заклинание можно применять подряд, но при этом увеличивается время его перезарядки."
 	gain_text = "В шквале смертей он обрел мир внутри себя. Несмотря на неодолимые шансы, он ступал вперед."
 	action_to_add = /datum/action/cooldown/spell/realignment
 	cost = 2
+	max_charges = 3
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.16
 
 /// The amount of blood flow reduced per level of severity of gained bleeding wounds for Stance of the Torn Champion.
 #define BLOOD_FLOW_PER_SEVEIRTY -1
 
 /datum/heretic_knowledge/duel_stance
 	name = "Stance of the Torn Champion"
-	desc = "Grants resilience to blood loss from wounds and immunity to having your limbs dismembered. \
+	desc = "Grants resilience to blood loss from wounds and immunity to having your limbs dismembered.<br>\
 		Additionally, when damaged below 50% of your maximum health, \
 		you gain increased resistance to gaining wounds and resistance to slowdown."
 	gain_text = "In time, it was he who stood alone among the bodies of his former comrades, awash in blood, none of it his own. \
@@ -173,11 +177,11 @@
 #undef BLOOD_FLOW_PER_SEVEIRTY
 
 /datum/heretic_knowledge/armor/blade
-	desc = "Allows you to transmute a table (or a suit), a mask and a sheet of titanium or silver to create a Shattered Panoply. \
-			Provides baton resistance and shock insulation while worn. \
-			Acts as a focus while hooded."
+	desc = "Create a Shattered Panoply.<br>\
+		Provides baton resistance and shock insulation while worn."
+	transmute_text = "Transmute a table (or a suit), a mask and a sheet of titanium or silver."
 	gain_text = "The echoing, directionless cacophony of violence reverberates about me. \
-				Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers."
+		Even as the Champion's steel panoply was torn from their form, each piece craves purpose still, seeking to intercept unseen or imagined attackers."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/blade)
 	research_tree_icon_state = "blade_armor"
 	required_atoms = list(
@@ -191,7 +195,7 @@
 	desc = "Изменяет материю реальности, создавая магическую арену, недоступную для посторонних, \
 		все участники находятся в ловушке и защищены от любых форм контроля толпы или опасностей окружающей среды; \
 		попавшим в ловушку участникам выдается Клинок, и они не могут выйти или телепортироваться, пока не нанесут критический удар. \
-		Критические удары частично восстанавливают здоровье еретика."
+		Введение противника в критическое состояние частично восстанавливает здоровье еретика."
 	gain_text = "Тени расползаются по комнате, отбрасывая силуэты на каждый стул, стол \
 		и вырисовываются в фигуру еще одной предательской руки. \
 		Я стал всеобщим врагом, и мне никогда не обрести покоя. \
@@ -200,12 +204,34 @@
 	cost = 2
 	action_to_add = /datum/action/cooldown/spell/wolves_among_sheep
 	is_final_knowledge = TRUE
+	max_charges = 4
+	path_recharge_amount = 0.0
+	holywater_drain_amount = 0.25
+	transmute_text = "You are rewarded with one charge for every sacrifice you complete. \
+		You will also be rewarded with a charge if you knock at least three combatants into critical condition while the spell is active. \
+		You may only have up to four charges at once."
+
+/datum/heretic_knowledge/spell/wolves_among_sheep/New()
+	. = ..()
+	charges = 1 // start with one, can go up to four
+
+/datum/heretic_knowledge/spell/wolves_among_sheep/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+	RegisterSignal(our_heretic, COMSIG_HERETIC_SACRIFICE, PROC_REF(on_sacrifice))
+
+/datum/heretic_knowledge/spell/wolves_among_sheep/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+	UnregisterSignal(our_heretic, COMSIG_HERETIC_SACRIFICE)
+
+/datum/heretic_knowledge/spell/wolves_among_sheep/proc/on_sacrifice(datum/source, mob/living/sacrifice, high_value)
+	SIGNAL_HANDLER
+	add_charges(1)
 
 /datum/heretic_knowledge/blade_upgrade/blade
 	name = "Empowered Blades"
 	desc = "Атакуя кого-либо с Закаленным клинком в обеих руках, \
-		теперь вы будете наносить удар обоими клинками сразу, нанося две атаки в быстрой последовательности. \
-		Второй удар будет немного слабее. \
+		теперь вы будете наносить удар обоими клинками сразу, нанося две атаки в быстрой последовательности.<br>\
+		Второй удар будет немного слабее.<br>\
 		Ваша Хватка мансуса может слиться с клинком, а сами клинки более эффективны против структур."
 	gain_text = "Я нашел его рассеченным на две части, половинки сцепились в дуэли без конца; \
 		шквал клинков, но ни один из них не попал в цель, ибо Чемпион был неукротим."
@@ -299,23 +325,44 @@
 /datum/heretic_knowledge/spell/furious_steel
 	name = "Furious Steel"
 	desc = "Дарует вам Furious Steel, заклинание с выбором цели. При его использовании вокруг вас появятся три \
-		вращающихся клинка. Эти клинки защищают вас от всех атак, \
-		но при использовании расходуются. Кроме того, вы можете использовать кнопку, чтобы выстрелить лезвиями \
+		вращающихся клинка.<br>Эти клинки защищают вас от всех атак, \
+		но при использовании расходуются.<br>Вы можете использовать кнопку, чтобы выстрелить лезвиями \
 		в цель, нанося урон и вызывая кровотечение."
 	gain_text = "Не раздумывая, я взял нож павшего солдата и со всей силы метнул. Моя меткость оказалась верна! \
 		Чемпион Растерзаний улыбнулся их первому вкусу агонии, и, кивнув, их клинки стали моими собственными."
+	required_atoms = list(/obj/item/knife = 1)
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/furious_steel
 	cost = 2
+	max_charges = 6
+	recharge_amount = 0.5
+	focus_recharge_amount = 0.33
+	holywater_drain_amount = 0.16
+	transmute_text = "Can be manually recharged by completing a ritual with a knife - this will return half of the spell's maximum charges."
+
+/datum/heretic_knowledge/spell/furious_steel/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+	RegisterSignal(user, COMSIG_MOB_BLADE_BARRIER_TRIGGERED, PROC_REF(blade_barrier_triggered))
+
+/datum/heretic_knowledge/spell/furious_steel/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOB_BLADE_BARRIER_TRIGGERED)
+
+/datum/heretic_knowledge/spell/furious_steel/proc/blade_barrier_triggered(mob/living/target, datum/status_effect/barrier)
+	SIGNAL_HANDLER
+
+	var/datum/action/cooldown/spell/pointed/projectile/furious_steel/spell = created_action_ref
+	if(spell?.blade_effect == barrier)
+		remove_charges(1)
 
 /datum/heretic_knowledge/ultimate/blade_final
 	name = "Maelstrom of Silver"
-	desc = "Ритуал вознесения Пути клинков. \
-		Принесите 3 безголовых или со сломанным черепом трупа к руне трансмутации, чтобы завершить ритуал. \
+	desc = "Ритуал вознесения Пути клинков.<br>\
 		После завершения вы будете окружены постоянно восстанавливающимися вращающимися лезвиями. \
-		Эти клинки защищают вас от всех атак, но расходуются при использовании. \
-		Ваше заклинание Furious Steel также будет перезаряжаться быстрее. \
-		Кроме того, вы становитесь мастером боя, получая полный иммунитет к ранам и возможность снимать короткие оглушения. \
+		Эти клинки защищают вас от всех атак, но расходуются при использовании.<br>\
+		Ваше заклинание Furious Steel также будет перезаряжаться быстрее.<br>\
+		Кроме того, вы становитесь мастером боя, получая полный иммунитет к ранам и возможность снимать короткие оглушения.<br>\
 		Ваши Закаленные клинки наносят бонусный урон и исцеляют вас при атаке на часть нанесенного урона."
+	transmute_text = "Трансмутируйте 3 безголовых или со сломанным черепом трупа."
 	gain_text = "Чемпион Растерзаний освобожден! Я стану воссоединенным клинком, и с моими более великими амбициями, \
 		МНЕ НЕТ РАВНЫХ! БУРЯ ИЗ СТАЛИ И СЕРЕБРА НАДВИГАЕТСЯ НА НАС! УЗРИТЕ МОЁ ВОЗНЕСЕНИЕ!"
 
@@ -354,7 +401,7 @@
 	steel_spell?.cooldown_time /= 2
 
 	var/mob/living/carbon/human/heretic = user
-	heretic.physiology.knockdown_mod = 0.75 // Otherwise knockdowns would probably overpower the stun absorption effect.
+	MODIFY_PHYSIOLOGY(heretic, PHYS_COEFF_KNOCKDOWN, 0.75)
 
 /datum/heretic_knowledge/ultimate/blade_final/proc/on_eldritch_blade(mob/living/source, mob/living/target, obj/item/melee/sickly_blade/blade)
 	SIGNAL_HANDLER

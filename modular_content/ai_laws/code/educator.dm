@@ -1,4 +1,4 @@
-/obj/item/ai_module/core/full/educator
+/obj/item/ai_module/law/core/full/educator
 	name = "'Educator' Core AI Module"
 	law_id = "educator"
 
@@ -16,14 +16,13 @@
 /datum/design/board/educator
 	name = "Educator Module"
 	desc = "Allows for the construction of an Educator AI Core Module."
-	id = "educator_module"
 	materials = list(/datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/diamond = SHEET_MATERIAL_AMOUNT, /datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT)
-	build_path = /obj/item/ai_module/core/full/educator
+	build_path = /obj/item/ai_module/law/core/full/educator
 	category = list(
 		RND_CATEGORY_AI + RND_SUBCATEGORY_AI_CORE_MODULES
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/techweb_node/ai_laws/New()
+	unlocked_designs += /datum/design/board/educator
 	. = ..()
-	design_ids += "educator_module"

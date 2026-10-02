@@ -1,6 +1,6 @@
 /datum/mutation/telepathy
 	name = "Telepathy"
-	desc = "Редкая мутация, позволяющая её обладателю телепатически общаться с другими."
+	desc = "Субъект получает способность телепатически общаться с другими."
 	quality = POSITIVE
 	text_gain_indication = span_notice("Ты слышишь эхо собственного голоса в своём разуме!")
 	text_lose_indication = span_notice("Ты перестаешь слышать эхо внутри своего разума.")

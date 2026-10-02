@@ -46,7 +46,6 @@
 	maximum_survivable_temperature = T0C + 200
 
 	gold_core_spawnable = HOSTILE_SPAWN
-	can_be_held = FALSE
 
 	ai_controller = /datum/ai_controller/basic_controller/lizard/big
 
@@ -54,6 +53,7 @@
 	. = ..()
 	REMOVE_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_FENCE_CLIMBER, INNATE_TRAIT)
+	RemoveElement(/datum/element/can_be_held)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)

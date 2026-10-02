@@ -80,7 +80,7 @@
 	head = /obj/item/clothing/head/helmet/space/beret
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/laceup
-	r_pocket = /obj/item/modular_computer/pda/heads/centcom
+	r_pocket = /obj/item/modular_computer/pda/crew/heads/centcom
 	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites
 
 /datum/id_trim/centcom/commander
@@ -102,7 +102,7 @@
 	head = /obj/item/clothing/head/helmet/space/beret
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
-	r_pocket = /obj/item/modular_computer/pda/heads/centcom
+	r_pocket = /obj/item/modular_computer/pda/crew/heads/centcom
 
 /datum/id_trim/centcom/commander/field
 	assignment = "Nanotrasen Navy Field Officer"

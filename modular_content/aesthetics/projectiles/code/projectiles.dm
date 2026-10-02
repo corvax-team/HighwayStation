@@ -25,6 +25,15 @@
 /obj/projectile/bullet/junk
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 
+/obj/projectile/bullet/incendiary
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/p50/incendiary
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
+/obj/projectile/bullet/mm40
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+
 /obj/projectile/bullet/incendiary/fire/junk
 	icon = 'icons/obj/weapons/guns/projectiles.dmi'
 

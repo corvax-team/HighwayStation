@@ -9,9 +9,10 @@
  */
 /datum/heretic_knowledge/codex_morbus
 	name = "Codex Morbus"
-	desc = "Allows you to to combine a codex cicatrix, and a body into a Codex Morbus. \
-		It draws runes and siphons essences a bit faster. \
-		Right Click on a rune to curse crewmembers, the target's blood is required in your off hand for a curse to take effect (Best combined with Phylactery Of Damnation)."
+	desc = "Author the Codex Morbus.<br>Draws runes and siphons essences a bit faster than a Codex Cicatrix.<br>\
+		Right Click on a rune to curse crewmembers - the target's blood is required in your off hand for a curse to take effect \
+		(Best combined with Phylactery Of Damnation)."
+	transmute_text = "Transmute the Codex Cicatrix and a body into a Codex Morbus."
 	gain_text = "The spine of this leather-bound tome creaks with an eerily pained sigh. \
 		To ply page from place takes considerable effort, and I dare not linger on the suggestions the book makes for longer than necessary. \
 		It speaks of coming plagues, of waiting supplicants of dead and forgotten gods, and the undoing of mortal kind. \
@@ -29,16 +30,17 @@
 /datum/heretic_knowledge/codex_morbus/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	. = ..()
 	var/mob/living/carbon/human/to_fuck_up = locate() in selected_atoms
-	for(var/_limb in to_fuck_up.bodyparts)
+	for(var/_limb in to_fuck_up.get_bodyparts())
 		var/obj/item/bodypart/limb = _limb
 		limb.force_wound_upwards(/datum/wound/slash/flesh/critical)
-	for(var/obj/item/bodypart/limb as anything in to_fuck_up.bodyparts)
+	for(var/obj/item/bodypart/limb as anything in to_fuck_up.get_bodyparts())
 		to_fuck_up.cause_wound_of_type_and_severity(WOUND_BLUNT, limb, WOUND_SEVERITY_CRITICAL)
 	return TRUE
 
 /datum/heretic_knowledge/greaves_of_the_prophet
-	name = "Greaves Of The Prophet"
-	desc = "Allows you to combine a pair of shoes and 2 sheets of titanium or silver into a pair of Armored Greaves, they confer to the user full immunity to slips."
+	name = "Greaves of the Prophet"
+	desc = "Forge a pair of Armored Greaves, which confer to the user full immunity to slips."
+	transmute_text = "Transmute a pair of shoes and two sheets of titanium or silver."
 	gain_text = " \
 		Gristle churns into joint, a pop, and the fool twists a blackened foot from the \
 		jaws of another. At their game for centuries, this mangled tree of limbs twists, \
@@ -59,19 +61,25 @@
 
 /datum/heretic_knowledge/spell/opening_blast
 	name = "Wave Of Desperation"
-	desc = "Grants you Wave Of Desparation, a spell which can only be cast while restrained. \
+	desc = "Grants you Wave Of Desperation, a spell which can only be cast while restrained.<br>\
 		It removes your restraints, repels and knocks down adjacent people, and applies the Mansus Grasp to everything nearby."
 	gain_text = "My shackles undone in dark fury, their feeble bindings crumble before my power."
-
+	required_atoms = list(
+		/obj/item/clothing/suit/jacket/straight_jacket = 1,
+	)
 	action_to_add = /datum/action/cooldown/spell/aoe/wave_of_desperation
 	cost = 2
 	drafting_tier = 2
+	max_charges = 1
+	path_recharge_amount = 0.0
+	transmute_text = "To recharge, complete a ritual with a straight jacket."
 
 /datum/heretic_knowledge/rune_carver
 	name = "Carving Knife"
-	desc = "Allows you to transmute a knife, a shard of glass, and a piece of paper to create a Carving Knife. \
-		The Carving Knife allows you to etch difficult to see traps that trigger on heathens who walk overhead. \
+	desc = "Create a Carving Knife.<br>\
+		The Carving Knife allows you to etch difficult to see traps that trigger on heathens who walk overhead.<br>\
 		Also makes for a handy throwing weapon."
+	transmute_text = "Transmute a knife, a shard of glass, and a piece of paper."
 	gain_text = "Etched, carved... eternal. There is power hidden in everything. I can unveil it! \
 		I can carve the monolith to reveal the chains!"
 	required_atoms = list(
@@ -86,9 +94,11 @@
 	drafting_tier = 2
 
 /datum/heretic_knowledge/ether
-	name = "Ether Of The Newborn"
-	desc = "Transmutes a pool of vomit and a shard into a single use potion, drinking it will remove any sort of abnormality from your body including diseases, traumas and implants \
-		on top of restoring it to full health, at the cost of losing consciousness for an entire minute."
+	name = "Ether of the Newborn"
+	desc = "Brews a single use potion.<br>Imbibing it will restore you to full health and \
+		remove any sort of abnormality from your body (including diseases, traumas and implants) - \
+		however, you will lose consciousness for a full minute."
+	transmute_text = "Transmute a pool of vomit and a shard."
 	gain_text = "Vision and thought grow hazy as the fumes of this ichor swirl up to meet me. \
 		Through the haze, I find myself staring back in relief, or something grossly resembling my visage. \
 		It is this wretched thing that I consign to my fate, and whose own that I snatch through the haze of dreams. Fools that we are."
@@ -104,15 +114,21 @@
 
 /datum/heretic_knowledge/painting
 	name = "Unsealed Arts"
-	desc = "Позволяет трансмутировать холст и дополнительный предмет, чтобы создать произведение искусства. \
-			Эти картины имеют разные эффекты в зависимости от добавленного предмета. Можно создать следующие картины: \
-			Сестра и Тот, Кто Плакал: Глаза. Очищает ваш разум, но проклинает не-еретиков галлюцинациями. \
-			Первое Желание: Любая часть тела. Предоставляет вам случайные органы, но проклинает не-еретиков жаждой плоти. \
-			Великий чапараль над холмами: Любая выращенная еда. Распространяет кудзу при установке и осмотре не-еретиками. Также дает вам маки и колокольчики. \
-			Дама за воротами: Перчатки. Очищает ваши мутации, но мутирует всех не-еретиков и проклинает их чесоткой. \
-			Подъем на ржавые горы: Мусло. Проклинает всех не-еретиков, заставляя их оставлять ржавчину на своем пути."
+	desc = "Воплощает проклятие в картине. \
+		Каждая картина имеет уникальный эффект и рецепт. \
+		<br>&bull; Сестра и Тот, Кто Плакал: Очищает ваш разум, но проклинает язычников галлюцинациями. \
+		<br>&bull; Первое Желание: Предоставляет вам случайные органы, но проклинает язычников жаждой плоти. \
+		<br>&bull; Великий чапараль над холмами: Распространяет кудзу при установке, а также дает вам маки и колокольчики. \
+		<br>&bull; Дама за воротами: Очищает ваши мутации, но мутирует язычников и проклинает их чесоткой. \
+		<br>&bull; Подъем на ржавые горы: Проклинает язычников, заставляя их оставлять ржавчину на своем пути."
+	transmute_text = "Трансмутируйте холст и дополнительный предмет, чтобы создать картину. \
+		<br>&bull; Глаза для картины \"Сестра и Тот, Кто Плакал\" \
+		<br>&bull; Любая часть тела для картины \"Первое Желание\" \
+		<br>&bull; Любая выращенная еда для картины \"Великий чапараль над холмами\" \
+		<br>&bull; Перчатки для картины \"Дама за воротами\" \
+		<br>&bull; Мусор для картины \"Подъем на ржавые горы\""
 	gain_text = "Ветер вдохновения дует через меня; за стенами и за вратами лежит вдохновение, которое еще предстоит изобразить \
-				Они снова жаждут взгляда смертных, и я исполню это желание."
+		Они снова жаждут взгляда смертных, и я исполню это желание."
 	required_atoms = list(/obj/item/canvas = 1)
 	result_atoms = list(/obj/item/canvas)
 	cost = 2
@@ -163,3 +179,65 @@
 
 	user.balloon_alert(user, "no additional atom present!")
 	return FALSE
+
+/datum/heretic_knowledge/hypnosis_ritual
+	name = "Unwrap Minds"
+	desc = "Exposes a healthen directly to the horrors of the Mansus, hypnotizing them."
+	transmute_text = "Transmute a scalpel, a shard of glass, a piece of paper, and a living heathen."
+	notice = "Whatever is written on the paper supplied, the heathen will be hypnotized with.\
+		<br>If the heathen is mindshielded, it will shatter - but the resulting hypnosis may not be what you expect.\
+		<br>Other Heretics are unaffected by this ritual."
+	gain_text = "My rise has been lonely, but I had realized it did not have to be. \
+		I can show them the truth. Their weak, mortal minds may not be able to withstand the revelation, but in its ashes, a phoenix will rise, free and true."
+	required_atoms = list(
+		/obj/item/scalpel = 1,
+		/obj/item/shard = 1,
+		/obj/item/paper = 1,
+		/mob/living/carbon/human = 1,
+	)
+	cost = 2
+	research_tree_icon_path = 'icons/hud/screen_alert.dmi'
+	research_tree_icon_state = "hypnosis"
+	drafting_tier = 2
+
+/datum/heretic_knowledge/hypnosis_ritual/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
+	for(var/mob/living/carbon/human/victim in atoms)
+		if(victim.stat == DEAD || IS_HERETIC(victim) || victim.has_trauma_type(/datum/brain_trauma/hypnosis))
+			atoms -= victim
+
+	var/has_paper = FALSE
+	var/has_written_text = FALSE
+	for(var/obj/item/paper/paper in atoms)
+		has_paper = TRUE
+		for(var/datum/paper_input/text as anything in paper.raw_text_inputs)
+			has_written_text = TRUE
+
+	if(!has_written_text && has_paper)
+		loc.balloon_alert(user, "write your hypnosis on the paper!")
+		return FALSE
+
+	return ..()
+
+/datum/heretic_knowledge/hypnosis_ritual/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
+	var/hypnosis_text = ""
+	for(var/obj/item/paper/paper in selected_atoms)
+		for(var/datum/paper_input/text as anything in paper.raw_text_inputs)
+			hypnosis_text += "[STRIP_HTML_FULL(text.raw_text, MAX_MESSAGE_LEN)] "
+		paper.burn()
+		selected_atoms -= paper
+
+	hypnosis_text = trim(hypnosis_text, MAX_MESSAGE_LEN)
+	for(var/mob/living/carbon/human/victim in selected_atoms)
+		var/specific_hypnosis_text = (HAS_TRAIT(victim, TRAIT_UNCONVERTABLE) || !hypnosis_text) ? pick_list(HERETIC_INFLUENCE_FILE, "hypnosis") : hypnosis_text
+		for(var/obj/item/implant/mindshield/shield in victim.implants)
+			shield.removed(victim, silent = FALSE)
+			shield.forceMove(victim.drop_location())
+			shield.burn()
+
+		selected_atoms -= victim
+		// lobotomy resistance because it might be a bit rough to make this permanent aye
+		// future note: if people just spam hypnosis to make an army to rush ascension, make it so hypnosis is broken by witnessing sacrifices
+		var/datum/brain_trauma/hypnosis/trauma = new(specific_hypnosis_text)
+		victim.gain_trauma(trauma, TRAUMA_RESILIENCE_LOBOTOMY)
+
+	return TRUE

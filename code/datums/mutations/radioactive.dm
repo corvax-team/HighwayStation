@@ -1,21 +1,15 @@
 /datum/mutation/radioactive
 	name = "Radioactivity"
-	desc = "Нестабильная мутация, которая заставляет носителя излучать смертельные бета-частицы. Мутация влияет на носителя и его окружение."
+	desc = "Субъект излучает смертельные бета-частицы, которые влияют как на носителя, так и на его окружение."
 	quality = NEGATIVE
 	text_gain_indication = span_warning("Ты ощущаешь, как что-то проходит через твои клетки и кости!")
 	instability = NEGATIVE_STABILITY_MAJOR
 	difficulty = 8
 	power_coeff = 1
+	mutation_icon_state = "radiation"
+	offset_location = ENTIRE_BODY
 	/// Weakref to our radiation emitter component
 	var/datum/weakref/radioactivity_source_ref
-
-/datum/mutation/radioactive/New(datum/mutation/copymut)
-	. = ..()
-	if(!(type in visual_indicators))
-		visual_indicators[type] = list(mutable_appearance('icons/mob/effects/genetics.dmi', "radiation", -MUTATIONS_LAYER))
-
-/datum/mutation/radioactive/get_visual_indicator()
-	return visual_indicators[type][1]
 
 /datum/mutation/radioactive/on_acquiring(mob/living/carbon/human/acquirer)
 	. = ..()

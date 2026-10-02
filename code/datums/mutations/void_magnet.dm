@@ -1,6 +1,6 @@
 /datum/mutation/void
 	name = "Void Magnet"
-	desc = "Редкий геном, который притягивает странные силы, обычно не наблюдаемые."
+	desc = "Субъект притягивает странные силы, обычно не наблюдаемые."
 	quality = MINOR_NEGATIVE //upsides and downsides
 	text_gain_indication = span_notice("Ты ощущаешь тяжёлую, мрачную силу, которая наблюдает за тобой через стену.")
 	instability = POSITIVE_INSTABILITY_MODERATE // useful, but has large drawbacks
@@ -60,7 +60,7 @@
 /datum/action/cooldown/spell/void/cursed/proc/on_life(mob/living/source, seconds_per_tick)
 	SIGNAL_HANDLER
 
-	if(!isliving(source) || HAS_TRAIT(source, TRAIT_STASIS) || source.stat == DEAD || HAS_TRAIT(source, TRAIT_NO_TRANSFORM))
+	if(HAS_TRAIT(source, TRAIT_STASIS) || source.stat == DEAD)
 		return
 
 	if(!is_valid_target(source))

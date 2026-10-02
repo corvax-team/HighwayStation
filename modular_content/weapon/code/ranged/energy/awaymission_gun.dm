@@ -12,6 +12,7 @@
 	charge_delay = 10
 	selfcharge = TRUE
 	can_charge = FALSE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/uranium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SMALL_MATERIAL_AMOUNT * 2.5)
 	var/going_boom = FALSE
 
 /obj/projectile/beam/laser/awaymission_aeg
@@ -46,6 +47,7 @@
 	позволяющей в короткие сроки восполнить необходимую электроэнергию с помощью ручного труда и конвертации личной энергии подключенного к системе зарядки. \
 	\nТеперь еще более нелепый дизайн с торчащими проводами!"
 	icon_state = "laser_gate_mk2"
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4, /datum/material/glass = SHEET_MATERIAL_AMOUNT, /datum/material/uranium = SHEET_MATERIAL_AMOUNT, /datum/material/silver = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/titanium = SMALL_MATERIAL_AMOUNT * 2.5)
 
 /obj/item/gun/energy/laser/awaymission_aeg/mk2/attack_self(mob/living/user)
 	. = ..()
@@ -70,7 +72,6 @@
 /datum/design/exploreverse_mk1
 	name = "Exploreverse Mk.I"
 	desc = "Энергетическое оружие с экспериментальным миниатюрным реактором."
-	id = "exploreverse_mk1"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3,
@@ -86,7 +87,6 @@
 /datum/design/exploreverse_mk2
 	name = "Exploreverse Mk.II"
 	desc = "Энергетическое оружие с экспериментальным миниатюрным реактором и рычагом для ручной зарядки."
-	id = "exploreverse_mk2"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
@@ -102,9 +102,9 @@
 	departmental_flags = DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_SECURITY
 
 /datum/techweb_node/mining/New()
+	unlocked_designs |= /datum/design/exploreverse_mk1
 	. = ..()
-	design_ids |= "exploreverse_mk1"
 
 /datum/techweb_node/plasma_mining/New()
+	unlocked_designs |= /datum/design/exploreverse_mk2
 	. = ..()
-	design_ids |= "exploreverse_mk2"

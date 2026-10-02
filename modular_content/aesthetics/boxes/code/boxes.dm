@@ -61,6 +61,9 @@
 /obj/item/storage/box/mousetraps
 	illustration = "mousetrap"
 
+/obj/item/storage/box/music_tapes
+	illustration = "tape"
+
 /obj/item/storage/box/pdas
 	illustration = "pda"
 
@@ -369,6 +372,9 @@
 	icon = 'icons/obj/storage/box.dmi'
 
 /obj/item/storage/box/kronkdealer
+	icon = 'icons/obj/storage/box.dmi'
+
+/obj/item/storage/box/ramen_beef
 	icon = 'icons/obj/storage/box.dmi'
 
 /obj/item/storage/box/stamps

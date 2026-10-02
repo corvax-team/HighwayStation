@@ -16,31 +16,31 @@
 /datum/design/stasisbodybag
 	name = "Stasis Body Bag"
 	desc = "A folded bag designed for the storage and transportation of cadavers with portable stasis module and little space."
-	id = "stasisbodybag"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plasma =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SMALL_MATERIAL_AMOUNT*5)
-	build_path = /obj/item/bodybag/stasis
+	build_path = /obj/item/bodybag/perma_stasis
+	inherit_materials = DESIGN_INHERIT_MATS_SPECIAL
 	category = list(
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_TOOLS_MEDICAL
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
-/obj/item/bodybag/stasis
+/obj/item/bodybag/perma_stasis
 	name = "Stasis body bag"
 	desc = "A folded bag designed for the storage and transportation of cadavers with portable stasis module and little space."
 	icon = 'modular_content/balance/icons/bodybag.dmi' //на замену
 	icon_state = "stasisbag_folded" //на замену
 	// Stored path we use for spawning a new body bag entity when unfolded.
-	unfoldedbag_path = /obj/structure/closet/body_bag/stasis
+	unfoldedbag_path = /obj/structure/closet/body_bag/perma_stasis
 	color = "#11978c"
 
-/obj/item/bodybag/stasis/deploy_bodybag(mob/user, atom/location)
+/obj/item/bodybag/perma_stasis/deploy_bodybag(mob/user, atom/location)
 	. = ..()
 	var/obj/structure/closet/body_bag/item_bag = .
 	item_bag.color = color
 	return item_bag
 
-/obj/structure/closet/body_bag/stasis
+/obj/structure/closet/body_bag/perma_stasis
 	name = "stasis body bag"
 	desc = "A plastic bag designed for the storage and transportation of cadavers with portable stasis module and little space."
 	icon = 'modular_content/balance/icons/bodybag.dmi' //на замену
@@ -49,9 +49,9 @@
 	color = "#11978c"
 	open_sound = 'sound/effects/spray.ogg'
 	close_sound = 'sound/effects/spray.ogg'
-	foldedbag_path = /obj/item/bodybag/stasis
+	foldedbag_path = /obj/item/bodybag/perma_stasis
 
-/obj/structure/closet/body_bag/stasis/closet_update_overlays(list/new_overlays)
+/obj/structure/closet/body_bag/perma_stasis/closet_update_overlays(list/new_overlays)
 	. = ..()
 	. = new_overlays
 	var/overlay_state = isnull(base_icon_state) ? initial(icon_state) : base_icon_state
@@ -67,26 +67,26 @@
 		door_underlay.overlays += emissive_blocker(door_underlay.icon, door_underlay.icon_state, src, alpha = door_underlay.alpha)
 	return .
 
-/obj/structure/closet/body_bag/stasis/undeploy_bodybag(atom/fold_loc)
+/obj/structure/closet/body_bag/perma_stasis/undeploy_bodybag(atom/fold_loc)
 	. = ..()
 	var/obj/item/bodybag/folding_bodybag = .
 	folding_bodybag.color = color
 	return folding_bodybag
 
-/obj/structure/closet/body_bag/stasis/close(mob/living/user)
+/obj/structure/closet/body_bag/perma_stasis/close(mob/living/user)
 	. = ..()
 	for(var/mob/living/mob in contents)
 		mob.apply_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		ADD_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 		mob.extinguish_mob()
 
-/obj/structure/closet/body_bag/stasis/Destroy()
+/obj/structure/closet/body_bag/perma_stasis/Destroy()
 	for(var/mob/living/mob in contents)
 		mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 		REMOVE_TRAIT(mob, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 	return ..()
 
-/obj/structure/closet/body_bag/stasis/Exited(atom/movable/gone, direction)
+/obj/structure/closet/body_bag/perma_stasis/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(isliving(gone))
 		var/mob/living/leaver = gone

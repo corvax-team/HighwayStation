@@ -47,17 +47,15 @@
 // MARK: Bodypart overlay
 
 /datum/bodypart_overlay/mutant/head_tentacle
-	layers = EXTERNAL_FRONT|EXTERNAL_ADJACENT
+	layers = list(
+		EXTERNAL_FRONT = BODY_FRONT_LAYER,
+		EXTERNAL_ADJACENT = BODY_ADJ_LAYER,
+	)
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
 	return SSaccessories.feature_list[FEATURE_SKRELL_HEAD_TENTACLE]
 
-/datum/bodypart_overlay/mutant/head_tentacle/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
-	var/mob/living/carbon/human/human = bodypart_owner.owner
-	if(!istype(human))
-		return TRUE
-	if((human.head?.flags_inv & HIDEHAIR) || (human.wear_mask?.flags_inv & HIDEHAIR))
-		return FALSE
-	return TRUE
+/datum/bodypart_overlay/mutant/head_tentacle/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner, mob/living/carbon/owner)
+	return ..() && !(bodypart_owner.owner?.obscured_slots & HIDEHAIR)

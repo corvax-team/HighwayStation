@@ -9,11 +9,14 @@
 	response_harm_simple   = "щипает"
 
 	held_state = "crab"
-	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_SMALL
 	held_lh = 'modular_content/mobs/icons/inhands/mobs_lefthand.dmi'
 	held_rh = 'modular_content/mobs/icons/inhands/mobs_righthand.dmi'
 	head_icon = 'modular_content/mobs/icons/inhead/head.dmi'
+
+/mob/living/basic/crab/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/can_be_held)
 
 /mob/living/basic/crab/old
 	name = "старый краб"
