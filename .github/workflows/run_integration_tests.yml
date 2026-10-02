@@ -107,7 +107,9 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: map-icons
-          path: ci_test/icons/map_icons/
+          path: |
+            ci_test/icons/map_icons/
+            ci_test/icons/obj/fluff/map_previews.dmi
           retention-days: 1
           if-no-files-found: ignore
 
