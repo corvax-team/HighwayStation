@@ -295,6 +295,7 @@
 	ammo_type = /obj/item/ammo_casing/c9x25mm
 	caliber = CALIBER_9x25NT
 	max_ammo = 12
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10)
 	ammo_band_icon = "+9x25_ammo_band"
 	ammo_band_color = null
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
@@ -319,6 +320,7 @@
 	desc = "Магазин стандартного размера для пистолетов НТ калибра 9x25мм, вмещает 12 травматических патронов."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c9x25mm/rubber
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5)
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/rubber
 	name = "extended pistol magazine (9x25mm NT rubber)"
@@ -330,6 +332,7 @@
 	name = "pistol magazine (9x25mm NT AP)"
 	MAGAZINE_TYPE_ARMORPIERCE
 	ammo_type = /obj/item/ammo_casing/c9x25mm/ap
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10, /datum/material/titanium = SHEET_MATERIAL_AMOUNT * 1.25)
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap
 	name = "extended pistol magazine (9x25mm NT AP)"
@@ -340,6 +343,7 @@
 	name = "pistol magazine (9x25mm NT HP)"
 	MAGAZINE_TYPE_HOLLOWPOINT
 	ammo_type = /obj/item/ammo_casing/c9x25mm/hp
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10, /datum/material/gold = SHEET_MATERIAL_AMOUNT * 1.25)
 
 /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp
 	name = "extended pistol magazine (9x25mm NT HP)"

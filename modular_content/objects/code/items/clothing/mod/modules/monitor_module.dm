@@ -9,6 +9,7 @@
 	incompatible_modules = list(/obj/item/mod/module/monitor)
 	cooldown_time = 0.5 SECONDS
 	required_slots = list(ITEM_SLOT_GLOVES)
+	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.75)
 
 /datum/design/module/mod_monitor
 	name = "Crew Monitor Module"

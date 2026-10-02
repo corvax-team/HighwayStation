@@ -81,3 +81,6 @@
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/obj/item/ammo_casing/shotgun/breacher
+	custom_materials = list(/datum/material/titanium = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/iron = SMALL_MATERIAL_AMOUNT * 3)

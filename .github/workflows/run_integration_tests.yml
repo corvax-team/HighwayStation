@@ -102,6 +102,15 @@ jobs:
           source $HOME/BYOND/byond/bin/byondsetup
           bash tools/ci/run_server.sh "${{ inputs.map }}" "${{ inputs.map_config }}"
 
+      - name: Upload generated map icons
+        if: always() && inputs.map == 'runtimestation_minimal'
+        uses: actions/upload-artifact@v7
+        with:
+          name: map-icons
+          path: ci_test/icons/map_icons/
+          retention-days: 1
+          if-no-files-found: ignore
+
       - name: Upload screenshot tests
         if: always()
         uses: actions/upload-artifact@v7

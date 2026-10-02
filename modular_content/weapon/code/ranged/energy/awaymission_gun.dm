@@ -12,6 +12,7 @@
 	charge_delay = 10
 	selfcharge = TRUE
 	can_charge = FALSE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 3, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/uranium = SHEET_MATERIAL_AMOUNT * 0.75, /datum/material/titanium = SMALL_MATERIAL_AMOUNT * 2.5)
 	var/going_boom = FALSE
 
 /obj/projectile/beam/laser/awaymission_aeg
@@ -46,6 +47,7 @@
 	позволяющей в короткие сроки восполнить необходимую электроэнергию с помощью ручного труда и конвертации личной энергии подключенного к системе зарядки. \
 	\nТеперь еще более нелепый дизайн с торчащими проводами!"
 	icon_state = "laser_gate_mk2"
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4, /datum/material/glass = SHEET_MATERIAL_AMOUNT, /datum/material/uranium = SHEET_MATERIAL_AMOUNT, /datum/material/silver = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/titanium = SMALL_MATERIAL_AMOUNT * 2.5)
 
 /obj/item/gun/energy/laser/awaymission_aeg/mk2/attack_self(mob/living/user)
 	. = ..()
