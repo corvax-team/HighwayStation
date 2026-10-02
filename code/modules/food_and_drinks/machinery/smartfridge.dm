@@ -312,7 +312,6 @@
 			to_chat(user, span_warning("В [tool.declent_ru(PREPOSITIONAL)] нет ничего, что можно положить в [declent_ru(ACCUSATIVE)]!"))
 			return ITEM_INTERACT_BLOCKING
 
-		var/filled = loaded_count >= max_n_of_items
 		user.visible_message(
 			span_notice("[capitalize(user.declent_ru(NOMINATIVE))] перекладывает предметы из [tool.declent_ru(GENITIVE)] в [declent_ru(ACCUSATIVE)]."),
 			span_notice("Вы перемещаете содержимое из [tool.declent_ru(GENITIVE)] в [declent_ru(ACCUSATIVE)]."),
