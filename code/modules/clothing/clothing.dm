@@ -400,7 +400,7 @@
 	if(TRAIT_FAST_CUFFING in clothing_traits)
 		.["сдерживающий"] = "Увеличивает скорость, с которой вы применяете стяжки или наручники."
 	if(emp_protection > EMP_PROTECTION_NONE)
-		.["emp resistant"] = "Reduces the effects of incoming electromagnetic pulses on the wearer."
+		.["ЭМИ-устойчивый"] = "Снижает воздействие электромагнитных импульсов на носителя."
 
 /obj/item/clothing/examine_descriptor(mob/user)
 	return "надеваемый предмет"
@@ -444,15 +444,15 @@
 
 		var/list/parts_covered = list()
 		if(body_parts_covered & HEAD)
-			parts_covered += "head"
+			parts_covered += "голову"
 		if(body_parts_covered & CHEST)
-			parts_covered += "torso"
+			parts_covered += "торс"
 		if(body_parts_covered & (ARMS|HANDS))
-			parts_covered += "arms"
+			parts_covered += "руки"
 		if(body_parts_covered & (LEGS|FEET))
-			parts_covered += "legs"
+			parts_covered += "ноги"
 		if(length(parts_covered))
-			readout += "It covers the wearer's [english_list(parts_covered)]."
+			readout += "Покрывает [english_list(parts_covered)] носителя."
 
 		if((clothing_flags & STOPSPRESSUREDAMAGE) || (visor_flags & STOPSPRESSUREDAMAGE))
 			var/output_string = "Защищает"

@@ -173,7 +173,7 @@ const NtosNotepadMenuBar = (props: MenuBarProps) => {
         <MenuBar.Dropdown.MenuItem {...getMenuItemProps('open', 'Open')} />
         <MenuBar.Dropdown.MenuItem {...getMenuItemProps('save', 'Сохранить')} />
         <MenuBar.Dropdown.MenuItem
-          {...getMenuItemProps('save_as', 'Save As')}
+          {...getMenuItemProps('save_as', 'Сохранить как')}
         />
         <MenuBar.Dropdown.Separator key="firstSep" />
         <MenuBar.Dropdown.MenuItem {...getMenuItemProps('exit', 'Выйти...')} />

@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/projectile/star_blast
-	name = "Star Blast"
+	name = "Звёздный взрыв"
 	desc = "This spell fires an unstoppable disk with cosmic energies at a target, spreading the star mark. \
 			When recasted, you will be teleported to the disk, and cosmic fields will generate from the disk and from the caster, pulling nearby heathens into it."
 	background_icon_state = "bg_heretic"

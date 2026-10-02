@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/cosmic
 	route = PATH_COSMIC
 	ui_bgr = "node_cosmos"
-	complexity = "Hard"
+	complexity = "Высокая"
 	complexity_color = COLOR_RED
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -11,28 +11,28 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Cosmos revolves around area denial, teleporation, and mastery over space.",
-		"Pick this path if you enjoy adapting to your environment and thinking outside (or inside) the box.",
+		"Путь Космоса фокусируется на ограничении передвижений, телепортациях, и контроле пространства.",
+		"Выбирайте этот путь, если вам нравится приспосабливаться к окружающей среде, и мыслить вне рамок (или внутри них).",
 	)
 	pros = list(
-		"Control the movement of foes with cosmic fields",
-		"Move in and around space with ease.",
-		"Teleport rapidly across the station.",
-		"Confound opponents with barriers upon barriers.",
+		"Ограничивайте передвижения противника при помощи космических полей.",
+		"С лёгкостью выходите в космос, и возвращайтесь обратно.",
+		"Быстро телепортируйтесь по всей станции.",
+		"Ставьте противников в тупик, воздвигая барьер за барьером.",
 	)
 	cons = list(
-		"Requires you spread your star mark to affect opponents with your cosmic fields.",
-		"Relatively low damage.",
-		"Relatively low direct defense, highly reliant on proper use of abilities.",
+		"Требуется распространять «Звездные Метки», чтобы влиять на противника космическими полями.",
+		"Относительно низкий урон.",
+		"Относительно низкая выживаемость, с сильной зависимостью от правильного использования способностей.",
 	)
 	tips = list(
-		"Your Mansus Grasp will mark your opponent with a star mark, as well as leave a mark that, when detonated, will teleport your opponent back to the place where the mark was applied and briefly paralyze them.",
-		"Your cosmic runes can quickly teleport you from two different locations instantly. Beware, however; non-heretics are also able to travel through them. Be creative and have your opponents teleport right into a trap. They come out star marked!",
-		"When standing on top of a cosmic rune, you can click on yourself with a empty hand to activate it.",
-		"Star marked opponents cannot cross your cosmic fields willingly. But they can be dragged through!",
-		"Star Blast is both a jaunt ability as well as a disabling tool. Use it to catch several people in your cosmic fields at once.",
-		"Star Touch will prevent your target from teleporting away. Should they fail to break the tether, they will be put to sleep and then teleport to your feet.",
-		"It's Always a good idea to leave one cosmic rune near your ritual rune, it will allow you to quickly kidnap your targets to sacrifice them.",
+		"«Хватка Мансуса» помечает вашего противника «Звездной Меткой», а также запоминает место, где он её получил. При активации, помеченый враг перемещается в место, где метка была нанесена и ненадолго лишается способности двигаться.",
+		"«Космические руны» позволяют мгновенно переноситься между ними. Однако стоит быть осторожным, так как ими могут воспользоваться и неверные. Будьте креативны, заставьте своих противников перенестись прямо в ловушку. После перемещения, они также получат «Звездную Метку»!",
+		"Когда вы стоите на «Космической руне», вы можете нажать на себя пустой рукой и активировать её.",
+		"Противники помеченные Звездой не могут самостоятельно пересечь границу звездного поля. Однако, ничто не помешает их оттуда вытащить!",
+		"«Звёздный взрыв» одновременно является способностью повышающей вашу подвижность, а также неплохим способом выйти или вывести кого-то из боя. Используйте её, чтобы поймать в своё звездное поле сразу несколько человек.",
+		"«Касание Звезды» не даст цели телепортироваться от вас. Если они не смогут разорвать связь, то будут усыплены, а после телепортируются к вашим ногам.",
+		"Всегда полезно оставить одну «Космическую руну» рядом с вашей ритуальной руной, это позволит вам быстро похищать свои цели, чтобы принести их в жертву.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_cosmic
@@ -85,10 +85,10 @@
 	max_charges = INFINITY
 
 /datum/heretic_knowledge/spell/star_blast
-	name = "Star Blast"
+	name = "Звёздный взрыв"
 	desc = "Fires a projectile that moves very slowly, raising a short-lived wall of cosmic fields where it goes. \
 		Anyone hit by the projectile will receive burn damage, a knockdown, and give people in a three tile range a star mark."
-	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
+	gain_text = "С каждой новой жертвой, как никогда ранее четко, слышу я слова Зверя, стоящего за мной."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/star_blast
 	cost = 2
 	max_charges = 4
@@ -307,8 +307,8 @@
 
 /// Replace an annoying griefer you were paired up to with a different but probably no less annoying player.
 /datum/action/cooldown/mob_cooldown/replace_star_gazer
-	name = "Reset Star Gazer Consciousness"
-	desc = "Replaces the mind of your summon with that of a different ghost."
+	name = "Перезагрузка сознания Звездочета"
+	desc = "Заменяет разум вызванного вами призрака разумом другого призрака."
 	button_icon = 'icons/mob/simple/mob.dmi'
 	button_icon_state = "ghost"
 	background_icon_state = "bg_heretic"
@@ -326,15 +326,15 @@
 
 	var/mob/living/to_reset = bad_dog.resolve()
 
-	to_chat(owner, span_mansus("You prompt [to_reset] to shift it\'s personality..."))
-	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
+	to_chat(owner, span_mansus("Вы предлагаете изменить личность [to_reset]..."))
+	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Хотите ли вы играть за [span_danger("[owner.real_name]")] [span_notice(to_reset.name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, alert_pic = to_reset, jump_target = owner, role_name_text = to_reset.name, amount_to_pick = 1)
 	if(isnull(chosen_one))
-		to_chat(owner, span_mansus("Your request to shift [to_reset]'\s personality appears to have been denied... Looks like you're stuck with it for now."))
+		to_chat(owner, span_mansus("Ваш запрос о смене личности [to_reset], судя по всему, был отклонён... Похоже пока придётся мириться с этим."))
 		StartCooldown()
 		return FALSE
-	to_chat(to_reset, span_mansus("Your summoner reset you, and your body was taken over by a ghost. Looks like they weren't happy with your performance."))
-	to_chat(owner, span_mansus("The mind of [to_reset] has twisted itself to suit you better."))
-	message_admins("[key_name_admin(chosen_one)] has taken control of ([ADMIN_LOOKUPFLW(to_reset)])")
+	to_chat(to_reset, span_mansus("Ваш призыватель перезагрузил вас, и вашим телом завладел призрак. Похоже, он был не очень доволен вашими действиями."))
+	to_chat(owner, span_mansus("Разум [to_reset] изменился, чтобы лучше подходить вам."))
+	message_admins("[key_name_admin(chosen_one)] взял контроль над ([ADMIN_LOOKUPFLW(to_reset)])")
 	to_reset.ghostize(FALSE)
 	to_reset.PossessByPlayer(chosen_one.key)
 	StartCooldown()

@@ -77,9 +77,9 @@ export const sound_tts_radio: FeatureChoiced = {
   name: 'Enable TTS Over Radio',
   category: 'Звук',
   description: `
-    When enabled, be able to hear text-to-speech sounds in game over radio channels.
-    When set to "Departmental Radio Only", text to speech over the radio will only play for departmental radio channels. Anything that isn't Common.
-    When disabled, text to speech will not play over radio sources.
+    Когда включено, вы будете слышать text-to-speech звуки в игре поверх радио каналов.
+    Когда режим выставлен в "Только радио отделов", text-to-speech звуки поверх радио будут слышны только для каналов отделов, и любых частот которые не являются Общей.
+    Когда выключено, text-to-speech не будет слышно поверх радио.
   `,
   component: FeatureDropdownInput,
 };

@@ -3,11 +3,11 @@
  */
 
 /datum/heretic_knowledge/summon/rusty
-	name = "Rusted Ritual"
+	name = "Ритуал Ржавчины"
 	desc = "Summon a Rust Walker.<br>\
 		Rust Walkers excel at spreading rust and are moderately strong in combat."
-	transmute_text = "Transmute a pool of vomit, some cable coil, and 10 sheets of iron."
-	gain_text = "I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out."
+	transmute_text = "Трансмутируйте лужу рвоты, 15 мотков кабеля и 10 листов железа."
+	gain_text = "Я объединил свои знания о созидании с моим стремлением к разрушению. Маршал знал моё имя, и Ржавые Холмы отозвались эхом."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/vomit = 1,
 		/obj/item/stack/sheet/iron = 10,
@@ -19,11 +19,11 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/maid_in_mirror
-	name = "Maid in the Mirror"
+	name = "Горничная из Зазеркалья"
 	desc = "Summon a Maid in the Mirror.<br>\
 		Maid in the Mirrors are decent combatants that can become incorporeal by phasing in and out of the mirror realm, \
 		serving as powerful scouts and ambushers. Their attacks also apply a stack of void chill."
-	transmute_text = "Transmute five sheets of glass, any suit, and a pair of lungs."
+	transmute_text = "Трансмутируйте пять листов стекла, любой костюм и лёгкие."
 	gain_text = "Within each reflection, lies a gateway into an unimaginable world of colors never seen and \
 		people never met. The ascent is glass, and the walls are knives. Each step is blood, if you do not have a guide."
 
@@ -39,13 +39,13 @@
 	drafting_tier = 3
 
 /datum/heretic_knowledge/summon/ashy
-	name = "Ashen Ritual"
+	name = "Пепельный ритуал"
 	desc = "Summon an Ash Spirit.<br>\
 		Ash Spirits have a short range jaunt and the ability to cause bleeding in foes at range. \
 		They also have the ability to create a ring of fire around themselves for a length of time.<br>\
 		They have a low amount of health, but will passively recover given enough time to do so."
-	transmute_text = "Transmute a pool of ash, a book, and a bonfire."
-	gain_text = "I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on."
+	transmute_text = "Трансмутируйте горсть пепла, книгу и костёр."
+	gain_text = "Я объединил свой голод с жаждой разрушения. Маршал знал моё имя, а Ночной Дозорный наблюдал за происходящим."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
 		/obj/item/book = 1,
@@ -161,12 +161,12 @@
 	sharpness = SHARP_EDGED
 
 /datum/heretic_knowledge/summon/fire_shark
-	name = "Scorching Shark"
+	name = "Пылающая акула"
 	desc = "Summon a Fire Shark.<br>\
 		Fire Sharks are fast and strong in groups, but fragile to non-burning damage.<br>\
 		They also inject phlogiston on attack and spawn plasma on death."
-	transmute_text = "Transmute a pool of ash, a liver, and a sheet of plasma."
-	gain_text = "The cradle of the nebula was cold, but not dead. Light and heat flits even through the deepest darkness, and is hunted by its own predators."
+	transmute_text = "Трансмутируйте горсть пепла, печень и лист плазмы."
+	gain_text = "Колыбель туманности была холодной, но не мертвой. Свет и тепло проникают даже в самую глубокую тьму, и за ними охотятся их собственные хищники."
 
 	required_atoms = list(
 		/obj/effect/decal/cleanable/ash = 1,
@@ -212,10 +212,10 @@
 		what.set_light_on(TRUE)
 
 /datum/heretic_knowledge/mansus_gate
-	name = "Keys to the Backdoor"
+	name = "Ключи к чёрному ходу"
 	desc = "Open a backdoor to the Mansus.<br>\
 		Entering the container will transport you to the Mansus, granting you a safe haven to transmute or store equipment."
-	transmute_text = "Transmute a locker and a Codex Cicatrix or Codex Morbus."
+	transmute_text = "Трансмутируйте шкаф и Кодекс Цикатрикс или Кодекс Морбус."
 	notice = "Only willing individuals or the deceased can pass through the backdoor.\
 		<br>Attempting to perform a sacrifice so close to the gods may anger them.\
 		<br>You can only create one backdoor."
@@ -282,13 +282,13 @@
 		return CLOSET_TELEPORT_FORCED
 
 	if(isliving(sending_through) && !consents_to_entry(sending_through))
-		locker.balloon_alert(sending_through, "the door refuses you!")
+		locker.balloon_alert(sending_through, "дверь отвергает вас!")
 		return CLOSET_TELEPORT_BLOCKED
 
 	for(var/mob/living/entering in sending_through.get_all_contents())
 		if(!consents_to_entry(entering))
 			if(isliving(sending_through))
-				locker.balloon_alert(sending_through, "the door refuses you!")
+				locker.balloon_alert(sending_through, "дверь отвергает вас!")
 			return CLOSET_TELEPORT_BLOCKED
 
 	return CLOSET_TELEPORT_FORCED
@@ -342,7 +342,7 @@
 /area/centcom/heretic_backdoor/proc/greet_message(mob/living/arrived_mob)
 	if(QDELETED(arrived_mob) || get_area(arrived_mob) != src)
 		return
-	to_chat(arrived_mob, span_mansus("A hollow sun shines down from above."))
+	to_chat(arrived_mob, span_mansus("Пустое солнце сияет сверху."))
 
 /datum/movespeed_modifier/heretic_backdoor_slowdown
 	multiplicative_slowdown = 0.5

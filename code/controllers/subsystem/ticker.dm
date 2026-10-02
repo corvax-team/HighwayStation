@@ -211,7 +211,7 @@ SUBSYSTEM_DEF(ticker)
 	return player_states
 
 /datum/controller/subsystem/ticker/proc/setup()
-	to_chat(world, span_boldannounce("Starting game..."))
+	to_chat(world, span_boldannounce("Игра начинается..."))
 	var/init_start = world.timeofday
 
 	var/list/players_and_readiness = get_player_ready_states()
@@ -275,7 +275,7 @@ SUBSYSTEM_DEF(ticker)
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
 	if(length(GLOB.holidays))
-		to_chat(world, span_notice("and..."))
+		to_chat(world, span_notice("и..."))
 		for(var/holidayname in GLOB.holidays)
 			var/datum/holiday/holiday = GLOB.holidays[holidayname]
 			to_chat(world, span_info(holiday.greet()))
@@ -547,7 +547,7 @@ SUBSYSTEM_DEF(ticker)
 		for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
 			var/mob/living/carbon/human/new_player_human = new_player_mob.new_character
 			if(new_player_human)
-				to_chat(new_player_mob, span_notice("Captainship not forced on anyone."))
+				to_chat(new_player_mob, span_notice("Капитанство никому не назначено."))
 			CHECK_TICK
 
 
@@ -810,10 +810,10 @@ SUBSYSTEM_DEF(ticker)
 
 	var/skip_delay = check_rights()
 	if(delay_end && !skip_delay)
-		to_chat(world, span_boldannounce("An admin has delayed the round end."))
+		to_chat(world, span_boldannounce("Администратор задержал окончание раунда."))
 		return
 
-	to_chat(world, span_boldannounce("Rebooting World in [DisplayTimeText(delay)]. [reason]"))
+	to_chat(world, span_boldannounce("Перезагрузка мира через [DisplayTimeText(delay)]. [reason]"))
 
 	var/statspage = CONFIG_GET(string/roundstatsurl)
 	var/gamelogloc = CONFIG_GET(string/gamelogurl)
@@ -833,7 +833,7 @@ SUBSYSTEM_DEF(ticker)
 	if(end_string)
 		end_state = end_string
 
-	log_game(span_boldannounce("Rebooting World. [reason]"))
+	log_game(span_boldannounce("Перезагрузка мира. [reason]"))
 
 	world.Reboot()
 
@@ -845,9 +845,9 @@ SUBSYSTEM_DEF(ticker)
  */
 /datum/controller/subsystem/ticker/proc/cancel_reboot(mob/user)
 	if(!reboot_timer)
-		to_chat(user, span_warning("There is no pending reboot!"))
+		to_chat(user, span_warning("Ожидающей перезагрузки нет!"))
 		return FALSE
-	to_chat(world, span_boldannounce("An admin has delayed the round end."))
+	to_chat(world, span_boldannounce("Администратор задержал окончание раунда."))
 	deltimer(reboot_timer)
 	reboot_timer = null
 	return TRUE

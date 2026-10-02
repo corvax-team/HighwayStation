@@ -74,7 +74,7 @@ export const CivCargoHoldTerminal = (props) => {
                   selected={tab === 'personal'}
                   backgroundColor={tab === 'personal' ? "green" : "default"}
                 >
-                  Personal Bounties
+                  Личные заказы
                 </Tabs.Tab>
                 <Tabs.Tab
                   icon="space-shuttle"
@@ -82,7 +82,7 @@ export const CivCargoHoldTerminal = (props) => {
                   selected={tab === 'station'}
                   backgroundColor={tab === 'station' ? "brown" : "default"}
                 >
-                  Station Bounties
+                  Станционные заказы
                 </Tabs.Tab>
               </Tabs>
             </Section>
@@ -289,7 +289,7 @@ const GlobalBountyBlock = (props) => {
               textColor="#ffffffe5"
               align="center"
               >
-              <Tooltip content="The total number of global bounties will go up by 1 for every 3 completed!">
+              <Tooltip content="Общее количество глобальных заказов будет увеличиваться на 1 за каждые 3 выполненных заказа!">
                 <Box className="Marquee">
                   {data.claimed_bounties} bount{data.claimed_bounties === 1 ? "y" : "ies"} served{data.claimed_bounties > 0 ? "!" : "."}
                 </Box>
@@ -306,7 +306,7 @@ const GlobalBountyBlock = (props) => {
             bold
             icon="print"
           >
-            Printout List
+            Печать
           </Tabs.Tab>
           {safeListBounty.map((bounty) => (
             <Tabs.Tab
@@ -344,7 +344,7 @@ const GlobalBountyBlock = (props) => {
             maxValue={localBounty.maximum}
             p={1}
             >
-          {localBounty.shipped} / {localBounty.maximum} shipped.
+          {localBounty.shipped} / {localBounty.maximum} отправлено.
           </ProgressBar>
               <Box
                 dangerouslySetInnerHTML={{__html:localBounty.description }}
@@ -364,7 +364,7 @@ const GlobalBountyBlock = (props) => {
                 backgroundColor="green"
                 color="white"
               >
-                <Tooltip content={`You'll receive a cut of ${Math.round(localBounty.reward * 0.3)} Credits.`}>
+                <Tooltip content={`Вы получите долю в ${Math.round(localBounty.reward * 0.3)}¢.`}>
                   <b>Reward:</b> {localBounty.reward} Credits
                 </Tooltip>
             </Box>
@@ -376,13 +376,13 @@ const GlobalBountyBlock = (props) => {
             disabled={!pad || !id_inserted}
             onClick={() => { act(sending ? 'stop' : 'send', { global: true}); setBountyTab(0); }}
           >
-            Send & Claim
+            Отправка
           </Button>
         </Section>
         ) : (
           <NoticeBox
             width="100%">
-            Please select a bounty from the list.
+            Пожалуйста, выберите заказ из списка.
           </NoticeBox>
         )}
       </Stack.Item>

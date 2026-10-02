@@ -155,7 +155,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 /datum/action/antag_info/New(Target)
 	. = ..()
-	name = "Open [target] Information"
+	name = "Открыть информацию о «[target]»"
 
 /datum/action/antag_info/Trigger(mob/clicker, trigger_flags)
 	. = ..()
@@ -257,8 +257,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(!silent)
 		greet()
 		if(ui_name)
-			to_chat(owner.current, span_boldnotice("For more info, read the panel. \
-				You can always come back to it using the button in the top left."))
+			to_chat(owner.current, span_boldnotice("Для большей информации - прочтите панель. \
+				Вы можете вернуться снова, нажав кнопку сверху слева."))
 			info_button.Trigger()
 		var/type_policy = get_policy("[type]") // path to text
 		if(type_policy)

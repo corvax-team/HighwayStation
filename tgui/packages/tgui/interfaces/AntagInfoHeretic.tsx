@@ -278,11 +278,11 @@ const KnowledgeTree = () => {
   return (
     <Section title="Древо знаний" fill scrollable>
       <Box textAlign="center" fontSize="32px">
-        <span style={hereticYellow}>DAWN</span>
+        <span style={hereticYellow}>РАССВЕТ</span>
       </Box>
       <Stack vertical>
         {nodesToShow.length === 0
-          ? 'None!'
+          ? 'Нет!'
           : nodesToShow.map((tier, i) => (
               <Stack.Item key={i}>
                 <Stack
@@ -377,7 +377,7 @@ const KnowledgeNode = (props: KnowledgeNodeProps) => {
             </Stack.Item>
             <Stack.Item>
               <BlockQuote>
-                <span style={hereticPurple}>Result: </span>{' '}
+                <span style={hereticPurple}>Результат: </span>{' '}
               </BlockQuote>
               {formatTooltipText(node.desc)}
             </Stack.Item>
@@ -389,7 +389,7 @@ const KnowledgeNode = (props: KnowledgeNodeProps) => {
             {!!node.info && (
               <Stack.Item>
                 <BlockQuote>
-                  <span style={hereticGreen}>Recipe: </span>{' '}
+                  <span style={hereticGreen}>Рецепт: </span>{' '}
                 </BlockQuote>
                 {formatTooltipText(node.info)}
               </Stack.Item>
@@ -439,12 +439,12 @@ const KnowledgeNode = (props: KnowledgeNodeProps) => {
           bold
           style={{ margin: '2px', borderRadius: '100%' }}
         >
-          {isBuyable && (node.cost > 0 ? node.cost : 'FREE')}
+          {isBuyable && (node.cost > 0 ? node.cost : 'ДАР')}
         </Box>
       </Button>
       {!!node.ascension && (
         <Box textAlign="center" fontSize="32px">
-          <span style={hereticPurple}>DUSK</span>
+          <span style={hereticPurple}>ЗАКАТ</span>
         </Box>
       )}
     </Stack.Item>
@@ -460,7 +460,7 @@ const KnowledgeShop = () => {
   }
 
   return (
-    <Section title="Knowledge Shop" fill scrollable>
+    <Section title="Магазин знаний" fill scrollable>
       <Stack vertical fill>
         <Knowledges />
       </Stack>
@@ -480,7 +480,7 @@ const KnowledgeShop = () => {
 
     return tiers?.map((tier, index) => (
       <Stack.Item key={`tier-${index}`}>
-        Tier {index + 1}
+        Уровень {index + 1}
         <Stack fill scrollable wrap="wrap">
           {tier.map((knowledge) => (
             <Stack.Item key={`knowledge-${knowledge.path}`}>
@@ -610,7 +610,7 @@ const PathContentUnselected = ({ path }: { path: HereticPath }) => {
         <Stack>
           <Stack.Item style={{ justifyItems: 'center' }} width="50%">
             <Stack vertical>
-              <Stack.Item bold>Passive: {path.passive.name}</Stack.Item>
+              <Stack.Item bold>Пассивный навык: {path.passive.name}</Stack.Item>
               <Stack.Item italic>{path.passive.recharge}</Stack.Item>
               <Stack.Item className="Passive" width="100%">
                 {path.passive.description[0]}
@@ -619,7 +619,7 @@ const PathContentUnselected = ({ path }: { path: HereticPath }) => {
           </Stack.Item>
           <Stack.Item width="50%">
             <Stack vertical>
-              <Stack.Item bold>Path Abilities:</Stack.Item>
+              <Stack.Item bold>Способности пути:</Stack.Item>
               <Stack.Item>
                 <Stack wrap="wrap" justify="center">
                   {path.preview_abilities.map((ability) => (
@@ -637,10 +637,10 @@ const PathContentUnselected = ({ path }: { path: HereticPath }) => {
       <Stack.Item>
         <Stack>
           <Stack.Item width="50%">
-            <PathProCons proconlist={path.pros} title="Pros" />
+            <PathProCons proconlist={path.pros} title="Сильные стороны" />
           </Stack.Item>
           <Stack.Item width="50%">
-            <PathProCons proconlist={path.cons} title="Cons" />
+            <PathProCons proconlist={path.cons} title="Слабые стороны" />
           </Stack.Item>
         </Stack>
       </Stack.Item>
@@ -665,7 +665,7 @@ const PathContentSelected = ({
       <Stack.Item>
         <Stack vertical>
           <Stack.Item bold>
-            Passive: {path.passive.name}, level: {passive_level}
+            Пассивный навык: {path.passive.name}, уровень: {passive_level}
           </Stack.Item>
           <Stack.Item italic>{path.passive.recharge}</Stack.Item>
           {path.passive.description.map((line, index) => (
@@ -674,7 +674,7 @@ const PathContentSelected = ({
               className={`Passive ${passive_level >= index + 1 ? 'Passive--Active' : ''}`}
               width="100%"
             >
-              Level {index + 1}
+              Уровень {index + 1}
               <br />
               {line}
             </Stack.Item>
@@ -683,7 +683,7 @@ const PathContentSelected = ({
       </Stack.Item>
       <Stack.Item textAlign="left" mt={2} mb={1}>
         <Stack.Item bold mb={1}>
-          Tips:
+          Советы:
         </Stack.Item>
         <Stack.Item>
           <Stack vertical>
@@ -742,13 +742,13 @@ export const AntagInfoHeretic = () => {
   );
 
   const tabs = [
-    { label: 'Information', icon: 'info', content: <IntroductionSection /> },
+    { label: 'Информация', icon: 'info', content: <IntroductionSection /> },
     {
-      label: 'Paths',
+      label: 'Информация пути',
       icon: 'info',
       content: <PathInfo currentPath={currentPath} />,
     },
-    { label: 'Research', icon: 'book', content: <ResearchInfo /> },
+    { label: 'Исследования', icon: 'book', content: <ResearchInfo /> },
   ];
 
   const currentTheme = () => {

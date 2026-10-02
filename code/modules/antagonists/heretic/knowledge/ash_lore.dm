@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/ash
 	route = PATH_ASH
 	ui_bgr = "node_ash"
-	complexity = "Easy"
+	complexity = "Низкая"
 	complexity_color = COLOR_GREEN
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -11,18 +11,18 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Ash revolves around fire, mobility and brutal crowd control against single opponents.",
-		"Play this path if you are new to Heretic, or really enjoy hit and run playstyles.",
+		"Путь Пепла завязан на огне, подвижности и беспощадном контроле над одиночными противниками.",
+		"Выбирайте этот путь, если вы начинающий еретик или вам нравится стиль игры «бей и беги».",
 	)
 	pros = list(
-		"Very potent even from the beginning of the path.",
-		"Easy access to a mobility spells and expanded vision.",
-		"Very powerful mark effect.",
+		"Очень силен, даже в начале своего пути.",
+		"Легкий доступ к заклинаниям передвижения и расширенному зрению.",
+		"Очень мощный эффект от метки.",
 	)
 	cons = list(
-		"Has less power than most heretics beyond their starting abilities.",
-		"Lacks durability in long conflicts.",
-		"Reliant on hitting fast and hard before their opponents can mount proper countermeasures.",
+		"Обладает меньшей силой, чем большинство еретиков, за исключением их начальных способностей.",
+		"Недостаточно устойчив в затяжных противостояниях.",
+		"Полагается на быстрые и мощные удары, прежде чем его противники успеют принять надлежащие контрмеры.",
 	)
 	tips = list(
 		"Your Mansus Grasp applies a short blind and a mark that puts your opponent into stamina crit when triggered by your blade. The mark can spread to nearby opponents.",
@@ -87,7 +87,7 @@
 		grasp.build_all_button_icons()
 
 /datum/heretic_knowledge/spell/ash_passage
-	name = "Ashen Passage"
+	name = "Пепельный проход"
 	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality, \
 		allowing you to traverse a short distance, passing though any walls."
 	gain_text = "Он знал, как ходить между мирами."
@@ -126,11 +126,11 @@
 	)
 
 /datum/heretic_knowledge/nightwatchers_lantern
-	name = "Nightwatcher's Lantern"
+	name = "Фонарь Ночного Дозорного"
 	desc = "Create a burning lantern.<br>\
 		A burning lantern is a bright light that damages the eyes and eventually confuses those who witness it for too long. \
 		The effect is reduced for those with protective eyewear, and strengthened if the burning lantern is the only nearby source of light."
-	transmute_text = "Transmute a lamp, lantern, or seclight, a pair of eyes, a flash, and four lit candles."
+	transmute_text = "Трансмутируйте лампу, фонарь или фонарик службы безопасности, пару глаз, вспышку и четыре зажжённые свечи."
 	gain_text = "The Nightwatcher did not venture out in the dark. That was foolish, even the Watch knew that. \
 		Their lantern burned with a light that could burn the sun."
 	cost = 2

@@ -11,7 +11,7 @@ export const ExperimentView = () => {
     <Stack vertical fill>
       <Stack.Item>
         <Section
-          title="Servers"
+          title="Серверы"
           fill
           buttons={
             <Button onClick={() => act('open_experiments')}>Open Config</Button>
@@ -24,7 +24,7 @@ export const ExperimentView = () => {
         <Stack vertical fill>
           {techwebs.some((e) => e.selected) && (
             <Stack.Item grow>
-              <Section title="Experiments" scrollable fill>
+              <Section title="Эксперименты" scrollable fill>
                 {experiments.length > 0 ? (
                   experiments
                     .sort((a, b) => (a.name > b.name ? 1 : -1))
@@ -32,7 +32,7 @@ export const ExperimentView = () => {
                       <Experiment key={i} exp={exp} can_select={false} />
                     ))
                 ) : (
-                  <NoticeBox color="yellow">No experiments found!</NoticeBox>
+                  <NoticeBox color="yellow">Эксперименты не найдены!</NoticeBox>
                 )}
               </Section>
             </Stack.Item>

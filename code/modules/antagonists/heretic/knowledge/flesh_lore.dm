@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/flesh
 	route = PATH_FLESH
 	ui_bgr = "node_flesh"
-	complexity = "Varies"
+	complexity = "Изменчивая"
 	complexity_color = COLOR_ORANGE
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -11,30 +11,30 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Flesh revolves around summoning ghouls and monstrosities to do your bidding.",
-		"Pick this path if you enjoy the fantasy of being a necromancer commanding legions of allies.",
+		"Путь Плоти специализируется на призыве гулей и чудовищ для исполнения ваших приказов.",
+		"Выбирайте этот путь, если вам нравится чувствовать себя некромантом, командующим ордами нежити.",
 	)
 	pros = list(
-		"Can turn dead humanoids into fragile but loyal ghouls.",
-		"Access to a versatile list of summoned minions.",
-		"Your summons are very versatie and can quicky overwhelm the crew should you coordinate your attacks",
-		"Eating organs or being fat grants various boons (depending on the level of your passive).",
+		"Способен превращать мертвых гуманоидов в хрупких, но преданных гулей.",
+		"Доступ к разнообразному списку призываемых миньонов.",
+		"Ваши призывы очень разнообразны и могут быстро подавить экипаж, если вы скоординируете свои атаки.",
+		"Поедание органов или полнота дают различные бонусы (в зависимости от уровня вашего пассивного навыка).",
 	)
 	cons = list(
-		"A high degree of your progression is obtaining additional summoned monsters.",
-		"You have very little utility beyond your summoned monsters.",
-		"You gain no inherent access to defensive, offensive or mobility spells.",
-		"You are mostly focused around supporting your minions.",
+		"Важным этапом вашего прогресса является получение дополнительных призываемых чудовищ.",
+		"У вас очень мало полезных способностей, кроме призыва чудовищ.",
+		"Вы не получаете врожденного доступа к заклинаниям защиты, атаки или мобильности.",
+		"Вы в основном фокусируетесь на поддержке своих миньонов.",
 	)
 	tips = list(
-		"Your Mansus Grasp allows you to turn dead humanoids into ghouls (even mindshielded humanoids like security officers and the captain). It also Leaves a mark that causes heavy bleeding when triggered by your bloody blade.",
-		"As a Flesh Heretic, organs and dead bodies are your best friends! You can use them for rituals, to heal or to gain buffs.",
-		"Your Flesh Surgery spell can heal your summons. Your robes grant you an aura that also heals nearby summons (but not yourself).",
-		"Your Flesh Surgery spell also lets you steal organs from humanoids. Useful if you need a spare liver.",
-		"Raw Prophets can link you and other summons in a telepathic network, allowing for long distance co-ordination.",
-		"Flesh Stalkers are decent combatants with the ability to disguise themselves as small creatures, like beepskies and corgis. They can also utilize an EMP spell, but this can potentially harm them if they transformed into a robot!",
-		"Your success with this path is reliant on how knowledgable or robust your minions are. However, there is always power in numbers; the more minions, the higher your chances of success.",
-		"Your minions are more expendable than you are. Do not be afraid to tell them to go to their deaths. You can just recover them later... maybe.",
+		"Ваша «Хватка Мансуса» позволяет вам превращать мертвых гуманоидов в гулей (даже гуманоидов с защитой разума, таких как офицеры и капитан). Она также оставляет след, который вызывает сильное кровотечение, когда его задевает ваш Кровавый клинок.",
+		"Для Еретика Плоти органы и трупы — лучшие друзья! Вы можете использовать их для ритуалов, исцеления или получения усилений.",
+		"Ваше заклинание «Плетение Плоти» может исцелять ваших призываемых существ. Ваша мантия наделяет вас аурой, которая также исцеляет призываемых существ, находящихся поблизости (но не вас самих).",
+		"Ваше заклинание «Плетение Плоти» также позволяет вам похищать органы у гуманоидов. Полезно, если вам нужна запасная печень.",
+		"Сырые Пророки могут соединить вас и других призываемых существ в телепатическую сеть, позволяющую координировать действия на большом расстоянии.",
+		"Преследователи Плоти — неплохие бойцы, способные маскироваться под мелких существ, таких как бипски и корги. Они также могут использовать заклинание ЭМИ, но это может нанести им вред, если они превратились в робота!",
+		"Ваш успех на этом пути зависит от того, насколько опытные и сильные ваши подчиненные. Однако в количестве всегда есть сила: чем больше подчиненных, тем выше ваши шансы на успех.",
+		"Ваши подчиненные более легкозаменяемы, чем вы. Не бойтесь отправлять их на верную гибель. Вы всегда сможете восстановить их позже... возможно.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_flesh

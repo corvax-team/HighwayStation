@@ -646,7 +646,7 @@
 		else if(had_nondried)
 			balloon_alert(user, "не высушенные зерна в упаковке с кофе!")
 		else
-			balloon_alert(user, "no beans added!")
+			balloon_alert(user, "нет зёрен!")
 		return ITEM_INTERACT_SUCCESS //no afterattack
 
 	return ..()

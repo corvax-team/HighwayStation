@@ -1,7 +1,7 @@
 /datum/wound/blunt
-	name = "Blunt Wound"
+	name = "Тупая травма"
 	sound_effect = 'sound/effects/wounds/crack1.ogg'
-	undiagnosed_name = "Painful Bruising"
+	undiagnosed_name = "Болезненный ушиб"
 	a_or_from = "some"
 
 /datum/wound/blunt/wound_injury(datum/wound/old_wound, attack_direction)

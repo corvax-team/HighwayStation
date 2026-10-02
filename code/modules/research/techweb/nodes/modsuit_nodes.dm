@@ -35,8 +35,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mod_service
-	display_name = "Civilian Modular Suits"
-	description = "Civilian MODsuits for dignified living."
+	display_name = "Гражданские МОДули"
+	description = "Гражданские модульные костюмы для достойной жизни."
 	prerequisite_nodes = list(/datum/techweb_node/mod_suit)
 	unlocked_designs = list(
 		/datum/design/module/mod_clamp,

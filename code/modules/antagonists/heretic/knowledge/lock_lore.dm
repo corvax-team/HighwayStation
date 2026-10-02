@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/lock
 	route = PATH_LOCK
 	ui_bgr = "node_lock"
-	complexity = "Medium"
+	complexity = "Умеренная"
 	complexity_color = COLOR_YELLOW
 	shop_cost_discount = 1
 	icon = list(
@@ -12,25 +12,25 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Lock revolves around access, area denial, theft and gadgets.",
-		"Pick this path if you want a less confrontational playstyle and more interested in being a slippery rat.",
+		"Путь Замка сосредоточен на проникновении, блокировании доступа, кражах и хитрости.",
+		"Выбирайте этот путь, если вы предпочитаете менее конфронтационный стиль игры и больше интересуетесь ролью скользкой крысы.",
 	)
 	pros = list(
-		"Your mansus grasp can open any lock, unlock every terminal and bypass any access restriction.",
-		"lock heretics get a discount from the knowledge shop, making it the perfect path if you want to experiment with the various trinkets the shop has to offer.",
+		"Ваша «Хватка Мансуса» может открыть любой замок, разблокировать любой терминал и обойти любые ограничения доступа.",
+		"Хранители Ключей получают скидку в магазине знаний, что делает его идеальным выбором, если вы хотите поэкспериментировать с различными безделушками, которые предлагает магазин.",
 	)
 	cons = list(
-		"The weakest heretic path in direct combat, period.",
-		"Very limited direct combat benefits.",
-		"You have no defensive benefits or immunities.",
-		"no mobility or direct additional teleportation",
-		"Highly reliant on sourcing power from other departments, players and the game world.",
+		"Самый слабый путь еретика в прямом бою.",
+		"Очень ограниченные преимущества в открытом бою.",
+		"У вас нет защитных преимуществ или иммунитетов.",
+		"Без мобильности или прямой дополнительной телепортации",
+		"В значительной степени зависит от ресурсов других отделов, игроков и игрового мира.",
 	)
 	tips = list(
-		"Your mansus grasp allows you to access everything, from airlocks, consoles and even exosuits, but it has no additional effects on players. It will however leave a mark that when triggered will make your victim unable to leave the room you are in.",
-		"Your blade also functions as a crowbar! You can store it in utility belts And, in a pitch, use it to force open an airlock.",
-		"Your Eldritch ID can create a portal between 2 different airlocks. Useful if you want to enstablish a secret base.",
-		"Use your labyrinth book to shake off pursuers. It creates impassible walls to anyone but you.",
+		"Ваша «Хватка Мансуса» позволяет вам получить доступ ко всему, от шлюзов и консолей до экзокостюмов, но не оказывает дополнительного воздействия на игроков. Однако она оставляет след, который при срабатывании не дает вашей жертве покинуть комнату, в которой вы находитесь.",
+		"Ваш клинок также функционирует как ломик! Вы можете хранить его в поясе для инструментов и, в случае необходимости, использовать его, чтобы взломать шлюз.",
+		"Ваша Мистическая ID может создать портал между двумя разными шлюзами. Полезно, если вы хотите создать секретную базу.",
+		"Используйте свою книгу лабиринтов, чтобы оторваться от преследователей. Она создает непроходимые стены для всех, кроме вас.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_lock
@@ -196,7 +196,7 @@
 	max_charges = 12
 	focus_recharge_amount = 0.33
 	holywater_drain_amount = 0.33
-	transmute_text = "Can be manually recharged by completing a ritual with a pair of gloves."
+	transmute_text = "Можно вручную перезарядить, завершив ритуал с парой перчаток."
 
 /datum/heretic_knowledge/blade_upgrade/flesh/lock
 	name = "Opening Blade"
@@ -223,7 +223,7 @@
 	max_charges = 3
 	path_recharge_amount = 0.66
 	holywater_drain_amount = 0.33
-	notice = "&bull; Cannot be used near living sentient beings.<br>&bull; Cancelled if you are hit with an anti-magic item."
+	notice = "&bull; Нельзя использовать рядом с живыми разумными существами.<br>&bull; Прерывается, если по вам ударят антимагическим предметом."
 
 /datum/heretic_knowledge/spell/caretaker_refuge/has_charges(mob/living/user)
 	return user.has_status_effect(/datum/status_effect/caretaker_refuge) || ..()

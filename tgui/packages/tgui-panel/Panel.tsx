@@ -48,7 +48,7 @@ export function Panel(props) {
                   color="grey"
                   selected={audioVisible}
                   icon="music"
-                  tooltip="Music player"
+                  tooltip="Проигрыватель музыки"
                   tooltipPosition="bottom-start"
                   onClick={() => setAudioVisible((v) => !v)}
                 />
@@ -85,8 +85,8 @@ export function Panel(props) {
             <Notifications>
               {game.connectionLostAt && (
                 <Notifications.Item rightSlot={<ReconnectButton />}>
-                  You are either AFK, experiencing lag or the connection has
-                  closed.
+                  Либо вы находитесь AFK, испытываете задержку, либо соединение
+                  прервано.
                 </Notifications.Item>
               )}
               {game.roundRestartedAt && (

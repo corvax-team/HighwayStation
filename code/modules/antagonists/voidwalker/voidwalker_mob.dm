@@ -4,7 +4,7 @@
 /// Voidwalker mob to void all over the place
 /mob/living/basic/voidwalker
 	name = "voidwalker"
-	desc = "A glass-like entity from the void between stars. You probably shouldn't stare."
+	desc = "Стеклообразное существо из пустоты между звездами. Наверное, вам не стоит так пристально смотреть."
 	icon = 'icons/mob/simple/voidwalker.dmi'
 	icon_state = "voidwalker"
 

@@ -431,7 +431,7 @@
 				msg += "[span_boldwarning("Ик... где... где я? Кто... я?")]<br>"
 
 	if (HAS_TRAIT(mob_parent, TRAIT_APATHETIC))
-		msg += span_notice("My mood: [span_grey("I don't feel anything.")]<br>")
+		msg += span_notice("Моё настроение: [span_grey("Я ничего не чувствую.")]<br>")
 	else
 		msg += span_notice("Мой текущий рассудок: ") //Long term
 		switch(sanity)

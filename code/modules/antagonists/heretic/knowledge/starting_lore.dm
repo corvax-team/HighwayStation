@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	max_charges = 8
 	focus_recharge_amount = 0.25
 	holywater_drain_amount = 0.125
-	transmute_text = "Tapping influences and completing sacrifices will recharge the spell."
+	transmute_text = "Поглощение влияний и завершение жертвоприношений перезаряжает заклинание."
 
 // Heretics can enhance their fishing rods to fish better - fishing content.
 // Lasts until successfully fishing something up.
@@ -55,7 +55,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	INVOKE_ASYNC(cast_on, TYPE_PROC_REF(/atom/movable, say), message = "R'CH T'H F'SH!", forced = "fishing rod infusion invocation")
 	playsound(cast_on, /datum/action/cooldown/spell/touch/mansus_grasp::sound, 15)
-	cast_on.visible_message(span_notice("[cast_on] snaps [cast_on.p_their()] fingers next to [held_rod], covering it in a burst of purple flames!"))
+	cast_on.visible_message(span_notice("[cast_on] щёлкает пальцами рядом с [held_rod], окутывая его вспышкой фиолетового пламени!"))
 
 	ADD_TRAIT(held_rod, TRAIT_ROD_MANSUS_INFUSED, REF(held_rod))
 	held_rod.difficulty_modifier -= 20
@@ -98,7 +98,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "living_heart"
 	research_tree_icon_frame = 1
-	notice = "If your heart is Cybernetic, you will be unable to reawaken it."
+	notice = "Если ваше сердце кибернетическое, вы не сможете пробудить его."
 
 /datum/heretic_knowledge/living_heart/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
@@ -193,14 +193,14 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	return TRUE
 
 /datum/heretic_knowledge/feast_of_owls
-	name = "Feast of Owls"
-	desc = "Allows you to undergo a ritual that grants you five knowledge points, but locks you out of ascension."
-	gain_text = "Under the soft glow of unreason there is a beast that stalks the night. I shall bring it forth and let it enter my presence. It will feast upon my amibitions and leave knowledge in its wake."
+	name = "Пир для Сов"
+	desc = "Позволяет пройти ритуал, который даёт 5 очков знаний, но лишает возможности совершить вознесение."
+	gain_text = "Под мягким сиянием безрассудства скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'
 	research_tree_icon_state = "god_transmit"
-	notice = "This can only be done once and cannot be reverted."
+	notice = "Это можно сделать только один раз, и эффект нельзя отменить."
 	/// amount of research points granted
 	var/reward = 5
 
@@ -208,8 +208,8 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	return !invoker.feast_of_owls
 
 /datum/heretic_knowledge/feast_of_owls/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
-	var/alert = tgui_alert(user,"Do you really want to forsake your ascension? This action cannot be reverted.", "Feast of Owls", list("Yes I'm sure", "No"), 30 SECONDS)
-	if(alert != "Yes I'm sure" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
+	var/alert = tgui_alert(user,"Вы действительно хотите отказаться от своего вознесения? Это действие невозможно отменить.", "Пир для Сов", list("Да, я уверен", "Нет"), 30 SECONDS)
+	if(alert != "Да, я уверен" || QDELETED(user) || QDELETED(src) || get_dist(user, loc) > 2)
 		return FALSE
 	var/datum/antagonist/heretic/heretic_datum = GET_HERETIC(user)
 	if(QDELETED(heretic_datum) || heretic_datum.feast_of_owls)
@@ -227,13 +227,13 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		playsound(loc, 'sound/items/eatfood.ogg', 100, TRUE)
 		heretic_datum.adjust_knowledge_points(1)
 
-		to_chat(user, span_danger("You feel something invisible tearing away at your very essence!"))
+		to_chat(user, span_danger("Вы чувствуете, как что-то невидимое разрушает саму вашу сущность!"))
 		user.do_jitter_animation()
 		sleep(1 SECONDS)
 		if(QDELETED(user) || QDELETED(heretic_datum))
 			return FALSE
 
-	to_chat(user, span_danger(span_big("Your ambition is ravaged, but something powerful remains in its wake...")))
+	to_chat(user, span_danger(span_big("Ваши амбиции разрушены, но на их месте пробуждается нечто могущественное...")))
 	var/drain_message = pick_list(HERETIC_INFLUENCE_FILE, "drain_message")
 	to_chat(user, span_hypnophrase(span_big("[drain_message]")))
 	return .

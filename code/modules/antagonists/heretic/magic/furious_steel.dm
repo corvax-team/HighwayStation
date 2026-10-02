@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/pointed/projectile/furious_steel
-	name = "Furious Steel"
+	name = "Ярость клинков"
 	desc = "Summon three silver blades which orbit you. \
 		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
 		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
@@ -141,14 +141,14 @@
 	outline_color = "#D7CBCA"
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/solo
-	name = "Lesser Furious Steel"
+	name = "Меньшая ярость клинков"
 	cooldown_time = 20 SECONDS
 	projectile_amount = 1
-	active_msg = "You summon forth a blade of furious silver."
-	deactive_msg = "You conceal the blade of furious silver."
+	active_msg = "Вы вызываете яростные серебряные клинки."
+	deactive_msg = "Вы скрываете яростные серебряный клинки."
 
 /datum/action/cooldown/spell/pointed/projectile/furious_steel/haunted
-	name = "Cursed Steel"
+	name = "Проклятая сталь"
 	desc = "Summon two cursed blades which orbit you. \
 		While orbiting you, these blades will protect you from attacks, but will be consumed on use. \
 		Additionally, you can click to fire the blades at a target, dealing damage and causing bleeding."
@@ -164,8 +164,8 @@
 
 	spell_requirements = NONE
 
-	active_msg = "You summon forth two cursed blades."
-	deactive_msg = "You conceal the cursed blades."
+	active_msg = "Вы призываете 2 проклятых клинка."
+	deactive_msg = "Вы скрываете проклятые клинки."
 	projectile_amount = 2
 	projectile_type = /obj/projectile/floating_blade/haunted
 	projectile_effect = /obj/effect/floating_blade/haunted
