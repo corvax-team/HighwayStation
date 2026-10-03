@@ -106,6 +106,15 @@
 	copy.levels = levels
 	return copy
 
+// BANDASTATION EDIT START: tts_component gate
+/datum/signal/subspace/vocal/proc/should_queue_radio()
+	if(!SStts220.is_enabled || frequency == FREQ_ENTERTAINMENT)
+		return FALSE
+
+	var/atom/movable/signal_source = virt?.GetSource()
+	return !isnull(signal_source?.get_tts_seed())
+// BANDASTATION EDIT END: tts_component gate
+
 /// This is the meat function for making radios hear vocal transmissions.
 /datum/signal/subspace/vocal/broadcast()
 	set waitfor = FALSE
@@ -160,12 +169,16 @@
 	var/list/message_mods = data["mods"]
 
 	var/tts_radio_id = LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER)
+	// BANDASTATION EDIT START: Spatial TTS
+	var/should_do_modular_radio_tts = should_queue_radio()
+	var/should_do_radio_tts = tts_radio_id || should_do_modular_radio_tts
+	// BANDASTATION EDIT END: Spatial TTS
 	// Flat list of mobs who can hear the message
 	var/list/receive
 	// Assoc list of weakref to a radio to list of weakrefs to mobs who can hear the message
 	var/list/receive_radios
 
-	if(tts_radio_id) // only do this if we have a TTS identifier to save on perf
+	if(should_do_radio_tts) // BANDASTATION EDIT: Spatial TTS, orig: if(tts_radio_id)
 		receive = list()
 		receive_radios = list()
 		for(var/radio, radio_hearers in get_hearers_in_radio_ranges_track_radios(radios))
@@ -183,17 +196,53 @@
 	for(var/mob/dead/observer/ghost in GLOB.player_list)
 		if(get_chat_toggles(ghost.client) & CHAT_GHOSTRADIO)
 			receive |= ghost
-			if(tts_radio_id && can_hear_radio_tts(ghost, frequency))
+			if(should_do_radio_tts && can_hear_radio_tts(ghost, frequency)) // BANDASTATION EDIT: Spatial TTS
 				receive_radios[TTS_GHOST_RADIO] ||= list()
 				receive_radios[TTS_GHOST_RADIO] += WEAKREF(ghost)
 
-	if(tts_radio_id && length(receive_radios))
+	if(SStts.tts_enabled && tts_radio_id && !should_do_modular_radio_tts && length(receive_radios)) // BANDASTATION EDIT: Spatial TTS
 		SStts.queued_radio_messages[tts_radio_id] = receive_radios
 		SStts.queued_radio_messages_compression[tts_radio_id] = compression
 
+	var/spans = data["spans"] // BANDASTATION EDIT: moved up for TTS radio playback
+
+	// BANDASTATION EDIT START: TTS radio playback
+	if(should_do_modular_radio_tts && length(receive_radios))
+		for(var/radio_ref in receive_radios)
+			if(!length(receive_radios[radio_ref]))
+				continue
+			var/atom/radio_source
+			if(radio_ref != TTS_GHOST_RADIO)
+				var/datum/weakref/radio_weakref = radio_ref
+				radio_source = radio_weakref.resolve()
+				if(QDELETED(radio_source))
+					continue
+			var/list/radio_listeners = list()
+			for(var/hearer_ref in receive_radios[radio_ref])
+				var/datum/weakref/hearer_weakref = hearer_ref
+				var/mob/radio_listener = hearer_weakref.resolve()
+				if(!radio_listener)
+					continue
+				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)
+				if(message_to_tts == message)
+					message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || message_to_tts
+				LAZYADD(radio_listeners[message_to_tts], radio_listener)
+			for(var/message_to_tts in radio_listeners)
+				virt.cast_tts(
+					radio_listeners[message_to_tts],
+					message_to_tts,
+					location = radio_source,
+					is_local = !isnull(radio_source),
+					is_radio = TRUE,
+					effects = LAZYACCESS(message_mods, MODE_TTS_FILTERS),
+					tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE),
+					channel_override = CHANNEL_TTS_RADIO,
+					radio_freq = frequency,
+				)
+	// BANDASTATION EDIT END: TTS radio playback
+
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
-	var/spans = data["spans"]
 
 	for(var/atom/movable/hearer as anything in receive)
 		if(!hearer)
