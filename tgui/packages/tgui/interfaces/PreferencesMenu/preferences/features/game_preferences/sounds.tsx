@@ -74,7 +74,7 @@ export const sound_tts: FeatureChoiced = {
 };
 
 export const sound_tts_radio: FeatureChoiced = {
-  name: 'Enable TTS Over Radio',
+  name: 'TTS - Включить поверх радио',
   category: 'Звук',
   description: `
     Когда включено, вы будете слышать text-to-speech звуки в игре поверх радио каналов.
@@ -85,9 +85,10 @@ export const sound_tts_radio: FeatureChoiced = {
 };
 
 export const sound_tts_hear_self_radio: FeatureToggle = {
-  name: 'Enable TTS Hear Self Over Radio',
+  name: 'TTS - слышать себя в рации',
   category: 'Звук',
-  description: 'When enabled, hear yourself over the radio when Text to Speech and TTS Over Radio is enabled.',
+  description:
+    'Когда включено, вы будете слышать себя в рации когда говорите в неё.',
   component: CheckboxInput,
 };
 
@@ -95,13 +96,6 @@ export const sound_tts_volume: Feature<number> = {
   name: 'TTS - громкость',
   category: 'Звук',
   description: 'Громкость text-to-speech.',
-  component: FeatureSliderInput,
-};
-
-export const sound_tts_volume_radio: Feature<number> = {
-  name: 'TTS - громкость рации',
-  category: 'Звук',
-  description: 'Громкость text-to-speech для рации.',
   component: FeatureSliderInput,
 };
 
@@ -120,9 +114,10 @@ export const sound_tts_volume_telepathy: Feature<number> = {
 };
 
 export const sound_tts_radio_volume: Feature<number> = {
-  name: 'TTS Radio Volume',
+  name: 'TTS - громкость рации',
   category: 'Звук',
-  description: 'The volume that radio text-to-speech sounds will play at. This is independent of regular TTS volume.',
+  description:
+    'Громкость text-to-speech для рации. Громкость независима от обычной громкости text-to-speech.',
   component: FeatureSliderInput,
 };
 
