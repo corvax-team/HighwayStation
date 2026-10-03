@@ -5,18 +5,14 @@
 /datum/component/tts_component/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_TTS_SEED_CHANGE, PROC_REF(tts_seed_change))
 	RegisterSignal(parent, COMSIG_ATOM_TTS_CAST, PROC_REF(cast_tts))
-	if(ismob(parent))
-		RegisterSignal(parent, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(on_item_equip))
-		RegisterSignal(parent, COMSIG_CARBON_GAIN_ORGAN, PROC_REF(on_organ_gain))
-		RegisterSignal(parent, COMSIG_CARBON_LOSE_ORGAN, PROC_REF(on_organ_lose))
+	RegisterSignal(parent, COMSIG_ATOM_TTS_EFFECTS_ADD, PROC_REF(tts_effects_add))
+	RegisterSignal(parent, COMSIG_ATOM_TTS_EFFECTS_REMOVE, PROC_REF(tts_effects_remove))
 
 /datum/component/tts_component/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_ATOM_TTS_SEED_CHANGE)
 	UnregisterSignal(parent, COMSIG_ATOM_TTS_CAST)
-	if(ismob(parent))
-		UnregisterSignal(parent, COMSIG_MOB_EQUIPPED_ITEM)
-		UnregisterSignal(parent, COMSIG_CARBON_GAIN_ORGAN)
-		UnregisterSignal(parent, COMSIG_CARBON_LOSE_ORGAN)
+	UnregisterSignal(parent, COMSIG_ATOM_TTS_EFFECTS_ADD)
+	UnregisterSignal(parent, COMSIG_ATOM_TTS_EFFECTS_REMOVE)
 
 /datum/component/tts_component/Initialize(datum/tts_seed/new_tts_seed, list/effects)
 	if(!isatom(parent))
@@ -25,16 +21,13 @@
 		new_tts_seed = SStts220.tts_seeds[initial(new_tts_seed.name)]
 	if(istype(new_tts_seed))
 		tts_seed = new_tts_seed
+
 	if(!tts_seed)
 		tts_seed = get_random_tts_seed_by_gender()
 	if(!tts_seed) // Something went terribly wrong
 		return COMPONENT_INCOMPATIBLE
 	if(length(effects))
 		src.effects |= effects
-	if(ismovable(parent))
-		var/atom/movable/parent_movable = parent
-		if(parent_movable.voice_effect)
-			src.effects |= parent_movable.voice_effect
 
 /datum/component/tts_component/proc/return_tts_seed()
 	SIGNAL_HANDLER
@@ -76,7 +69,7 @@
 		tts_seeds |= SStts220.get_tts_by_gender(being_changed.gender)
 		tts_seeds |= SStts220.get_tts_by_gender(NEUTER)
 	// Check donation restrictions
-	if(!check_rights(R_ADMIN, FALSE, chooser) && !(overrides & TTS_OVERRIDE_TIER))
+	if(!(overrides & TTS_OVERRIDE_TIER))
 		tts_seeds = tts_seeds && SStts220.get_available_seeds(being_changed) // && for lists means intersection
 	if(!length(tts_seeds))
 		to_chat(chooser, span_warning("Не удалось найти голоса для пола! Текущий голос - [tts_seed.name]"))
@@ -127,7 +120,8 @@
 
 /datum/component/tts_component/proc/get_random_tts_seed_by_gender()
 	var/atom/being_changed = parent
-	var/tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender)
+	var/list/available_seeds = SStts220.get_available_seeds(being_changed)
+	var/tts_choice = SStts220.pick_tts_seed_by_gender(being_changed.gender, available_seeds)
 	var/datum/tts_seed/seed = SStts220.tts_seeds[tts_choice]
 	if(!seed)
 		return null
@@ -136,22 +130,13 @@
 /datum/component/tts_component/proc/get_effects(list/additional_effects)
 	var/list/resulting_effects = effects.Copy()
 	if(length(additional_effects))
-		additional_effects = sort_effects(additional_effects)
 		resulting_effects |= additional_effects
 
 	return resulting_effects
 
-/datum/component/tts_component/proc/sort_effects(list/effects_to_sort)
-	if(!length(effects_to_sort))
-		return list()
-	return sort_list(effects_to_sort, GLOBAL_PROC_REF(cmp_sound_effect_priority_asc))
-
-/proc/cmp_sound_effect_priority_asc(datum/singleton/sound_effect/A, datum/singleton/sound_effect/B)
-	return A.priority - B.priority
-
 /datum/component/tts_component/proc/cast_tts(
 	atom/speaker,
-	mob/listener,
+	listener,
 	message,
 	atom/location,
 	is_local = TRUE,
@@ -162,31 +147,45 @@
 	postSFX,
 	tts_seed_override,
 	tts_channel_override,
-	check_deafness = TRUE
+	check_deafness = TRUE,
+	radio_freq
 )
 
 	SIGNAL_HANDLER
 
 	if(!message)
 		return
-	var/datum/preferences/prefs = listener?.client?.prefs
-	if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(/datum/preference/numeric/volume/sound_tts_volume) == 0)
-		return
-	if(check_deafness && HAS_TRAIT(listener, TRAIT_DEAF))
-		return
+	var/volume_preference = is_radio ? /datum/preference/numeric/volume/sound_tts_radio_volume : /datum/preference/numeric/volume/sound_tts_volume
 	if(!speaker)
 		speaker = parent
-	if(!location)
-		location = parent
+	var/list/input_listeners = islist(listener) ? listener : list(listener)
+	var/tts_listeners = list()
+	for(var/mob/current_listener as anything in input_listeners)
+		var/datum/preferences/prefs = current_listener?.client?.prefs
+		if(prefs?.read_preference(/datum/preference/choiced/sound_tts) != TTS_SOUND_ENABLED || prefs?.read_preference(volume_preference) == 0)
+			continue
+		if(check_deafness && HAS_TRAIT(current_listener, TRAIT_DEAF))
+			continue
+		if(is_radio && current_listener == speaker && !prefs.read_preference(/datum/preference/toggle/sound_tts_hear_self_radio))
+			continue
+		tts_listeners += current_listener
+	if(!length(tts_listeners))
+		return
+	if(isnull(additional_effects))
+		additional_effects = list()
+	else
+		additional_effects = additional_effects.Copy()
 	if(is_radio)
 		additional_effects |= /datum/singleton/sound_effect/radio
-		is_local = FALSE
-		if(listener == speaker) // don't hear both radio and whisper from yourself
-			return
+		// Global to listener, not positioned at the speaker
+		if(!location)
+			is_local = FALSE
+	if(!location)
+		location = parent
 
 	var/list/tts_args = list()
 	tts_args[TTS_CAST_SPEAKER] = speaker
-	tts_args[TTS_CAST_LISTENER] = listener
+	tts_args[TTS_CAST_LISTENER] = tts_listeners
 	tts_args[TTS_CAST_MESSAGE] = message
 	tts_args[TTS_CAST_LOCATION] = location
 	tts_args[TTS_CAST_LOCAL] = is_local
@@ -219,56 +218,21 @@
 		.[TTS_CHANNEL_OVERRIDE]
 	)
 
-/datum/component/tts_component/proc/tts_effects_add(list/new_sound_effects)
+/datum/component/tts_component/proc/tts_effects_add(atom/user, list/new_sound_effects)
+	SIGNAL_HANDLER
+
 	if(!length(new_sound_effects))
 		return
 
 	effects |= new_sound_effects
-	effects = sort_effects(effects)
 
-/datum/component/tts_component/proc/tts_effects_remove(list/sound_effects_to_remove)
+/datum/component/tts_component/proc/tts_effects_remove(atom/user, list/sound_effects_to_remove)
+	SIGNAL_HANDLER
+
 	if(!length(sound_effects_to_remove))
 		return
 
 	effects -= sound_effects_to_remove
-	effects = sort_effects(effects)
-
-/datum/component/tts_component/proc/on_item_equip(mob/user, obj/item/equipped_item, slot)
-	SIGNAL_HANDLER
-	if(!equipped_item.voice_effect)
-		return
-	if(!(slot & equipped_item.slot_flags))
-		return
-	if(equipped_item.should_apply_voice_effect())
-		tts_effects_add(equipped_item.voice_effect)
-	RegisterSignal(equipped_item, COMSIG_ITEM_POST_UNEQUIP, PROC_REF(on_item_unequip))
-	RegisterSignal(equipped_item, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT, PROC_REF(on_item_update_voice_effect))
-
-// Item got removed from us
-/datum/component/tts_component/proc/on_item_unequip(obj/item/item_dropping, force, newloc, no_move, invdrop, silent)
-	SIGNAL_HANDLER
-	tts_effects_remove(item_dropping.voice_effect)
-	UnregisterSignal(item_dropping, COMSIG_ITEM_POST_UNEQUIP)
-	UnregisterSignal(item_dropping, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT)
-
-/datum/component/tts_component/proc/on_item_update_voice_effect(obj/item/item_affecting, should_apply)
-	SIGNAL_HANDLER
-	if(should_apply)
-		tts_effects_add(item_affecting.voice_effect)
-	else
-		tts_effects_remove(item_affecting.voice_effect)
-
-/datum/component/tts_component/proc/on_organ_gain(mob/living/carbon/user, obj/item/organ/organ_gained, special)
-	SIGNAL_HANDLER
-	if(organ_gained.voice_effect)
-		user.voice_effect = organ_gained.voice_effect
-		tts_effects_add(organ_gained.voice_effect)
-
-/datum/component/tts_component/proc/on_organ_lose(mob/living/carbon/user, obj/item/organ/organ_lost, special)
-	SIGNAL_HANDLER
-	if(organ_lost.voice_effect)
-		user.voice_effect = user::voice_effect
-		tts_effects_remove(organ_lost.voice_effect)
 
 // Component usage
 

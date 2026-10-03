@@ -14,11 +14,11 @@
 	. = ..()
 	add_tts_component()
 
-/atom/proc/cast_tts(mob/listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX, tts_seed_override, channel_override, check_deafness)
-	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness)
+/atom/proc/cast_tts(listener, message, atom/location, is_local = TRUE, is_radio = FALSE, list/effects, traits = TTS_TRAIT_RATE_FASTER, preSFX, postSFX, tts_seed_override, channel_override, check_deafness, radio_freq)
+	SEND_SIGNAL(src, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness, radio_freq)
 
-/atom/movable/virtualspeaker/cast_tts(mob/listener, message, atom/location, is_local, is_radio, list/effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness)
-	SEND_SIGNAL(source, COMSIG_ATOM_TTS_CAST, listener, message, location, is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness)
+/atom/movable/virtualspeaker/cast_tts(listener, message, atom/location, is_local, is_radio, list/effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness, radio_freq)
+	SEND_SIGNAL(source, COMSIG_ATOM_TTS_CAST, listener, message, location || (is_radio ? radio : null), is_local, is_radio, effects, traits, preSFX, postSFX, tts_seed_override, channel_override, check_deafness, radio_freq)
 
 // TODO: Do it better?
 /atom/proc/get_tts_seed()
@@ -37,8 +37,8 @@
 		AddComponent(/datum/component/tts_component, /datum/tts_seed/silero/angel)
 	SEND_SIGNAL(src, COMSIG_ATOM_TTS_SEED_CHANGE, chooser, overrides, new_sound_effects)
 
-/atom/movable/proc/update_voice_effect()
-	SEND_SIGNAL(src, COMSIG_MOVABLE_UPDATE_VOICE_EFFECT, should_apply_voice_effect())
+/atom/proc/tts_effects_add(list/effects)
+	SEND_SIGNAL(src, COMSIG_ATOM_TTS_EFFECTS_ADD, effects)
 
-/atom/movable/proc/should_apply_voice_effect()
-	return TRUE
+/atom/proc/tts_effects_remove(list/effects)
+	SEND_SIGNAL(src, COMSIG_ATOM_TTS_EFFECTS_REMOVE, effects)
