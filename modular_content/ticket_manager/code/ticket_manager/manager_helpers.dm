@@ -138,7 +138,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = sender.key,
 		"message" = emoji_parse(message),
-		"time" = server_timestamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 
@@ -157,7 +157,7 @@
 		if(initiator.current_help_ticket != needed_ticket)
 			CRASH("Ticket with id [ticket_id] is not the current help ticket for [initiator.ckey]!")
 
-		needed_ticket.closed_at = server_timestamp(NONE)
+		needed_ticket.closed_at = TIMESTAMP()
 		initiator.current_help_ticket = null
 
 		var/blackbox_action = ticket_closed ? "Closed" : "Resolved"
@@ -221,7 +221,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_CLIENT_DISCONNECTED,
 		"message" = "[user.key] отключился",
-		"time" = server_timestamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 	// Gotta async this cause clients only logout on destroy, and sleeping in destroy is disgusting
@@ -240,7 +240,7 @@
 	needed_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_CLIENT_CONNECTED,
 		"message" = "[user.key] подключился",
-		"time" = server_timestamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 	SStgui.update_uis(src)
 	SSblackbox.LogAhelp(needed_ticket.id, "Reconnected", "Client reconnected", user.key)
@@ -275,7 +275,11 @@
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [admin_key] → [player_key]:"
 	var/log_message = "[message]"
-	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
+	for(var/client/admin_client as anything in GLOB.admins)
+		if(needed_ticket.has_staff_access(admin_client))
+			to_chat(admin_client, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
 	log_admin_private("[log_prefix] [log_message]")
 	SSblackbox.LogAhelp(id, "Reply", message, player_key, admin_key)
 
@@ -348,7 +352,7 @@
 	user_ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
-		"time" = server_timestamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	SStgui.update_uis(GLOB.ticket_manager)
@@ -361,7 +365,7 @@
 	ticket.messages += list(list(
 		"sender" = TICKET_LOG_SENDER_ADMIN_TICKET_LOG,
 		"message" = strip_html_full(message),
-		"time" = server_timestamp(NONE),
+		"time" = TIMESTAMP(),
 	))
 
 	SStgui.update_uis(GLOB.ticket_manager)
