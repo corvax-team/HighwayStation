@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - bugfix: "ERT Manager использует общий код спавна ОБР, исправлено возможное подвисание при вызове"
