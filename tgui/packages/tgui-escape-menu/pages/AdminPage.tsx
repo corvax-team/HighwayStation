@@ -47,7 +47,7 @@ export function AdminPage({
             onClose();
           }}
         >
-          See Admin Notices
+          Объявления администрации
         </MenuButton>
         <MenuButton
           onClick={() => {
@@ -55,7 +55,7 @@ export function AdminPage({
             onClose();
           }}
         >
-          Pray
+          Помолиться
         </MenuButton>
         {!!serverState.canSeeNotes && (
           <MenuButton
@@ -64,7 +64,7 @@ export function AdminPage({
               onClose();
             }}
           >
-            See Notes
+            Заметки
           </MenuButton>
         )}
       </div>
@@ -79,7 +79,7 @@ function BackButton({ onClick }: { onClick: () => void }) {
         <span className="escape-menu-icons40x40 template" />
         <span className="escape-menu-icons40x40 back escape-menu__icon-overlay" />
       </div>
-      <span>Back</span>
+      <span>Назад</span>
     </button>
   );
 }

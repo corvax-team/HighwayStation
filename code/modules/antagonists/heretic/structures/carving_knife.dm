@@ -26,8 +26,8 @@
 	var/list/datum/weakref/current_runes = list()
 	/// Turfs that you cannot draw carvings on
 	var/static/list/blacklisted_turfs = typecacheof(list(/turf/open/space, /turf/open/openspace, /turf/open/lava))
-	var/list/alt_continuous = list("stabs", "pierces", "impales")
-	var/list/alt_simple = list("stab", "pierce", "impale")
+	var/list/alt_continuous = list("протыкаете", "пронзаете", "нанизываете")
+	var/list/alt_simple = list("протыкаете", "пронзаете", "нанизываете")
 
 /obj/item/melee/rune_carver/Initialize(mapload)
 	. = ..()

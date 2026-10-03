@@ -34,12 +34,12 @@
 	tgui_icon = /datum/job/clown::tgui_icon
 
 /datum/job/ert/official
-	title = "CentCom Official"
+	title = "Представитель ЦК"
 	tgui_icon = FA_ICON_MEDAL
 
 /datum/job/ert/intern
-	title = "CentCom Intern"
+	title = "Интерн ЦК"
 
 /datum/job/ert/intern/leader
-	title = "CentCom Head Intern"
+	title = "Главный интерн ЦК"
 	tgui_icon = FA_ICON_PEN_FANCY

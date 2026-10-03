@@ -152,7 +152,7 @@
 	if (can_user_shoot(user))
 		charges--
 		return do_suicide(user)
-	user.visible_message(span_suicide("...but nothing happens."))
+	user.visible_message(span_suicide("...но ничего не происходит."))
 	return SHAME
 
 /// Extend to do something funny

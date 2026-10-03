@@ -458,7 +458,7 @@
 
 	if(dormant)
 		if(!silent)
-			to_chat(src, span_revenwarning("Your powers lie dormant right now!"))
+			to_chat(src, span_revenwarning("Ваши силы сейчас дремлют!"))
 		return SPELL_CANCEL_CAST
 
 	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED))

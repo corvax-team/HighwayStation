@@ -42,8 +42,8 @@
 		Due to that, it isn't of much use out in space. Their eyes are very sensitive."
 
 /datum/species/moth/get_species_description()
-	return "Hailing from a planet that was lost long ago, the moths travel \
-		the galaxy as a nomadic people aboard a colossal fleet of ships, seeking a new homeland."
+	return "Нианы инсектоидные гуманоиды, ведущие кочевой образ жизни. \
+	Они общительны, ценят коллектив и известны как торговцы, инженеры и посредники."
 
 /datum/species/moth/get_species_lore()
 	return list(

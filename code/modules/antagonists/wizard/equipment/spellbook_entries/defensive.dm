@@ -137,13 +137,13 @@
 	qdel(to_equip)
 
 	var/was_equipped = user.equip_to_slot_if_possible(bandolier, ITEM_SLOT_SUITSTORE, disable_warning = TRUE)
-	to_chat(user, span_notice("\A [bandolier.name] has been summoned [was_equipped ? "across your chest" : "at your feet"]."))
+	to_chat(user, span_notice("[capitalize(bandolier.declent_ru(NOMINATIVE))] призывается [was_equipped ? "вам на грудь" : "у ваших ног"]."))
 
 /datum/spellbook_entry/item/wands/discount
 	name = "Wand Assortment (Bargain Bin)"
-	desc = "A random collection of wands sourced from apprentice wandmaking studies. \
-		You're never quite sure what you're going to get. \
-		Comes in a handy belt, or a fancy bandolier if you are already wearing one."
+	desc = "Случайная коллекция палочек, сотворённых учениками. \
+		Неизвестно, что вы получите. \
+		Поставляется в удобном поясе или модной бандольере, если пояс уже экипирован."
 	cost = 1
 	item_path = /obj/item/storage/belt/wands/full/discount
 	category = SPELLBOOK_CATEGORY_DEFENSIVE

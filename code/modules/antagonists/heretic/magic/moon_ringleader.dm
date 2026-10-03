@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
-	name = "Ringleaders Rise"
+	name = "Восшествие Артистов"
 	desc = "Big AoE spell that summons copies of you. \
 			If any copies are attacked, they cause brain damage, sanity damage, and will briefly stun everyone nearby."
 	background_icon_state = "bg_heretic"

@@ -96,7 +96,7 @@
 		stoplag(0.3 SECONDS)
 
 /datum/action/cooldown/spell/fire_cascade/big
-	name = "Greater Fire Cascade"
+	name = "Великий огненный каскад"
 	flame_radius = 6
 
 // Currently unused - releases streams of fire around the caster.

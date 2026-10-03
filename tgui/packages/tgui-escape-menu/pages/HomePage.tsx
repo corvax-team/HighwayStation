@@ -74,13 +74,13 @@ export function HomePage({
           >
             Настройки
           </MenuButton>
-          <MenuButton onClick={() => onNavigate('players')}>Players</MenuButton>
+          <MenuButton onClick={() => onNavigate('players')}>Игроки</MenuButton>
           <MenuButton
             onClick={() => onNavigate('admin')}
             blinking={serverState.hasTicketNotification}
             tooltip={
               serverState.hasTicketNotification
-                ? 'An admin is trying to talk to you!'
+                ? 'Администратор пытается с вами связаться!'
                 : undefined
             }
           >
@@ -92,7 +92,7 @@ export function HomePage({
           >
             Покинуть тело
           </MenuButton>
-          <MenuButton onClick={() => onNavigate('quit')}>Quit</MenuButton>
+          <MenuButton onClick={() => onNavigate('quit')}>Выйти</MenuButton>
         </div>
       </div>
       <div className="escape-menu__resources">
@@ -127,7 +127,7 @@ export function HomePage({
           onClick={onToggleResources}
         >
           <IconButton iconClass="resources" />
-          <span className="escape-menu__resource-label">Resources</span>
+          <span className="escape-menu__resource-label">Ресурсы</span>
         </button>
       </div>
     </>

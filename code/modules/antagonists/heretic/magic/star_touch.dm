@@ -1,5 +1,5 @@
 /datum/action/cooldown/spell/touch/star_touch
-	name = "Star Touch"
+	name = "Касание Звезды"
 	desc = "Can be used to apply a star mark to a target. \
 		If your victim is already star marked, tethers you to your target with a cosmic ray. \
 		If the tether remains unbroken for 8 seconds, they will be put to sleep and teleported to you. \

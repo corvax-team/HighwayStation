@@ -80,7 +80,7 @@
 			ritual_requirements += extra_requirements
 
 		if(length(ritual_requirements))
-			ritual_info = "Requires: [english_list(ritual_requirements)]"
+			ritual_info = "Требуется: [english_list(ritual_requirements)]"
 
 		var/list/ritual_icon_info = heretic_datum.get_icon_of_knowledge(ritual.type)
 		var/icon/ritual_icon = icon(ritual_icon_info["icon"], ritual_icon_info["state"], ritual_icon_info["dir"], ritual_icon_info["frame"])

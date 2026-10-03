@@ -1,7 +1,7 @@
 /datum/heretic_knowledge_tree_column/moon
 	route = PATH_MOON
 	ui_bgr = "node_moon"
-	complexity = "Hard"
+	complexity = "Высокая"
 	complexity_color = COLOR_RED
 	icon = list(
 		"icon" = 'icons/obj/weapons/khopesh.dmi',
@@ -11,32 +11,32 @@
 		"moving" = FALSE,
 	)
 	description = list(
-		"The Path of Moon revolves around sanity, sowing confusion and discord, and skirting the conventional rules of combat.",
-		"Play this path if you are already experienced with Heretic and want to try something highly unconventional, or simply if you desire to play a pacifist Heretic (Yes, really!)."
+		"Путь Луны фокусируется на здравомыслии, сея смятение и разлад в головах ваших противников, нарушая привычные правила боя.",
+		"Выбирайте этот путь, если у вас уже есть опыт игры на Еретике и хочется попробовать нечто уникальное, или просто хочется отыграть пацифиста (Да, именно так!)."
 	)
 	pros = list(
-		"High amount of tools to confound foes.",
-		"Sows chaos through the station via lunatics.",
-		"Practically immune to disabling effects while wearing the Resplendent Regalia."
+		"Богатый набор инструментов для запутывания ваших противников.",
+		"Сейте хаос на станции при помощи безумцев.",
+		"Невосприимчивость к эффектам оглушения при ношении Блистательного облачения."
 	)
 	cons = list(
-		"No mobility.",
-		"No direct tools to damage your opponents.",
-		"Reliant on misdirection and confusion.",
-		"Lunatics can become liabilities.",
-		"Fairly fragile despite their unique protection mechanics.",
-		"Death while wearing the Resplendent Regalia results in a gorey end.",
+		"Отсутствует мобильность.",
+		"Отсутствуют навыки для нанесения урона напрямую.",
+		"Зависимость от запутывания и ошеломления противника.",
+		"Безумцы могут стать помехой.",
+		"Крайне уязвим, несмотря на уникальную механику защиты.",
+		"Смерть, во время ношения Блистательного облачения, приведет к крайне кровавому финалу.",
 	)
 	tips = list(
-		"Your Mansus Grasp will make your victim briefly hallucinate and apply a mark that, when triggered by your moon blade, will apply confusion and pacify them (the latter will get removed if the victim receives too much damage at once).",
-		"Your moon blade is special compared to the other heretic blades. It can be used even if you are pacified.",
-		"Your passive makes you completely impervious to brain traumas and slowly regenerates your brain health. Makes sure to upgrade it to bolster the regeneration effect.",
-		"Your Resplendent Regalia utterly changes the rules of combat for you and your opponents; You become fully immune to disabling effect, and all damage received (lethal or non lethal) will be converted into brain damage. However. the robes themselves have no armor, and prevent you from using guns as well as pacifying you (you can still use your moon blade).",
-		"Your moon amulette allows you to channel its effects through your moon blade. When toggled on, your Moon blade will no longer do lethal damage, but do sanity damage and become unblockable, this also allows you to use it while wearing your robes!",
-		"Your moon amulette is a vital part of your kit, as it allows your passive to regenerate double the brain health while worn.",
-		"If the sanity of your opponents goes below  a certain threshold, they'll become a lunatic. Lunatics are prompted to start attacking everyone (including you). Should you want to sacrifice them (or to get them to leave you be), hit them again with your moon blade to put them to sleep.",
-		"Ringleader's Rise summons an army of clones. They do barely any damage, but should they be attacked by non-heretics, they will explode and cause sanity and brain damage to those around them.",
-		"Your ascension will grant you an aura that converts nearby people to loyal lunatics. However, if they have a mindshield implant, their heads will instead detonate after a time.",
+		"Использование «Хватки Мансуса» накладывает на цель кратковременные галлюцинации, а также метку, активируемую вашим Лунным клинком. Активация Метки усмиряет цель, а также вводит её в замешательство (усмирение спадает, если цель получила слишком много урона).",
+		"Ваш Лунный клинок уникален в сравнении с клинками других путей, вы можете пользоваться им даже если подверглись пацификации.",
+		"Ваш пассивный навык делает вас полностью невосприимчивым к повреждениям мозга, а также медленно восстанавливают его здоровье. Обязательно улучшите его, чтобы усилить эффект.",
+		"Ваше Блистательное облачение значительно меняет правила боя для вас и ваших противников; Вы становитесь полностью неуязвимы для эффектов оглушения, а все полученные повреждения (смертельные или несмертельные) будут преобразованы в повреждения мозга, однако сама мантия не имеет брони и препятствует использованию стрелкового оружия, пацифицируя вас (вы все ещё можете использовать Лунный клинок).",
+		"Эффекты вашего Лунного амулета проецируются на Лунный клинок. При активации, ваш Лунный клинок больше не будет наносить смертельный урон, он будет наносить урон рассудку и станет неблокируемым, что также позволит вам использовать его в Блистательном облачении!",
+		"Ваш Лунный амулет ключевой элемент вашего снаряжения, при ношении, он удвоит скорость восстановления повреждений мозга.",
+		"Если рассудок ваших оппонентов упадет ниже определенного значения, они обезумят. Безумцам будет предложено нападать на всех (в том числе и вас). Если вы захотите принести их в жертву (или заставить их оставить вас в покое), ударьте их еще раз своим Лунным клинком, чтобы усыпить.",
+		"«Восшествие Артистов» призывает армию клонов. Они практически не наносят урон, но если на них нападут неверные, они взорвутся, приводя к потере рассудка и нанесению урона мозгу.",
+		"Ваше возвышение даст вам ауру, превращающую ближайших к вам людей в верных вам сумасшедших. Однако, если у цели есть имплант защиты разума, то вместо порабощения, через некоторое время их головы просто взорвутся.",
 	)
 
 	start = /datum/heretic_knowledge/limited_amount/starting/base_moon
@@ -76,7 +76,7 @@
 	. = ..()
 
 	if(target.can_block_magic(MAGIC_RESISTANCE_MOON))
-		to_chat(target, span_danger("You hear echoing laughter from above..but it is dull and distant."))
+		to_chat(target, span_danger("Вы слышите эхо смеха сверху... но оно глухое и отдалённое."))
 		return
 
 	source.apply_status_effect(/datum/status_effect/moon_grasp_hide)
@@ -129,8 +129,8 @@
 	gain_text = "Trails of light and mirth flowed from every arm of this magnificent attire. \
 			The troupe twirled in irridescent cascades, dazzling onlookers with the truth they sought. \
 			I observed, basking in the light, to find my self."
-	notice = "Despite the robe's pacifying effect, you can still use your Moon Blades, provided you ALSO wear a Moonlight Amulet."
-	transmute_text = "Transmute a table (or a suit), a mask and two sheets of glass."
+	notice = "Несмотря на пацифистический эффект робы, вы всё еще можете использовать Лунные клинки при условии, что вы так же носите Амулет Лунного Света."
+	transmute_text = "Трансмутируйте стол (или комбинезон), маску и два листа стекла."
 	result_atoms = list(/obj/item/clothing/suit/hooded/cultrobes/eldritch/moon)
 	research_tree_icon_state = "moon_armor"
 	required_atoms = list(
@@ -140,12 +140,12 @@
 	)
 
 /datum/heretic_knowledge/spell/moon_parade
-	name = "Lunar Parade"
+	name = "Лунный парад"
 	desc = "Grants you Lunar Parade, a spell that - after a short charge - fires a projectile.<br>\
 		Anyone hit by it is forced to join the parade, following the projectile while suffering hallucinations."
-	gain_text = "The music like a reflection of the soul compelled them, like moths to a flame they followed"
+	gain_text = "Музыка, словно отражение души, завораживала их, ведя их за собой, как мотыльков ведет за собой пламя."
 	action_to_add = /datum/action/cooldown/spell/pointed/projectile/moon_parade
-	notice = "There is no cap to the number of charges on the spell from applying Moonlight Amulets."
+	notice = "Количество зарядов, полученных от применения Амулетов Лунного Света, не ограничено."
 	cost = 2
 	drafting_tier = 5
 	max_charges = 4
@@ -254,11 +254,11 @@
 /datum/heretic_knowledge/ultimate/moon_final/proc/attempt_conversion(mob/living/carbon/convertee, mob/user)
 	// Heretics, lunatics and monsters shouldn't become lunatics because they either have a master or have a mansus grasp
 	if(IS_HERETIC_OR_MONSTER(convertee))
-		to_chat(convertee, span_boldwarning("[user]'s rise is influencing those who are weak willed. Their minds shall rend." ))
+		to_chat(convertee, span_boldwarning("Возвышение [user.declent_ru(GENITIVE)] оказывает влияние на тех, чья воля слаба. Их разум будет разрушен." ))
 		return FALSE
 	// Mindshielded and anti-magic folks are immune against this effect because this is a magical mind effect
 	if(HAS_MIND_TRAIT(convertee, TRAIT_UNCONVERTABLE) || convertee.can_block_magic(MAGIC_RESISTANCE))
-		to_chat(convertee, span_boldwarning("You feel shielded from something." ))
+		to_chat(convertee, span_boldwarning("Вы чувствуете себя защищенным от чего-то." ))
 		return FALSE
 
 	if(!convertee.mind)

@@ -574,22 +574,22 @@
 
 	if(istype(tool, /obj/item/suppressor))
 		if(!can_suppress)
-			balloon_alert(user, "[tool.name] doesn't fit!")
+			balloon_alert(user, "не подходит!")
 			return ITEM_INTERACT_FAILURE
 
 		if(!user.is_holding(src))
-			balloon_alert(user, "not in hand!")
+			balloon_alert(user, "не в руке!")
 			return ITEM_INTERACT_FAILURE
 
 		if(suppressed)
-			balloon_alert(user, "already has a suppressor!")
+			balloon_alert(user, "уже имеет глушитель!")
 			return ITEM_INTERACT_FAILURE
 
 		if(!user.transferItemToLoc(tool, src))
-			balloon_alert(user, "cannot attach!")
+			balloon_alert(user, "нельзя прикрепить!")
 			return ITEM_INTERACT_FAILURE
 
-		balloon_alert(user, "[tool.name] attached")
+		balloon_alert(user, "глушитель прикреплён")
 		install_suppressor(tool)
 		return ITEM_INTERACT_SUCCESS
 
@@ -607,7 +607,7 @@
 	if (!num_loaded)
 		return FALSE
 
-	balloon_alert(user, "[num_loaded] [cartridge_wording]\s loaded")
+	balloon_alert(user, "[num_loaded] патрон[declension_ru(num_loaded, "", "а", "ов")] заряжен[declension_ru(num_loaded, "", "о", "ы")]")
 	playsound(src, load_sound, load_sound_volume, load_sound_vary)
 	if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 		chamber_round()
@@ -732,11 +732,11 @@
 
 	if (!num_unloaded)
 		if (!forced)
-			balloon_alert(user, "it's empty!")
+			balloon_alert(user, "пуст!")
 		return
 
 	if (!forced)
-		balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
+		balloon_alert(user, "[num_unloaded] патрон[declension_ru(num_unloaded, "", "а", "ов")] разряжен[declension_ru(num_unloaded, "", "о", "ы")]")
 	playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
 	update_appearance()
 
@@ -925,7 +925,7 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 
 /obj/item/suppressor
 	name = "suppressor"
-	desc = "A syndicate small-arms suppressor for maximum espionage."
+	desc = "Универсальный глушитель для малокалиберного оружия, предназначенный для максимальной скрытности."
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	icon_state = "suppressor"
 	w_class = WEIGHT_CLASS_TINY

@@ -33,8 +33,8 @@
 	if(!can_use(cqc_user))
 		return
 	cqc_user.visible_message(
-		span_danger("[cqc_user] twists [attacker]'s arm, sending their [attack_weapon] back towards them!"),
-		span_userdanger("Making sure to avoid [attacker]'s [attack_weapon], you twist their arm to send it right back at them!"),
+		span_danger("[cqc_user.declent_ru(NOMINATIVE)] выворачивает руку [attacker.declent_ru(ACCUSATIVE)], перенаправляя [attack_weapon.declent_ru(ACCUSATIVE)] в сторону [genderize_ru(attacker.gender, "атакующего", "атакующей", "атакующего", "атакующих")]!"),
+		span_userdanger("Стараясь избежать [attack_weapon.declent_ru(GENITIVE)] [attacker.declent_ru(ACCUSATIVE)], вы выкручиваете [attacker.ru_p_them()] руку, направляя оружие обратно в [attacker.ru_p_theirs()]!"),
 	)
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
 	var/datum/action/cooldown/spell/touch/touch_spell = touch_weapon.spell_which_made_us?.resolve()
@@ -51,13 +51,13 @@
 	if(attack_type == PROJECTILE_ATTACK)
 		return NONE
 
-	var/blocking_text = "block"
-	var/blocking_text_s = "blocks"
+	var/blocking_text = "блокируете"
+	var/blocking_text_s = "блокирует"
 	var/potential_block_chance = block_chance
 
 	if(attack_type == OVERWHELMING_ATTACK)
-		blocking_text = "dodge"
-		blocking_text_s = "dodges"
+		blocking_text = "уклоняетесь"
+		blocking_text_s = "уклоняется"
 		potential_block_chance = clamp(round(potential_block_chance / (attack_type == OVERWHELMING_ATTACK ? 2 : 1), 1), 0, 100)
 
 	if(!prob(potential_block_chance))
@@ -113,7 +113,7 @@
 		null,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You slam [defender] into the ground!"))
+	to_chat(attacker, span_danger("Вы швыряете [defender.declent_ru(ACCUSATIVE)] на землю!"))
 	playsound(attacker, 'sound/items/weapons/slam.ogg', 50, TRUE, -1)
 	defender.apply_damage(10, BRUTE)
 	defender.Paralyze(12 SECONDS)
@@ -134,7 +134,7 @@
 			null,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You kick [defender]'s head, knocking [defender.p_them()] out!"))
+		to_chat(attacker, span_danger("Вы пинаете голову [defender.declent_ru(GENITIVE)], выводя [defender.ru_p_them()] из сознания!"))
 		playsound(attacker, 'sound/items/weapons/genhit1.ogg', 50, TRUE, -1)
 
 		var/helmet_protection = defender.run_armor_check(BODY_ZONE_HEAD, MELEE)
@@ -150,7 +150,7 @@
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You kick [defender] back!"))
+		to_chat(attacker, span_danger("Вы отбрасываете [defender.declent_ru(ACCUSATIVE)] назад!"))
 		playsound(attacker, 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 		var/atom/throw_target = get_edge_target_turf(defender, attacker.dir)
 		defender.throw_at(throw_target, 1, 14, attacker)
@@ -171,7 +171,7 @@
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You punch [defender]'s neck!"))
+	to_chat(attacker, span_danger("Вы бьёте [defender.declent_ru(ACCUSATIVE)] в шею!"))
 	defender.adjust_stamina_loss(60)
 	playsound(attacker, 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 	return TRUE
@@ -184,13 +184,13 @@
 
 	log_combat(attacker, defender, "restrained (CQC)")
 	defender.visible_message(
-		span_warning("[attacker] locks [defender] into a restraining position!"),
-		span_userdanger("You're locked into a restraining position by [attacker]!"),
-		span_hear("You hear shuffling and a muffled groan!"),
+		span_warning("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] в захват!"),
+		span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] берёт вас в захват!"),
+		span_hear("Вы слышите шарканье и приглушенный стон!"),
 		null,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You lock [defender] into a restraining position!"))
+	to_chat(attacker, span_danger("Вы берёте [defender.declent_ru(ACCUSATIVE)] в захват!"))
 	defender.adjust_stamina_loss(20)
 	defender.Stun(10 SECONDS)
 	restraining_mob = WEAKREF(defender)
@@ -210,7 +210,7 @@
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	to_chat(attacker, span_danger("You strike [defender]'s abdomen, neck and back consecutively!"))
+	to_chat(attacker, span_danger("Вы наносите последовательные удары по животу, шее и спине [defender.declent_ru(DATIVE)]!"))
 	playsound(defender, 'sound/items/weapons/cqchit2.ogg', 50, TRUE, -1)
 	var/obj/item/held_item = defender.get_active_held_item()
 	if(held_item && defender.temporarilyRemoveItemFromInventory(held_item))
@@ -238,13 +238,13 @@
 		attacker.setGrabState(GRAB_AGGRESSIVE) //Instant aggressive grab if on grab intent
 		log_combat(attacker, defender, "grabbed", addition="aggressively")
 		defender.visible_message(
-			span_warning("[attacker] violently grabs [defender]!"),
-			span_userdanger("You're grabbed violently by [attacker]!"),
-			span_hear("You hear sounds of aggressive fondling!"),
+			span_warning("[attacker.declent_ru(NOMINATIVE)] яростно хватает [defender.declent_ru(ACCUSATIVE)]!"),
+			span_userdanger("Вас яростно хватает [attacker.declent_ru(NOMINATIVE)]!"),
+			span_hear("Вы слышите звуки яростной борьбы!"),
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You violently grab [defender]!"))
+		to_chat(attacker, span_danger("Вы яростно хватаете [defender.declent_ru(ACCUSATIVE)]!"))
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/cqc/harm_act(mob/living/attacker, mob/living/defender)
@@ -257,12 +257,12 @@
 		if(!isnull(head))
 			playsound(defender, 'sound/effects/wounds/crack1.ogg', 100)
 			defender.visible_message(
-				span_danger("[attacker] snaps the neck of [defender]!"),
-				span_userdanger("Your neck is snapped by [attacker]!"),
-				span_hear("You hear a sickening snap!"),
+				span_danger("[attacker.declent_ru(NOMINATIVE)] сворачивает шею [defender.declent_ru(DATIVE)]!"),
+				span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] [genderize_ru(attacker.gender,"свернул","свернула","свернуло","свернули")] вашу шею!"),
+				span_hear("Вы слышите мерзкий хруст!"),
 				ignored_mobs = attacker
 			)
-			to_chat(attacker, span_danger("In a swift motion, you snap the neck of [defender]!"))
+			to_chat(attacker, span_danger("Одним быстрым движением вы сворачиваете шею [defender.declent_ru(GENITIVE)]!"))
 			log_combat(attacker, defender, "snapped neck")
 			defender.apply_damage(100, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND)
 			if(!HAS_TRAIT(defender, TRAIT_NODEATH))
@@ -281,7 +281,7 @@
 			null,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You leg sweep [defender]!"))
+		to_chat(attacker, span_danger("Вы делаете подсечку [defender.declent_ru(DATIVE)]!"))
 		playsound(attacker, 'sound/effects/hit_kick.ogg', 50, TRUE, -1)
 		attacker.do_attack_animation(defender)
 		defender.apply_damage(10, BRUTE)
@@ -294,11 +294,11 @@
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
 	attacker.do_attack_animation(defender)
-	var/picked_hit_type = pick("CQC", "Big Boss")
+	var/picked_hit_type = pick("CQC", "Большой Босс")
 	var/bonus_damage = 13
 	if(defender.body_position == LYING_DOWN)
 		bonus_damage += 5
-		picked_hit_type = pick("kick", "stomp")
+		picked_hit_type = pick("пинать", "топтать")
 	defender.apply_damage(bonus_damage, BRUTE)
 
 	playsound(defender, (picked_hit_type == "kick" || picked_hit_type == "stomp") ? 'sound/items/weapons/cqchit2.ogg' : 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
@@ -325,13 +325,13 @@
 	if(IS_WEAKREF_OF(attacker.pulling, restraining_mob))
 		log_combat(attacker, defender, "disarmed (CQC)", addition = "knocked out (CQC Chokehold)")
 		defender.visible_message(
-			span_danger("[attacker] puts [defender] into a chokehold!"),
-			span_userdanger("You're put into a chokehold by [attacker]!"),
-			span_hear("You hear shuffling and a muffled groan!"),
+			span_danger("[attacker.declent_ru(NOMINATIVE)] берёт [defender.declent_ru(ACCUSATIVE)] на удушающий захват!"),
+			span_userdanger("[capitalize(attacker.declent_ru(NOMINATIVE))] берёт вас на удушающий захват!"),
+			span_hear("Вы слышите шарканье и приглушенный стон!"),
 			null,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You put [defender] into a chokehold!"))
+		to_chat(attacker, span_danger("Вы берёте [defender.declent_ru(ACCUSATIVE)] в удушающий захват!"))
 		defender.SetSleeping(40 SECONDS)
 		restraining_mob = null
 		if(attacker.grab_state < GRAB_NECK && !HAS_TRAIT(attacker, TRAIT_PACIFISM))
@@ -357,7 +357,7 @@
 			COMBAT_MESSAGE_RANGE,
 			attacker,
 		)
-		to_chat(attacker, span_danger("You strike [defender]'s jaw,[disarmed_item ? " disarming [defender.p_them()] of [disarmed_item] and" : ""] leaving [defender.p_them()] disoriented!"))
+		to_chat(attacker, span_danger("Вы бьёте в челюсть [defender.declent_ru(ACCUSATIVE)],[disarmed_item ? " выбивая из [defender.ru_p_them()] рук [disarmed_item.declent_ru(ACCUSATIVE)] и" : ""] оставляя [defender.ru_p_them()] дезориентированным!"))
 		playsound(defender, 'sound/items/weapons/cqchit1.ogg', 50, TRUE, -1)
 		defender.set_jitter_if_lower(4 SECONDS)
 		defender.apply_damage(5, attacker.get_attack_type())
@@ -371,7 +371,7 @@
 		COMBAT_MESSAGE_RANGE,
 		attacker,
 	)
-	to_chat(attacker, span_warning("You fail to disarm [defender]!"))
+	to_chat(attacker, span_warning("У вас не выходит разоружить [defender.declent_ru(ACCUSATIVE)]!"))
 	playsound(defender, 'sound/items/weapons/punchmiss.ogg', 25, TRUE, -1)
 	log_combat(attacker, defender, "failed to disarm (CQC)")
 	return MARTIAL_ATTACK_FAIL
@@ -380,20 +380,20 @@
 /datum/martial_art/cqc/get_style_help()
 	. = list()
 
-	. += "<b><i>You try to remember some of the basics of CQC.</i></b>"
+	. += "<b><i>Вы пытаетесь вспомнить некоторые основы CQC.</i></b>"
 
-	. += "[span_notice("Slam")]: Grab Punch. Slam opponent into the ground, knocking them down."
-	. += "[span_notice("CQC Kick")]: Punch Punch. Knocks opponent away. Knocks out stunned opponents and does stamina damage."
-	. += "[span_notice("Restrain")]: Grab Grab. Locks opponents into a restraining position, disarm to knock them out with a chokehold."
-	. += "[span_notice("Pressure")]: Shove Grab. Decent stamina damage."
-	. += "[span_notice("Consecutive CQC")]: Shove Shove Punch. Mainly offensive move, huge damage and decent stamina damage."
+	. += "[span_notice("Бросок")]: Захват, Удар. Впечатайте оппонента в землю, опрокидывая его."
+	. += "[span_notice("CQC пинок")]: Удар, Удар. Отбросьте оппонента от себя. Отбрасывание оглушённого противника наносит урон выносливости."
+	. += "[span_notice("Сдерживание")]: Захват, Захват. Удерживает в захвате и обезоруживает оппонента, чтобы вырубить его удушающим приёмом."
+	. += "[span_notice("Давление")]: Толчок, Захват. Значительный урон по выносливости."
+	. += "[span_notice("Последовательный CQC")]: Толчок, Толчок, Удар. Основной атакующий приём, наносящий огромный урон и значительный урон выносливости."
 
-	. += "<b><i>In addition, by having your throw mode on when being attacked, you enter an active defense mode where you have a chance to block and sometimes even counter attacks done to you.</i></b>"
+	. += "<b><i>В дополнение, включив режим броска при нападении, вы переходите в режим активной защиты, где у вас есть шанс заблокировать удары противника, а иногда даже провести контратаку.</i></b>"
 	return .
 
 ///Subtype of CQC. Only used for the chef.
 /datum/martial_art/cqc/under_siege
-	name = "Close Quarters Cooking"
+	name = "Кулинария близкого контакта"
 	///List of all areas that CQC will work in, defaults to Kitchen.
 	var/list/kitchen_areas = list(/area/station/service/kitchen)
 

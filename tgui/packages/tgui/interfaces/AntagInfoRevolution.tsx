@@ -124,16 +124,16 @@ export const AntagInfoRevolution = () => {
                     </Stack.Item>
                   )}
                   <Stack.Item>
-                    - Convert the crew to your cause with a flash - any flash
-                    will work.
+                    - Обращайте экипаж на свою сторону вспышкой - подойдет любая
+                    вспышка.
                   </Stack.Item>
                   <Stack.Item>
-                    - Mindshields will prevent conversion. You can identify them
-                    via the flashing blue border around their job icon.
+                    - Щиты разума защищают от обращения. Их можно определить по
+                    мигающей синей рамке вокруг иконки должности.
                   </Stack.Item>
                   <Stack.Item>
-                    - The revolution is lost if you and your fellow leaders are
-                    all killed or exiled. Do not let that happen!
+                    - Революция проиграна, если вы и все ваши лидеры будете
+                    убиты или изгнаны. Не допустите этого!
                   </Stack.Item>
                 </Stack>
               ) : (
@@ -142,12 +142,12 @@ export const AntagInfoRevolution = () => {
                     - Help your cause. Do not harm your fellow freedom fighters.
                   </Stack.Item>
                   <Stack.Item>
-                    - You can identify your comrades by the red "R" icons, and
-                    your leaders by the blue "R" icons.
+                    - Вы можете узнать своих товарищей по красным значкам "R", а
+                    лидеров - по синим значкам "R".
                   </Stack.Item>
                   <Stack.Item>
-                    - The revolution is lost if all of your leaders are killed
-                    or exiled. Do not let that happen!
+                    - Революция проиграна, если все ваши лидеры будут убиты или
+                    изгнаны. Не допустите этого!
                   </Stack.Item>
                 </Stack>
               )}
@@ -158,7 +158,7 @@ export const AntagInfoRevolution = () => {
                 <Stack.Item>
                   <Stack vertical>
                     <Stack.Item fontSize="16px" textAlign="center">
-                      You must kill or exile the heads of staff:
+                      Вы должны убить или изгнать глав отделов:
                     </Stack.Item>
                     {heads.map((head, i) => (
                       <Stack.Item key={`head-${i}`}>

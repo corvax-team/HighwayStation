@@ -6,7 +6,7 @@
 //the nuke core - objective item
 /obj/item/nuke_core
 	name = "plutonium core"
-	desc = "Extremely radioactive. Wear goggles."
+	desc = "Очень радиоактивен. Наденьте очки."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "plutonium_core"
 	inhand_icon_state = "plutoniumcore"
@@ -42,7 +42,7 @@
 //nuke core box, for carrying the core
 /obj/item/nuke_core_container
 	name = "nuke core container"
-	desc = "Solid container for radioactive objects."
+	desc = "Прочный контейнер для радиоактивных объектов."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "core_container_empty"
 	inhand_icon_state = "tile"
@@ -87,7 +87,7 @@
 //snowflake screwdriver, works as a key to start nuke theft, traitor only
 /obj/item/screwdriver/nuke
 	name = "screwdriver"
-	desc = "A screwdriver with an ultra thin tip that's carefully designed to boost screwing speed."
+	desc = "Отвертка с ультратонким наконечником, тщательно разработанным для увеличения скорости завинчивания."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "screwdriver_nuke"
 	post_init_icon_state = null
@@ -132,7 +132,7 @@
 
 /obj/item/disk/computer/hdd_theft
 	name = "r&d server hard disk drive"
-	desc = "For some reason, people really seem to want to steal this. The source code on this drive is probably used for something awful!"
+	desc = "По какой-то причине люди очень сильно хотят украсть это. Исходный код на этом диске, вероятно, используется для чего-то ужасного!"
 	max_capacity = 512
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
@@ -155,7 +155,7 @@
 
 /obj/item/nuke_core/supermatter_sliver
 	name = "supermatter sliver"
-	desc = "A tiny, highly volatile sliver of a supermatter crystal. Do not handle without protection!"
+	desc = "Крошечный, обладающий высокой летучестью осколок кристалла суперматерии. Не обращайтесь с ним без средств защиты!"
 	icon_state = "supermatter_sliver"
 	inhand_icon_state = null //touching it dusts you, so no need for an inhand icon.
 	pulseicon = "supermatter_sliver_pulse"
@@ -238,7 +238,7 @@
 
 /obj/item/nuke_core_container/supermatter
 	name = "supermatter bin"
-	desc = "A tiny receptacle that releases an inert hyper-noblium mix upon sealing, allowing a sliver of a supermatter crystal to be safely stored."
+	desc = "Крошечная ёмкость, из которой при запечатывании выделяется инертная смесь гипер-ноблиума, что позволяет безопасно хранить кусочек кристалла суперматерии."
 	var/obj/item/nuke_core/supermatter_sliver/sliver
 
 /obj/item/nuke_core_container/supermatter/Destroy()
@@ -267,7 +267,7 @@
 
 /obj/item/scalpel/supermatter
 	name = "supermatter scalpel"
-	desc = "A scalpel with a fragile tip of condensed hyper-noblium gas, searingly cold to the touch, that can safely shave a sliver off a supermatter crystal."
+	desc = "Скальпель с хрупким наконечником из сконденсированного гипер-ноблиума, обжигающе холодного на ощупь, которым можно безопасно срезать осколок с кристалла суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_scalpel"
 	toolspeed = 0.5
@@ -281,7 +281,7 @@
 
 /obj/item/hemostat/supermatter
 	name = "supermatter extraction tongs"
-	desc = "A pair of tongs made from condensed hyper-noblium gas, searingly cold to the touch, that can safely grip a supermatter sliver."
+	desc = "Щипцы, изготовленные из конденсированного гипер-ноблиума, обжигающе холодного на ощупь, с помощью которых можно безопасно взять осколок суперматерии."
 	icon = 'icons/obj/antags/syndicate_tools.dmi'
 	icon_state = "supermatter_tongs"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'

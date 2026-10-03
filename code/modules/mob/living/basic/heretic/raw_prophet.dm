@@ -6,7 +6,7 @@
 /mob/living/basic/heretic_summon/raw_prophet
 	name = "\improper Raw Prophet"
 	real_name = "Raw Prophet"
-	desc = "An abomination stitched together from a few severed arms and one swollen, orphaned eye."
+	desc = "Мерзость, сшитая из нескольких отрубленных рук и одного опухшего, осиротевшего глаза."
 	icon_state = "raw_prophet"
 	icon_living = "raw_prophet"
 	status_flags = CANPUSH
@@ -31,10 +31,10 @@
 	AddComponent(/datum/component/focused_attacker)
 	var/on_link_message = "You feel something new enter your sphere of mind... \
 		You hear whispers of people far away, screeches of horror and a huming of welcome to [src]'s Mansus Link."
-	var/on_unlink_message = "Your mind shatters as [src]'s Mansus Link leaves your mind."
+	var/on_unlink_message = "Ваш разум разлетается вдребезги, когда связь Мансуса с [src.declent_ru(INSTRUMENTAL)] покидает ваш разум."
 	AddComponent( \
 		/datum/component/mind_linker/active_linking, \
-		network_name = "Mansus Link", \
+		network_name = "Связь Мансуса", \
 		chat_color = "#568b00", \
 		post_unlink_callback = CALLBACK(src, PROC_REF(after_unlink)), \
 		speech_action_background_icon_state = "bg_heretic", \

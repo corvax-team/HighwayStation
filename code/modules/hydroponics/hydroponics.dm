@@ -467,7 +467,7 @@
 	. = ..()
 	if(GetComponent(/datum/component/rename))
 		return
-	name = current_soil ? "botanic tray" : initial(name)
+	name = current_soil ? "ботанический лоток" : initial(name)
 	if(myseed)
 		name += " ([myseed.plantname])"
 		ru_names_rename(ru_names_toml(current_soil ? "botanic tray" : initial(name), suffix = " ([myseed.plantname])"))

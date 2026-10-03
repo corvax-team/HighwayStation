@@ -12,9 +12,9 @@
 	/// The abstract parent type of the knowledge, used in determine mutual exclusivity in some cases
 	abstract_type = /datum/heretic_knowledge
 	/// Name of the knowledge, shown to the heretic.
-	var/name = "Basic knowledge"
+	var/name = "Базовые знания"
 	/// Description of the knowledge, shown to the heretic. Describes what it unlocks / does.
-	var/desc = "Basic knowledge of forbidden arts."
+	var/desc = "Базовые знания о запретных искусствах."
 	/// Text describing how you create the thing
 	var/transmute_text = ""
 	/// Big red notices about the knowledge
@@ -59,8 +59,8 @@
 /datum/heretic_knowledge/proc/pre_research(mob/user, datum/antagonist/heretic/our_heretic)
 	// consider moving this check to a type instead
 	if(is_final_knowledge && !our_heretic.unlimited_blades)
-		var/choice = tgui_alert(user, "THIS WILL DISABLE BLADE BREAKING, Are you ready to research this? The blade cap will also be removed.", "Get Final Spell?", list("Yes", "No"))
-		if(choice != "Yes")
+		var/choice = tgui_alert(user, "ЭТО ОТКЛЮЧИТ ВОЗМОЖНОСТЬ РАЗБИТЬ ВАШ КЛИНОК. Вы готовы изучить это? Ограничение на количества клинков будет убрано.", "Изучить финальное заклинание?", list("Да", "Нет"))
+		if(choice != "Да")
 			return FALSE
 	return TRUE
 
@@ -146,7 +146,7 @@
 /datum/heretic_knowledge/proc/parse_required_item(atom/item_path, number_of_things)
 	// If we need a human, there is a high likelihood we actually need a (dead) body
 	if(ispath(item_path, /mob/living/carbon/human))
-		return "[number_of_things] bod[number_of_things > 1 ? "ies" : "y"]"
+		return "тел[number_of_things > 1 ? "а" : "о"]"
 	if(ispath(item_path, /mob/living))
 		return "[number_of_things] carcass[number_of_things > 1 ? "es" : ""] of any kind"
 	return "[number_of_things] [initial(item_path.name)]\s"
@@ -235,7 +235,7 @@
 	. = ..()
 	charges = max_charges
 	if(max_charges != INFINITY)
-		desc += "<br>Has [max_charges] charge\s[transmute_text ? ", after which you must recharge the spell" : ""]."
+		desc += "<br>Количество зарядов: [max_charges][transmute_text ? ". После их расхода заклинание нужно перезарядить" : ""]."
 
 /datum/heretic_knowledge/spell/Destroy()
 	QDEL_NULL(created_action_ref)
@@ -337,7 +337,7 @@
 	if(our_heretic?.ascended)
 		return NONE
 
-	to_chat(source, span_mansus("You don't have enough charges to cast this spell! [transmute_text]"))
+	to_chat(source, span_mansus("У вас недостаточно зарядов, чтобы произнести это заклинание! [transmute_text]"))
 	return SPELL_CANCEL_CAST
 
 /// Checks if we have enough charges to cast the spell
@@ -424,7 +424,7 @@
 			LAZYREMOVE(created_items, ref)
 
 	if(LAZYLEN(created_items) >= limit)
-		loc.balloon_alert(user, "ritual failed, at limit!")
+		loc.balloon_alert(user, "ритуал провален - превышен лимит!")
 		return FALSE
 
 	return TRUE
@@ -466,7 +466,7 @@
 		our_heretic.heretic_path = new column_path()
 	if(!our_heretic.heretic_path)
 		// If we don't have a path, we can't continue.
-		to_chat(user, span_warning("Oh shit, something broke, no path found!"))
+		to_chat(user, span_warning("Вот чёрт! Что-то сломалось, путь не найден!"))
 		stack_trace("failed to find valid path [our_heretic.heretic_shops[HERETIC_KNOWLEDGE_TREE][type][HKT_ROUTE]] from researching [src]")
 		return
 	SSblackbox.record_feedback("tally", "heretic_path_taken", 1, our_heretic.heretic_path.route)
@@ -840,7 +840,7 @@
 	)
 
 	if(EMERGENCY_IDLE_OR_RECALLED)
-		SSshuttle.call_evac_shuttle("Critical reality rupture detected on supranatural casuality long-range scanners. Mass crew casualty and possible station destruction determined to be beyond acceptable probability. Priority evacuation shuttle dispatched.")
+		SSshuttle.call_evac_shuttle("Сканерами дальнего действия зафиксирован критический разрыв в реальности, вызванный потусторонними силами. Вероятность массовых потерь экипажа и уничтожения станции превышает допустимые рассчётные вероятности. Запущен приоритетный эвакуационный шаттл.")
 	SSshuttle.emergency_no_recall = TRUE
 
 	if(!isnull(ascension_achievement))
