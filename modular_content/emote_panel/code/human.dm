@@ -172,3 +172,26 @@
 	user.spin(cooldown, pick(0.1 SECONDS, 0.2 SECONDS))
 	user.do_jitter_animation(rand(8 SECONDS, 16 SECONDS), cooldown / 4)
 
+/datum/emote/living/evil_laugh
+	key = "laughevil"
+	key_third_person = "laughevil"
+	name = "злорадно смеяться"
+	message = "злорадно смеётся."
+	message_mime = "бесшумно злорадно смеётся!"
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	vary = TRUE
+	sounds_by_mobtype = list(
+		/mob/living/carbon/human = list(
+			FEMALE = list(
+				'modular_content/emote_panel/audio/human/female/evil_laugh_female_1.ogg',
+				'modular_content/emote_panel/audio/human/female/evil_laugh_female_2.ogg',
+			),
+			MALE = list(
+				'modular_content/emote_panel/audio/human/male/evil_laugh_male_1.ogg',
+				'modular_content/emote_panel/audio/human/male/evil_laugh_male_2.ogg',
+			),
+		),
+	)
+
+/datum/emote/living/evil_laugh/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
+	return ..() && user.can_speak(allow_mimes = TRUE)
