@@ -24447,3 +24447,11 @@ instrumental = "переключением предохранителя"
 prepositional = "переключении предохранителя"
 gender = "neuter"
 
+["electrostaff"]
+nominative = "Электро-посох"
+genitive = "Электро-посоха"
+dative = "Электро-посоху"
+accusative = "Электро-посох"
+instrumental = "Электро-посохом"
+prepositional = "Электро-посохе"
+gender = "male"

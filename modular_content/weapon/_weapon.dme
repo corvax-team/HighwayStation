@@ -1,8 +1,10 @@
 #include "_weapon.dm"
 
 // MARK: Melee
+#include "code/crafting/electrostaff.dm"
 #include "code/crafting/nt_cane.dm"
 #include "code/melee/baton.dm"
+#include "code/melee/electrostaff.dm"
 #include "code/melee/sledgehammer.dm"
 #include "code/melee/tsf_katana.dm"
 #include "code/melee/vibroblade.dm"
