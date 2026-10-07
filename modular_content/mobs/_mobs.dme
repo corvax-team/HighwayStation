@@ -7,6 +7,7 @@
 #include "code/simple_animal/items.dm"
 #include "code/simple_animal/overrides.dm"
 #include "code/simple_animal/friendly/crab.dm"
+#include "code/simple_animal/friendly/ce_mothroach.dm"
 #include "code/simple_animal/friendly/farm_animals.dm"
 #include "code/simple_animal/friendly/frog.dm"
 #include "code/simple_animal/friendly/hamster.dm"
