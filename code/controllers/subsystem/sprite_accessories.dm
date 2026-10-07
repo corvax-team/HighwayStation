@@ -121,6 +121,9 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	// skrell
 	feature_list[FEATURE_SKRELL_HEAD_TENTACLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_head_tentacle)
+	feature_list[FEATURE_SKRELL_HEAD_TENTACLE_ORNAMENT] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_tentacle_ornament)
+	feature_list[FEATURE_SKRELL_CLOTH_WRAP] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_cloth_wrap)
+	feature_list[FEATURE_SKRELL_CLOTH_WRAP_TOGGLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_cloth_wrap_toggle)
 	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
@@ -150,7 +153,10 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 		FEMALE_SPRITE_LIST = list(),
 	)
 
-	for(var/path in subtypesof(prototype))
+	// BANDASTATION EDIT START - sort accessories by name
+	var/list/prototype_subtypes = sortTim(subtypesof(prototype), GLOBAL_PROC_REF(cmp_init_name_asc))
+	for(var/path in prototype_subtypes)
+	// BANDASTATION EDIT END
 		var/datum/sprite_accessory/accessory = new path
 
 		if(accessory.icon_state)
