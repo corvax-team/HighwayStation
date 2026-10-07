@@ -70,6 +70,7 @@
 #include "security_levels/_security_levels.dme"
 #include "shuttles/_shuttles.dme"
 #include "skillchip_rcd/_skillchip_rcd.dme"
+#include "skills/_skills.dme"
 #include "sounds/_sounds.dme"
 #include "species/_species.dme"
 #include "speech_filter/_speech_filter.dme"

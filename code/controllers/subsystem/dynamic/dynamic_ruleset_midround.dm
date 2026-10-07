@@ -274,7 +274,7 @@
  * Returns TRUE if prefs were applied
  */
 /datum/dynamic_ruleset/midround/from_ghosts/proc/apply_prefs_to_body(mob/living/carbon/human/body)
-	body.client?.prefs.safe_transfer_prefs_to(body)
+	body.client?.prefs.safe_transfer_prefs_to(body, is_antag = TRUE) // BANDASTATION MOD - Do not apply body mods on roles
 	body.dna.remove_all_mutations()
 	body.dna.update_dna_identity()
 	return TRUE
