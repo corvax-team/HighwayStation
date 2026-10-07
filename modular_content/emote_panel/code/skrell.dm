@@ -17,6 +17,20 @@
 		'modular_content/emote_panel/audio/skrell/warble_2.ogg',
 	)
 
+/datum/emote/living/carbon/human/skrell/warble/melodic
+	name = "Мелодично трелить"
+	key = "melodicwarble"
+	key_third_person = "melodicwarble"
+	message = "мелодично трелит."
+	message_param = "мелодично трелит на %t."
+	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+	vary = TRUE
+
+/datum/emote/living/carbon/human/skrell/warble/melodic/get_sound(mob/living/user)
+	return pick(
+		'modular_content/emote_panel/audio/skrell/melodicwarble.ogg',
+	)
+
 /datum/emote/living/carbon/human/skrell/croak
 	name = "Квакать"
 	key = "croak"
@@ -46,4 +60,24 @@
 	return pick(
 		'modular_content/emote_panel/audio/skrell/anger_1.ogg',
 		'modular_content/emote_panel/audio/skrell/anger_2.ogg',
+	)
+
+/obj/item/organ/tongue/skrell
+	emote_sounds = list(
+		/datum/emote/living/laugh::key = list(
+			FEMALE = list(
+				'modular_content/emote_panel/audio/skrell/laugh_female_1.ogg',
+				'modular_content/emote_panel/audio/skrell/laugh_female_2.ogg',
+				'modular_content/emote_panel/audio/skrell/laugh_female_3.ogg',
+			),
+			MALE = list(
+				'modular_content/emote_panel/audio/skrell/laugh_male_1.ogg',
+				'modular_content/emote_panel/audio/skrell/laugh_male_2.ogg',
+				'modular_content/emote_panel/audio/skrell/laugh_male_3.ogg',
+			),
+		),
+		/datum/emote/living/giggle::key = list(
+			FEMALE = 'modular_content/emote_panel/audio/skrell/giggle_female_1.ogg',
+			MALE = 'modular_content/emote_panel/audio/skrell/giggle_male_1.ogg',
+		),
 	)

@@ -24454,4 +24454,21 @@ dative = "Электро-посоху"
 accusative = "Электро-посох"
 instrumental = "Электро-посохом"
 prepositional = "Электро-посохе"
+
+["wrynroach"]
+nominative = "вринтаракан"
+genitive = "вринтаракана"
+dative = "вринтаракану"
+accusative = "вринтаракана"
+instrumental = "вринтараканом"
+prepositional = "вринтаракане"
+gender = "male"
+
+["chiefroach"]
+nominative = "главный молетаракан"
+genitive = "главного молетаракана"
+dative = "главному молетаракану"
+accusative = "главного молетаракана"
+instrumental = "главным молетараканом"
+prepositional = "главном молетаракане"
 gender = "male"
