@@ -209,42 +209,41 @@
 
 ///employers that are from the syndicate
 GLOBAL_LIST_INIT(syndicate_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
 	"MI13",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative Occultist", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
+	"S.E.L.F. Activist" // BANDASTATION ADDITION - Syndicate Lore Rewritten
 ))
 ///employers that are from Nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
-	"Gone Postal",
-	"Internal Affairs Agent",
 	"Legal Trouble",
 ))
 
 ///employers who hire agents to do the hijack
 GLOBAL_LIST_INIT(hijack_employers, list(
-	"Animal Rights Consortium",
-	"Bee Liberation Front",
+	//"Animal Rights Consortium", BANDASTATION REMOVAL - Syndicate Lore Rewritten
+	//"Bee Liberation Front", BANDASTATION REMOVAL - Syndicate Lore Rewritten
 	"Gone Postal",
-	"Tiger Cooperative Fanatic",
+	"Tiger Cooperative Occultist",  // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Waffle Corporation Terrorist",
 ))
 
 ///employers who hire agents to do a task and escape... or martyrdom. whatever
 GLOBAL_LIST_INIT(normal_employers, list(
-	"Champions of Evil",
+	//"Champions of Evil", BANDASTATION REMOVAL - Syndicate Faction removal
 	"Corporate Climber",
 	"Cybersun Industries",
 	"Donk Corporation",
 	"Gorlex Marauders",
-	"Internal Affairs Agent",
+	"S.E.L.F. Activist",  // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"Legal Trouble",
 	"MI13",
 	"Waffle Corporation",
@@ -259,7 +258,7 @@ GLOBAL_LIST_INIT(ai_employers, list(
 	"Problem Solver",
 	"S.E.L.F.",
 	"Something's Wrong",
-	"Spam Virus",
+	"Cybersun Virus", // BANDASTATION EDIT - Syndicate Lore Rewritten
 	"SyndOS",
 	"Unshackled",
 	"Ratvarian Remnant",
