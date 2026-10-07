@@ -66,6 +66,7 @@
 #include "code/items/clothing/under/jobs/security.dm"
 #include "code/items/consumables/customer_data.dm"
 #include "code/items/consumables/drinks.dm"
+#include "code/items/consumables/supply_packs.dm"
 #include "code/items/devices/clothing_vendors.dm"
 #include "code/items/devices/radio.dm"
 #include "code/items/devices/nanotrasen_radio_jammer.dm"

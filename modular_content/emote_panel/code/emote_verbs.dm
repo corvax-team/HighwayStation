@@ -269,6 +269,9 @@ GAME_VERB(/mob/living/carbon/human, emote_wink, "◦ Подмигнуть", "Э�
 GAME_VERB(/mob/living/carbon/human, emote_shiver, "◦ Дрожать", "Эмоции")
 	emote("shiver", intentional = TRUE)
 
+GAME_VERB(/mob/living/carbon/human, emote_evil_laugh, "▷ Смеяться злорадно", "Эмоции")
+	emote("laughevil", intentional = TRUE)
+
 // MARK: Tajaran emotes
 GAME_VERB(/mob/living/carbon/human/species/tajaran, emote_meow, "▷ Мяукнуть", "Эмоции")
 	emote("meow_t", intentional = TRUE)
