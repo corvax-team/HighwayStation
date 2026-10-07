@@ -148,21 +148,20 @@
 		'modular_content/emote_panel/audio/human/male/moan_male_3.ogg',
 	)
 
-/datum/emote/living/giggle/get_sound(mob/living/user)
-	if(!ishuman(user))
-		return
-
-	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
-		return pick(
-			'modular_content/emote_panel/audio/human/female/giggle_female_1.ogg',
-			'modular_content/emote_panel/audio/human/female/giggle_female_2.ogg',
-			'modular_content/emote_panel/audio/human/female/giggle_female_3.ogg',
-			'modular_content/emote_panel/audio/human/female/giggle_female_4.ogg',
-		)
-	return pick(
-		'modular_content/emote_panel/audio/human/male/giggle_male_1.ogg',
-		'modular_content/emote_panel/audio/human/male/giggle_male_2.ogg',
+/datum/emote/living/giggle
+	sounds_by_mobtype = list(
+		/mob/living/carbon/human = list(
+			FEMALE = list(
+				'modular_content/emote_panel/audio/human/female/giggle_female_1.ogg',
+				'modular_content/emote_panel/audio/human/female/giggle_female_2.ogg',
+				'modular_content/emote_panel/audio/human/female/giggle_female_3.ogg',
+				'modular_content/emote_panel/audio/human/female/giggle_female_4.ogg',
+			),
+			MALE = list(
+				'modular_content/emote_panel/audio/human/male/giggle_male_1.ogg',
+				'modular_content/emote_panel/audio/human/male/giggle_male_2.ogg',
+			),
+		),
 	)
 
 /datum/emote/living/dance
@@ -172,3 +171,4 @@
 	. = ..()
 	user.spin(cooldown, pick(0.1 SECONDS, 0.2 SECONDS))
 	user.do_jitter_animation(rand(8 SECONDS, 16 SECONDS), cooldown / 4)
+

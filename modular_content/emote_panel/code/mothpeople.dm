@@ -5,4 +5,5 @@
 		/datum/emote/living/deathgasp::key = 'sound/mobs/humanoids/moth/moth_death.ogg',
 		/datum/emote/living/cough::key = 'modular_content/emote_panel/audio/moth/moth_cough.ogg',
 		/datum/emote/living/sneeze::key = 'modular_content/emote_panel/audio/moth/moth_sneeze.ogg',
+		/datum/emote/living/giggle::key = 'sound/mobs/humanoids/moth/moth_chitter.ogg',
 	)
