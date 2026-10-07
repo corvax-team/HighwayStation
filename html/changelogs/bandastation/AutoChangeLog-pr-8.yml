@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - rscadd: "Снаряжение синдиката, ниндзя и ЭМИ-гранаты теперь определяются сканером контрабанды"
