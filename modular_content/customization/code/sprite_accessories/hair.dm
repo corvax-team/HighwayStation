@@ -148,3 +148,8 @@
 	name = "Ponytail 80s"
 	icon = 'modular_content/customization/icons/sprite_accessories/hair.dmi'
 	icon_state = "hair_ponytail_80s"
+
+/datum/sprite_accessory/hair/tribum
+	name = "Tri-bun"
+	icon = 'modular_content/customization/icons/sprite_accessories/hair.dmi'
+	icon_state = "hair_tribun"
