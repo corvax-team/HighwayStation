@@ -237,6 +237,18 @@
 
 	return ..()
 
+//MARK: NTR cane projectile
+
+/obj/projectile/bullet/nt_cane_diamond
+	name = "diamond shot"
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "energy2"
+	damage = 35
+	speed = 2.5
+	armour_penetration = 10
+	paralyze = 5
+	damage_type = BRUTE
+
 /obj/projectile/bullet/incendiary/c40sol
 	name = ".40 Sol Long incendiary bullet"
 	icon_state = "redtrac"
