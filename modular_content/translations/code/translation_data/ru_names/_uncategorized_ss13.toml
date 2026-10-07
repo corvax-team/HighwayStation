@@ -24411,3 +24411,21 @@ accusative = "гарнитуру"
 instrumental = "гарнитурой"
 prepositional = "гарнитуре"
 gender = "female"
+
+["wrynroach"]
+nominative = "вринтаракан"
+genitive = "вринтаракана"
+dative = "вринтаракану"
+accusative = "вринтаракана"
+instrumental = "вринтараканом"
+prepositional = "вринтаракане"
+gender = "male"
+
+["chiefroach"]
+nominative = "главный молетаракан"
+genitive = "главного молетаракана"
+dative = "главному молетаракану"
+accusative = "главного молетаракана"
+instrumental = "главным молетараканом"
+prepositional = "главном молетаракане"
+gender = "male"
