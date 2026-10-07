@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - admin: "Отчёт о выходах на старте раунда пишется в blackbox"
