@@ -9,7 +9,6 @@
 #include "code/melee/tsf_katana.dm"
 #include "code/melee/vibroblade.dm"
 #include "code/melee/centcom/_enchantment_datum.dm"
-#include "code/melee/centcom/baseball_bat.dm"
 #include "code/melee/centcom/rapier.dm"
 
 // MARK: Ranged - Ballistic
