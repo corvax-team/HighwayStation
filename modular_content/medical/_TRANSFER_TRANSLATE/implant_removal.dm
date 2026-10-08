@@ -57,7 +57,7 @@
 
 		if (!QDELETED(implant))
 			var/obj/item/implantcase/case
-			for(var/obj/item/implantcase/implant_case in user.held_items)
+			for(var/obj/item/implantcase/implant_case in user.get_held_items())
 				case = implant_case
 				break
 			if(!case)

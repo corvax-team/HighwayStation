@@ -168,7 +168,7 @@
 	var/estimated_remaining_steps = target.get_brute_loss() / brute_healed
 	var/progress_text
 
-	if(locate(/obj/item/healthanalyzer) in user.held_items)
+	if(locate(/obj/item/healthanalyzer) in user.get_held_items())
 		progress_text = ". Оставшиеся ушибы: <font color='#ff3333'>[target.get_brute_loss()]</font>"
 	else
 		switch(estimated_remaining_steps)
@@ -233,7 +233,7 @@
 	var/estimated_remaining_steps = target.get_fire_loss() / burn_healed
 	var/progress_text
 
-	if(locate(/obj/item/healthanalyzer) in user.held_items)
+	if(locate(/obj/item/healthanalyzer) in user.get_held_items())
 		progress_text = ". Оставшиеся ожоговые повреждения: <font color='#ff9933'>[target.get_fire_loss()]</font>"
 	else
 		switch(estimated_remaining_steps)
@@ -301,7 +301,7 @@
 
 	var/progress_text
 
-	if(locate(/obj/item/healthanalyzer) in user.held_items)
+	if(locate(/obj/item/healthanalyzer) in user.get_held_items())
 		if(target.get_brute_loss())
 			progress_text = ". Оставшиеся ушибы: <font color='#ff3333'>[target.get_brute_loss()]</font>"
 		if(target.get_fire_loss())

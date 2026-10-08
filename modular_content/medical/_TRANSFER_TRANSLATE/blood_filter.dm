@@ -91,7 +91,7 @@
 		span_notice("[capitalize(tool.declent_ru(NOMINATIVE))] сигнализирует об окончании перекачивания крови."),
 	)
 
-	if(locate(/obj/item/healthanalyzer) in user.held_items)
+	if(locate(/obj/item/healthanalyzer) in user.get_held_items())
 		chemscan(user, target)
 
 	return ..()
