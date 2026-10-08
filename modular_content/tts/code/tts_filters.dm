@@ -50,7 +50,7 @@
 	ffmpeg_arguments = @{"[0:a] asetrate=%SAMPLE_RATE%*0.7,aresample=16000,atempo=1/0.7,lowshelf=g=-20:f=500,highpass=f=500,aphaser=in_gain=1:out_gain=1:delay=3.0:decay=0.4:speed=0.5:type=t [out]; [out]atempo=1.2,volume=15dB,lowpass=f=3000,alimiter=limit=0.999 [final]; anoisesrc=a=0.01:d=60 [noise]; [final][noise] amix=inputs=2:duration=shortest:weights='1 0.1':normalize=0,alimiter=limit=0.999,lowpass=f=3000"}
 	priority = TTS_SOUND_EFFECT_PRIORITY_MASK
 
-/obj/item/organ/tongue/inky
+/obj/item/organ/tongue/fish/inky
 	voice_effect = list(/datum/singleton/sound_effect/tongue_inky)
 
 /datum/singleton/sound_effect/tongue_inky
