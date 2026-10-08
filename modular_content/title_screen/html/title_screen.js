@@ -135,51 +135,47 @@ function finishLoading() {
 }
 
 // MARK: Authentication
-const authBrowser = document.getElementById("external_auth");
 const authCheckbox = document.getElementById("hide_auth");
 const authButton = document.getElementById("open_auth");
+const AUTH_POLL_INTERVAL = 3000;
+const AUTH_POLL_TIMEOUT = 10 * 60 * 1000;
+let authPoll = null;
+
 function toggleAuthModal() {
-  const checked = authCheckbox.checked;
-  authCheckbox.checked = !checked;
+  authCheckbox.checked = !authCheckbox.checked;
+}
 
-  if (!checked) {
-    call_byond("discord_oauth_close", true);
-    setTimeout(() => {
-      authButton.style.display = "";
-      authBrowser.className = "";
-    }, 200);
+// once the link is found the server redraws the lobby and the modal goes away with it
+function updateAuthBrowser(url) {
+  authButton.querySelector(".lobby-text").textContent = "Открыть ссылку ещё раз";
+  if (url) {
+    document.getElementById("auth_link_url").value = url;
+    document.getElementById("auth_link").classList.remove("hidden");
   }
-}
-
-function updateAuthBrowser() {
-  authBrowser.className = "open";
-  authButton.style.display = "none";
-  setTimeout(() => updateExternalWindowPos(), 1000);
-}
-
-function updateExternalWindowPos() {
-  if(!authBrowser) {
+  if (authPoll) {
     return;
   }
 
-  const titleBarHeight = 43; // I hate Byond sometimes
-  const pixelRatio = window.devicePixelRatio ?? 1;
-  const rect = authBrowser.getBoundingClientRect();
-  const placeholderSize = {
-    pos: [rect.left * pixelRatio, rect.top + titleBarHeight * pixelRatio],
-    size: [
-      (rect.right - rect.left) * pixelRatio,
-      (rect.bottom - rect.top) * pixelRatio,
-    ],
-  };
-
-  BYOND.winset("authwindow", {
-    pos: `${placeholderSize.pos[0]},${placeholderSize.pos[1]}`,
-    size: `${placeholderSize.size[0]},${placeholderSize.size[1]}`,
-  });
+  const startedAt = Date.now();
+  authPoll = setInterval(() => {
+    if (Date.now() - startedAt > AUTH_POLL_TIMEOUT) {
+      clearInterval(authPoll);
+      authPoll = null;
+      return;
+    }
+    call_byond("discord_oauth_check", true);
+  }, AUTH_POLL_INTERVAL);
 }
 
-window.addEventListener("resize", updateExternalWindowPos);
+function copyAuthLink() {
+  const input = document.getElementById("auth_link_url");
+  input.select();
+  try {
+    document.execCommand("copy");
+  } catch (e) {
+    // selection stays, the player can copy it by hand
+  }
+}
 
 /* Return focus to Byond after click */
 function reFocus() {

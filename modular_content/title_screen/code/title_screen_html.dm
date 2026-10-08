@@ -148,20 +148,23 @@
 					<div class="lobby_auth_text">
 						[SStitle.discord_verification_possible ? {"
 							Вход в игру требует привязать аккаунт<br>
-							Для этого воспользуйтесь авторизацией через Discord<br>
-							После авторизации, просто <b>закройте это окно</b><br>
-							<small>Ссылка продублирована в чат, если вы хотите авторизоваться через свой браузер
+							Нажмите кнопку ниже, ссылка откроется в вашем браузере<br>
+							После авторизации это окно <b>закроется само</b><br>
+							<small>Если браузер не открылся, скопируйте ссылку ниже и откройте её вручную</small>
 						"} : {"
 							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
 							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
 						"}]
 					</div>
-					<div id="external_auth"></div>
 					[SStitle.discord_verification_possible ? {"
 						<div class="lobby_auth_controls">
 							<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
 								<span class="lobby-text">Привязать Discord</span>
 							</button>
+						</div>
+						<div id="auth_link" class="lobby_auth_link hidden">
+							<input id="auth_link_url" type="text" readonly onclick="this.select()">
+							<button class="lobby_element" onclick="copyAuthLink()"><span class="lobby-text">Копировать</span></button>
 						</div>
 					"} : ""]
 				</div>
