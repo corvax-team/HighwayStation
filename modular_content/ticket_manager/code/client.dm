@@ -5,7 +5,6 @@
 	COOLDOWN_DECLARE(ticket_response)
 
 GAME_VERB_DESC(/client, ticket_manager, "Ticket Manager", "Открыть интерфейс админ/ментор тикетов", "Admin")
-
 	GLOB.ticket_manager.ui_interact(mob)
 
 /client/cmd_admin_pm(whom, message)
