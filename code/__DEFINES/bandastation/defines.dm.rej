@@ -1,0 +1,8 @@
+diff a/code/__DEFINES/bandastation/defines.dm b/code/__DEFINES/bandastation/defines.dm	(rejected hunks)
+@@ -34,5 +34,4 @@
+ /// 10000 RUB | 130 USD
+ #define DONATOR_TIER_5 5
+
+-#define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
+-#define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
++#define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.2
