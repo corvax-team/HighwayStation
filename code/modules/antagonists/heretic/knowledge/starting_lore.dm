@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, ритуал будет невозможен!"
 
 	else
-		to_chat(user, span_boldnotice("У вас нет сердца или каких-либо органов грудной клетки, если на то пошло. Вы не получили Живое сердце из-за этого."))
+		to_chat(user, span_boldnotice("У вас нет сердца, да и вообще никаких органов в груди. Поэтому Живое сердце вы не получили."))
 
 /datum/heretic_knowledge/living_heart/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
 	var/obj/item/organ/our_living_heart = user.get_organ_slot(our_heretic.living_heart_organ_slot)
