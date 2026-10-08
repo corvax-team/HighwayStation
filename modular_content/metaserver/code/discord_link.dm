@@ -3,6 +3,8 @@
 		return FALSE
 	return ..()
 
+/client/var/next_discord_link_check = 0
+
 /client/proc/verify_in_discord_central()
 	if(!SScentral.can_run())
 		to_chat(src, span_warning("Привязка Discord сейчас недоступна."))
@@ -28,13 +30,12 @@
 		return
 
 	var/list/data = json_decode(response.body)
-	var/login_endpoint = "[CONFIG_GET(string/ss_central_url)]/oauth/login?token=[data]"
+	var/public_url = CONFIG_GET(string/ss_central_public_url) || CONFIG_GET(string/ss_central_url)
+	var/login_endpoint = "[public_url]/oauth/login?token=[data]"
 
 	to_chat(player, boxed_message("<a href='[login_endpoint]'>Привязать дискорд</a>"))
-	player << browse(
-		"<!DOCTYPE html><html><head><meta charset=UTF-8'><script>location.href='[login_endpoint]'</script></head><body'></body></html>",
-		"window=authwindow;parent=mapwindow.map;titlebar=0;can_resize=0;size=0x0;pos=0,0;background-color=black;"
-	)
+	// в системном браузере игрок уже авторизован в Discord, во встроенном окне BYOND нет
+	player << link(login_endpoint)
 	SStitle.title_output(player, login_endpoint, "updateAuthBrowser")
 
 /datum/config_entry/flag/force_discord_verification

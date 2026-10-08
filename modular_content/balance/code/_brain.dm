@@ -13,17 +13,21 @@
 	integer = FALSE
 	default = 0.5
 
-/datum/design/stasisbodybag
-	name = "Stasis Body Bag"
-	desc = "A folded bag designed for the storage and transportation of cadavers with portable stasis module and little space."
-	build_type = PROTOLATHE | AWAY_LATHE
-	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plasma =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SMALL_MATERIAL_AMOUNT*5)
-	build_path = /obj/item/bodybag/perma_stasis
-	inherit_materials = DESIGN_INHERIT_MATS_SPECIAL
-	category = list(
-		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_TOOLS_MEDICAL
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
+/*
+ * CorvaxStation edit start
+ * /datum/design/stasisbodybag
+ * 	name = "Stasis Body Bag"
+ * 	desc = "A folded bag designed for the storage and transportation of cadavers with portable stasis module and little space."
+ * 	build_type = PROTOLATHE | AWAY_LATHE
+ * 	materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plasma =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SMALL_MATERIAL_AMOUNT*5)
+ * 	build_path = /obj/item/bodybag/perma_stasis
+ * 	inherit_materials = DESIGN_INHERIT_MATS_SPECIAL
+ * 	category = list(
+ * 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_TOOLS_MEDICAL
+ * 	)
+ * 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
+ * CorvaxStation edit end
+ */
 
 /obj/item/bodybag/perma_stasis
 	name = "Stasis body bag"

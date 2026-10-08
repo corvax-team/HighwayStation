@@ -246,7 +246,7 @@
 
 	for(var/mob/living/carbon/human/crewmate as anything in lunatic_candidates)
 		if(amount_of_lunatics > max_lunatics)
-			to_chat(crewmate, span_boldwarning("Вы чувствуете неспокойство, как будто на мгновение что-то смотрело на вас."))
+			to_chat(crewmate, span_boldwarning("Вам становится не по себе, как будто на мгновение что-то смотрело на вас."))
 			continue
 		if(attempt_conversion(crewmate, user))
 			amount_of_lunatics++

@@ -1,21 +1,3 @@
-[crocodile]
-nominative = "крокодил"
-genitive = "крокодила"
-dative = "крокодилу"
-accusative = "крокодила"
-instrumental = "крокодилом"
-prepositional = "крокодиле"
-gender = "male"
-
-[gena]
-nominative = "Гена"
-genitive = "Гену"
-dative = "Гене"
-accusative = "Гену"
-instrumental = "Геной"
-prepositional = "Гене"
-gender = "male"
-
 [alien]
 nominative = "чужой"
 genitive = "чужого"
@@ -18855,14 +18837,6 @@ instrumental = "модифицированным медицинским вещм
 prepositional = "модифицированном медицинском вещмешке"
 gender = "male"
 
-["nanotrasen fleet tactical bat"]
-nominative = "тактическая бита флота Нанотрейзен"
-genitive = "тактической биты флота Нанотрейзен"
-dative = "тактической бите флота Нанотрейзен"
-accusative = "тактическую биту флота Нанотрейзен"
-instrumental = "тактической битой флота Нанотрейзен"
-prepositional = "тактической бите флота Нанотрейзен"
-gender = "female"
 
 ["kaza ruk gloves"]
 nominative = "перчатки Каза Рук"
