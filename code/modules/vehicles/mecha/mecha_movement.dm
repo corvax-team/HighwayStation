@@ -76,7 +76,8 @@
 	if(!COOLDOWN_FINISHED(src, cooldown_vehicle_move))
 		return FALSE
 
-	COOLDOWN_START(src, cooldown_vehicle_move, modified_move_delay(movedelay, cap_speed = TRUE)) // BANDASTATION EDIT - Speed
+	COOLDOWN_START(src, cooldown_vehicle_move, movedelay)
+
 	if(completely_disabled)
 		return FALSE
 
@@ -118,7 +119,7 @@
 		if(keyheld || !pivot_step) //If we pivot step, we don't return here so we don't just come to a stop
 			return TRUE
 
-	set_glide_size(DELAY_TO_GLIDE_SIZE(modified_move_delay(movedelay, cap_speed = TRUE))) // BANDASTATION EDIT - Speed
+	set_glide_size(DELAY_TO_GLIDE_SIZE(movedelay))
 	//Otherwise just walk normally
 	. = try_step_multiz(direction)
 

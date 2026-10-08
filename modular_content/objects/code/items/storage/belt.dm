@@ -1,3 +1,7 @@
+// MARK: Standart
+/obj/item/storage/belt/utility
+	w_class = WEIGHT_CLASS_NORMAL
+
 // MARK: TSF
 /obj/item/storage/belt/military/army/tsf
 	icon = 'modular_content/objects/icons/obj/clothing/belts.dmi'
