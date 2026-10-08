@@ -120,7 +120,6 @@
 	var/mob/living/living_parent = parent
 	step(living_parent, direction)
 	var/modified_move_delay = get_move_delay(living_parent, user, direction)
-	modified_move_delay = modified_move_delay(modified_move_delay, cap_speed = TRUE) // BANDASTATION EDIT - Speed
 	if(NSCOMPONENT(direction) && EWCOMPONENT(direction))
 		modified_move_delay = FLOOR(modified_move_delay * sqrt(2), world.tick_lag)
 	COOLDOWN_START(src, vehicle_move_cooldown, modified_move_delay)
