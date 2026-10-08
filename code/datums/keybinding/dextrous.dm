@@ -20,18 +20,18 @@
 
 /datum/keybinding/dextrous/swap_hands/row
 	hotkey_keys = list("X")
-	name = "swap_hands_row"
-	full_name = "Swap Hands (Horizontal)"
-	description = "Switch between the hands on the currently selected row (left/right)"
-	keybind_signal = COMSIG_KB_MOB_SWAPHANDSROW_DOWN
+	name = "swap_hands"
+	full_name = "Поменять руки (горизонтально)"
+	description = ""
+	keybind_signal = COMSIG_KB_MOB_SWAPHANDS_DOWN
 
 	dir = WEST
 
 /datum/keybinding/dextrous/swap_hands/column
 	hotkey_keys = list("ShiftX")
 	name = "swap_hands_column"
-	full_name = "Swap Hands (Vertical)"
-	description = "Switch between the hands on the currently selected column (up/down)"
+	full_name = "Поменять руки (вертикально)"
+	description = ""
 	keybind_signal = COMSIG_KB_MOB_SWAPHANDSCOLUMN_DOWN
 
 	dir = NORTH
@@ -39,8 +39,8 @@
 /datum/keybinding/dextrous/swap_hands/cycle
 	hotkey_keys = list(UNBOUND_KEY)
 	name = "swap_hands_cycle"
-	full_name = "Cycle Hands"
-	description = "Cycles through all hands (right to left, bottom to top)"
+	full_name = "Поменять руки (переключение)"
+	description = ""
 	keybind_signal = COMSIG_KB_MOB_SWAPHANDSCYCLE_DOWN
 
 	dir = WEST
@@ -52,14 +52,14 @@
 /datum/keybinding/dextrous/select_hand/right
 	hotkey_keys = list(UNBOUND_KEY)
 	name = "select_right_hand"
-	full_name = "Swap to Right Hand"
+	full_name = "Поменять на правую руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTRIGHTHAND_DOWN
 	hand_index = RIGHT_HANDS
 
 /datum/keybinding/dextrous/select_hand/left
 	hotkey_keys = list(UNBOUND_KEY)
 	name = "select_left_hand"
-	full_name = "Swap to Left Hand"
+	full_name = "Поменять на левую руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTLEFTHAND_DOWN
 	hand_index = LEFT_HANDS
 
@@ -85,8 +85,8 @@
 /datum/keybinding/dextrous/activate_inhand
 	hotkey_keys = list("Z")
 	name = "activate_inhand"
-	full_name = "Activate in-hand"
-	description = "Uses whatever item you have inhand"
+	full_name = "Использовать предмет в руке"
+	description = "Использует предмет в вашей активной руке"
 	keybind_signal = COMSIG_KB_MOB_ACTIVATEINHAND_DOWN
 
 /datum/keybinding/dextrous/activate_inhand/down(client/user, turf/target, mousepos_x, mousepos_y)
@@ -100,8 +100,8 @@
 /datum/keybinding/dextrous/drop_item
 	hotkey_keys = list("Q")
 	name = "drop_item"
-	full_name = "Drop Item"
-	description = "Drops the item in your active hand to the ground."
+	full_name = "Выложить предмет в руке"
+	description = "Ложит предмет из активной руки на поверхность."
 	keybind_signal = COMSIG_KB_MOB_DROPITEM_DOWN
 
 /datum/keybinding/dextrous/drop_item/down(client/user, turf/target, mousepos_x, mousepos_y)
@@ -113,7 +113,7 @@
 	var/mob/user_mob = user.mob
 	var/obj/item/item_dropped = user_mob.get_active_held_item()
 	if(!item_dropped)
-		to_chat(user, span_warning("You have nothing to drop in your hand!"))
+		to_chat(user, span_warning("Вам нечего выбрасывать из руки!"))
 		return TRUE
 	user.mob.dropItemToGround(item_dropped)
 	return TRUE
@@ -121,8 +121,8 @@
 /datum/keybinding/dextrous/drop_item_specific
 	hotkey_keys = list("CtrlX")
 	name = "drop_item_specific"
-	full_name = "Drop Item (Specific)"
-	description = "Drops the item in your active where your mouse cursor is, if in range."
+	full_name = "Положить предмет (курсор мыши)"
+	description = "Ложит элемент в вашем активном месте туда, где находится курсор мыши, если он находится в пределах досягаемости."
 	keybind_signal = COMSIG_KB_MOB_DROPITEM_DOWN
 
 /datum/keybinding/dextrous/drop_item_specific/down(client/user, turf/target, mousepos_x, mousepos_y)
@@ -134,7 +134,7 @@
 	var/mob/user_mob = user.mob
 	var/obj/item/item_dropped = user_mob.get_active_held_item()
 	if(!item_dropped)
-		to_chat(user, span_warning("You have nothing to drop in your hand!"))
+		to_chat(user, span_warning("Вам нечего выбрасывать из руки!"))
 		return TRUE
 	if(!user_mob.Adjacent(target) || target.is_blocked_turf(source_atom = item_dropped))
 		return TRUE
