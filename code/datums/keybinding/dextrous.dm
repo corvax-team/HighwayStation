@@ -23,7 +23,7 @@
 	name = "swap_hands"
 	full_name = "Поменять руки (горизонтально)"
 	description = ""
-	keybind_signal = COMSIG_KB_MOB_SWAPHANDS_DOWN
+	keybind_signal = COMSIG_KB_MOB_SWAPHANDSROW_DOWN
 
 	dir = WEST
 
