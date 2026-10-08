@@ -30,13 +30,14 @@
 				<input type="checkbox" id="hide_menu">
 				<img id="screen_blur" class="bg bg-blur" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
 				<img id="screen_image" class="bg" src="[screen_image_url]" alt="Загрузка..." onerror="fixImage()">
+				<iframe id="screen_video" class="bg hidden" style="border: none;" allow="autoplay; encrypted-media" allowfullscreen alt="[screen_image_url]"></iframe>
 				<div class="lobby_wrapper">
 					<div class="lobby_container">
 						<div class="lobby-name">
 							<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 							<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player_name]"></span>
 							<div id="logo" data-loaded="[round(loading_percentage)]%">
-								<img src="[SSassets.transport.get_asset_url("lobby_logo.png")]">
+								<img src="[SSassets.transport.get_asset_url("corvax_logo.png")]">
 							</div>
 						</div>
 						<div class="lobby_buttons">
@@ -51,7 +52,7 @@
 								[create_button(player, "start_now", "Запустить раунд", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "delay", "Отложить начало раунда", enabled = SSticker && SSticker.current_state <= GAME_STATE_PREGAME)]
 								[create_button(player, "notice", "Оставить уведомление")]
-								[create_button(player, "picture", "Сменить изображение")]
+								[create_button(player, "picture", "Сменить фон")]
 							</div>
 						</div>
 					</div>
@@ -148,23 +149,27 @@
 					<div class="lobby_auth_text">
 						[SStitle.discord_verification_possible ? {"
 							Вход в игру требует привязать аккаунт<br>
-							Для этого воспользуйтесь авторизацией через Discord<br>
-							После авторизации, просто <b>закройте это окно</b><br>
-							<small>Ссылка продублирована в чат, если вы хотите авторизоваться через свой браузер
+							Нажмите кнопку ниже, ссылка откроется в вашем браузере<br>
+							После авторизации это окно <b>закроется само</b><br>
+							<small>Если браузер не открылся, скопируйте ссылку ниже и откройте её вручную</small>
 						"} : {"
 							Включена система привязок Space Station Central, однако на данный момент она недоступна<br>
 							<span class="bad"><b>Дальнейшая игра невозможна до исправления. Сообщите хосту об этом.</b></span>
 						"}]
 					</div>
-					<div id="external_auth"></div>
 					[SStitle.discord_verification_possible ? {"
 						<div class="lobby_auth_controls">
 							<button id="open_auth" class="lobby_element lobby-auth-discord" onclick="call_byond('discord_oauth', true)">
 								<span class="lobby-text">Привязать Discord</span>
 							</button>
 						</div>
+						<div id="auth_link" class="lobby_auth_link hidden">
+							<input id="auth_link_url" type="text" readonly onclick="this.select()">
+							<button class="lobby_element" onclick="copyAuthLink()"><span class="lobby-text">Копировать</span></button>
+						</div>
 					"} : ""]
 				</div>
 			</div>
 		</div>
 	"}
+

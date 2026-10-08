@@ -13,8 +13,10 @@
 	if(href_list["discord_oauth"])
 		client?.verify_in_discord_central()
 
-	else if(href_list["discord_oauth_close"])
-		client << browse("", "window=authwindow;")
+	else if(href_list["discord_oauth_check"])
+		if(world.time < client.next_discord_link_check)
+			return
+		client.next_discord_link_check = world.time + 2 SECONDS
 		SScentral.update_player_discord_async(client.ckey, client)
 
 	else if(href_list["changelog"])
@@ -46,12 +48,19 @@
 			to_chat(usr, span_warning("Игра уже начинается!"))
 			return
 
-		if(ready == PLAYER_NOT_READY)
-			auto_deadmin_on_ready_or_latejoin()
-			ready = PLAYER_READY_TO_PLAY
-		else
+		if(ready != PLAYER_NOT_READY)
 			ready = PLAYER_NOT_READY
-		SStitle.title_output(client, ready == PLAYER_READY_TO_PLAY, "toggleReady")
+			SStitle.title_output(client, FALSE, "toggleReady")
+			return
+
+		var/prefs_specie = client.prefs.read_preference(/datum/preference/choiced/species)
+		var/list/prefs_jobs = client.prefs.job_preferences
+		if(!prefs_specie || !islist(prefs_jobs) || !length(prefs_jobs))
+			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
+			return
+
+		ready = PLAYER_READY_TO_PLAY
+		SStitle.title_output(client, TRUE, "toggleReady")
 
 	else if(href_list["late_join"])
 		if(SSticker.current_state == GAME_STATE_FINISHED)
