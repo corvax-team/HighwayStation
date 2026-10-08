@@ -377,23 +377,12 @@
 	if(!user.Adjacent(victim))
 		return
 
-	if(user.get_active_held_item() && !user.get_inactive_held_item())
-		user.swap_hand()
-
-	if(user.get_active_held_item())
-		return
-
 	victim.grabbedby(user)
 	victim.grippedby(user, instant = TRUE) //instant aggro grab
 
 	for(var/obj/item/weapon as anything in user.get_held_items())
 		if(weapon.get_sharpness())
-			victim.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] протыкает [capitalize(victim.declent_ru(ACCUSATIVE))] с помощью [weapon.declent_ru(GENITIVE)]!"), span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] протыкает вас с помощью [weapon.declent_ru(GENITIVE)]!"))
-			victim.apply_damage(weapon.force, BRUTE, BODY_ZONE_CHEST, attacking_item = weapon)
-			user.do_item_attack_animation(victim, used_item = weapon, animation_type = ATTACK_ANIMATION_PIERCE)
-			user.add_blood_DNA_to_items(victim.get_blood_dna_list(), ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING)
-			playsound(get_turf(user),weapon.hitsound,75,TRUE)
-			return
+			weapon.melee_attack_chain(user, victim)
 
 /obj/projectile/tentacle/on_hit(atom/movable/target, blocked = 0, pierce_hit)
 	if(!isliving(firer) || !ismovable(target))
