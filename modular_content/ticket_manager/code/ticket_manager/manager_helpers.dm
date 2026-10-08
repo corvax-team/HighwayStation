@@ -368,4 +368,5 @@
 		"time" = TIMESTAMP(),
 	))
 
+	SScentral.relay_ticket_event(user_ticket, TICKET_AHELP_ACTION_ASSIGNED, usr?.ckey, message)
 	SStgui.update_uis(GLOB.ticket_manager)
