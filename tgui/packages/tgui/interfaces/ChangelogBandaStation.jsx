@@ -184,14 +184,14 @@ export class ChangelogBandaStation extends Component {
 
     const header = (
       <Section>
-        <h1>Space Station 13 | Corvax</h1>
+        <h1>Space Station 13 | Highway</h1>
         <p>
-          Чейнджлог билда Space Station 13 <b>Corvax</b>. Билд основан на
+          Чейнджлог билда Space Station 13 <b>Highway</b>. Билд основан на
           BandaStation (SS220) и Traditional Games (TG). Изменения родительских
           проектов сгруппированы и отмечены здесь авторством tgstation.
           Действительные псевдонимы и имена авторов изменений можно найти
           <a href="https://github.com//tgstation/tgstation"> здесь</a>. Все иные
-          изменения имеют непосредственное отношение к проекту Corvax и имеют
+          изменения имеют непосредственное отношение к проекту Highway и имеют
           сведения об их авторах.
         </p>
         <p>
