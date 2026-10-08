@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - bugfix: "Лобби больше не ломается из-за отсутствующего логотипа."
