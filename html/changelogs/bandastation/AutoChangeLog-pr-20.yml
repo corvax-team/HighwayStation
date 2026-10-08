@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - server: "Мерж апстрима tgstation до 08.10"
