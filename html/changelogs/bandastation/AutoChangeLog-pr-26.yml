@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - bugfix: "В окне чейнджлога указано название билда Highway."
