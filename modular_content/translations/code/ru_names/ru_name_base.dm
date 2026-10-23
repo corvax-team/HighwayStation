@@ -116,7 +116,8 @@ GLOBAL_LIST_EMPTY(ru_names)
 	. = name
 	if(declent == "gender")
 		. = gender
-	if(!length(ru_names) || ru_names["base"] != name)
+	// Embedding drops \improper, so "\improper fence" has to be compared as a string with the base "fence"
+	if(!length(ru_names) || "[ru_names["base"]]" != "[name]")
 		return .
 	return get_declented_value(ru_names, declent, .)
 
