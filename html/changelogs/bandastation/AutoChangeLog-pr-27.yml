@@ -1,0 +1,4 @@
+author: "YesImMorty"
+delete-after: True
+changes:
+  - bugfix: "Объекты с \\improper в имени теперь отображаются на русском"
